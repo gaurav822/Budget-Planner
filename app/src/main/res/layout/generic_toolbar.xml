@@ -1,0 +1,54 @@
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainGenericToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:background="@color/white"
+    android:elevation="0dp"
+    android:fitsSystemWindows="true"
+    android:minHeight="?android:attr/actionBarSize"
+    app:navigationIcon="@drawable/icon_arrow_back">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/toolbarTitle"
+            style="@style/IMEPayTextStyle.SemiBold16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:letterSpacing="0"
+            android:singleLine="true"
+            android:textColor="@color/black_opacity_87" />
+
+
+
+        <RelativeLayout
+            android:id="@+id/toolbar_icon_layout"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/toolbarGPSIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="7dp"
+                android:layout_marginRight="7dp"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</androidx.appcompat.widget.Toolbar>

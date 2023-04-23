@@ -7,4 +7,178 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#FF03DAC5</color>
+
+    <color name="colorPrimaryDark">#e72429</color>
+    <color name="colorAccent">#7b7a7a</color>
+    <color name="colorControlActivated">#e72429</color>
+    <color name="textColorSecondary">#7b7a7a</color>
+
+
+    <color name="buttonRippleColor">#70e2cecf</color>
+
+    <color name="rebate_color">#2eb82e</color>
+    <color name="tap_target_background">#10E72429</color>
+    <!--HOMEPAGE-->
+
+    <!--FONT COLOR-->
+    <color name="inactive_font_color">#c1c1c1</color>
+    <color name="active_font_color">#000000</color>
+
+    <!--BACKGROUND ALL OVER APP-->
+    <color name="view_background_dark">#fdfdfd</color>
+    <color name="view_background_light">#fbfbfb</color>
+
+    <color name="tab_bg">@color/color_white</color>
+
+    <color name="on_board_text_color">#797979</color>
+    <color name="on_board_view_line_color">#ECECEC</color>
+
+    <color name="on_board_background_color">#FDFDFD</color>
+
+    <color name="pin_normal">#6B767E</color>
+    <!--Toast Color-->
+    <color name="black_semi_transparent">#c6000000</color>
+    <color name="customer_pay_header_text_color">#797979</color>
+    <color name="pay_tab_dynamicmenu_title_text_color">#393939</color>
+    <color name="pay_item_bottom_text_color">#ff333333</color>
+
+    <color name="drawer_item_txt_color">#868686</color>
+    <color name="textLabelColor">#797979</color>
+    <color name="textSubHeaderColor">#424242</color>
+
+    <color name="tab_font_color">#858585</color>
+    <color name="tab_top_view_color">#FFF</color>
+
+    <color name="pager_bullet_active">@color/colorPrimary</color>
+<!--    <color name="pager_bullet_inactive">@color/md_grey_50</color>-->
+    <color name="pager_bullet_text_indicator">#ffffff</color>
+    <color name="error_red">#e72429</color>
+    <color name="text_light_grey">#969696</color>
+    <color name="grey_stripe">#e0f4f4f4</color>
+    <color name="dark_blue">#0000ff</color>
+    <color name="red_new">#ed1c24</color>
+    <color name="text_color_dark">#4a4a4a</color>
+    <color name="light_pink_bg">#fff4f4</color>
+    <color name="rippleColor">#F1C3C3</color>
+    <color name="light_pink_dark">#F1E6E6</color>
+    <color name="flight_selected_strip">#43e72429</color>
+    <color name="transparent">#00000000</color>
+    <color name="skip_color">#757575</color>
+    <color name="color_white">#FFFFFF</color>
+    <!-- Generic dialog START -->
+    <color name="new_background_v2">#fff4f4</color>
+    <color name="generic_dialog_end_color">#ff0000</color>
+    <color name="generic_dialog_center_color">#c3181b</color>
+    <color name="generic_dialog_start_color">#9c272d</color>
+    <color name="generic_dialog_line_color">#c8c7cc</color>
+    <color name="screen_bg_v2">#FEF4F4</color>
+    <color name="generic_dialog_message_text_color">#4a4a4a</color>
+    <!-- Generic dialog END -->
+
+    <!-- Airline START -->
+    <color name="cashback_color">#1ac73d</color>
+    <color name="fare_breakdown_separator_color">#292b2b2b</color>
+    <color name="rv_item_background_color">#5ecca8a8</color>
+    <color name="semi_black_color">#2b2b2b</color>
+    <!-- Airline ENDS HERE-->
+
+    <!-- Movie START -->
+    <color name="blackColor">#CC000000</color>
+    <color name="background">#CC000000</color>
+    <color name="custom_status_bar_color">#01000000</color>
+    <color name="new_semi_transparent">#bfbfbf</color>
+    <color name="seat_available">#ababab</color>
+    <color name="seat_selected">#2c94ec</color>
+    <color name="seat_booked">#f6b5b5</color>
+    <color name="seat_sold">#ef1625</color>
+    <color name="seat_unavailable">#c8c7cc</color>
+    <color name="movie_banner_gradient_start">#1a1a1a</color>
+    <color name="movie_banner_gradient_end">#011a1a1a</color>
+    <color name="tab_title_color">#747474</color>
+    <color name="nav_icon_background_color">#e6e6e6</color>
+    <!--<color name="movie_banner_gradient_end">#333333</color>-->
+
+    <color name="scanner_black_transparent">#81000000</color>
+    <color name="black_transparent_80">#CC000000</color>
+    <color name="camera_black_overlay">#C8000000</color>
+    <color name="horizontal_line_pink_color">#fceaea</color>
+    <color name="green">#199C1B</color>
+    <color name="green_success">#25D373</color>
+    <!-- <color name="test_color">#FBA685</color>-->
+    <color name="test_color">#E80021</color>
+    <color name="sticky_reward">#f5b5b5</color>
+    <color name="light_green_alpha">#571ECF8B</color>
+    <color name="light_green">#1ECF8B</color>
+    <color name="light_red_alpha">#57E70026</color>
+    <color name="red_color_material_500">#FB4D49</color>
+    <color name="button_color">#FF6051</color>
+    <color name="round_button_color">#CC0000</color>
+    <color name="custom_header_text">#030303</color>
+    <color name="black_opacity_32">#51000000</color>
+    <color name="black_opacity_38">#61000000</color>
+    <color name="black_opacity_16">#F3F3F3</color>
+    <color name="black_opacity_87">#DD000000</color>
+    <color name="black_opacity_50">#80000000</color>
+    <color name="black_opacity_64">#A3000000</color>
+    <color name="black_opacity_60">#99000000</color>
+    <color name="black_opacity_05">#F8F3F3F3</color>
+    <color name="calendar_selected_day_bg">#FF6051</color>
+    <!-- <color name="calendar_selected_range_bg">#FFEAED</color>-->
+    <color name="dateTimeRangePickerStateToday">#FF6051</color>
+    <color name="footer_icon_color_inactive">#414141</color>
+    <color name="success_color">#1F7ED321</color>
+    <color name="colorRed">#1FE72429</color>
+    <color name="colorPending">#FFD806</color>
+    <color name="colorReject">#FF3366</color>
+    <color name="colorCancel">#D2E2E8</color>
+    <color name="white_opacity_32">#A3FFFFFF</color>
+    <color name="colorCancelBackground">#1FD2E2E8</color>
+    <color name="colorRejectBackground">#1FFF3366</color>
+    <color name="colorPendingBackGround">#1FFFD806</color>
+    <color name="colorExpiredBackground">#1F4A90E2</color>
+    <color name="upcoming_primary_color">#FF6051</color>
+    <color name="profile_background_color">#F5F5F5</color>
+    <color name="tab_active_font_color">#E4200C</color>
+    <color name="tab_inactive_font_color">@color/black_opacity_38</color>
+    <color name="home_menu_item_color">#DE000000</color>
+    <color name="scanner_line">#00ceff</color>
+    <color name="new_red_color">#CC0000</color>
+    <color name="disable_red_color">#EB9D9D</color>
+    <color name="light_grey_header">#E3E3E3</color>
+    <color name="light_grey_desc">#99000000</color>
+
+    <color name="new_round_amount_text_color">#000000DE</color>
+    <color name="sky_blue">#00CCCC</color>
+    <color name="red_color_alpha_4">#0ACC0000</color>
+    <color name="member_color">#c9161c</color>
+    <color name="silver_color">#1f99a2</color>
+    <color name="gold_color">#ecb24f</color>
+    <color name="platinum_color">#39386f</color>
+    <color name="dialog_white_trans">#EEFFFFFF</color>
+    <color name="light_grey_text">#40000000</color>
+
+    <color name="outlin_color">#00CCCC</color>
+    <color name="outlin_color_opacity">#5100CCCC</color>
+
+    <color name="pinFieldLibraryAccent">#FF4081</color>
+    <color name="inactivePinFieldColor">#00CCCC</color>
+    <color name="pinFieldLibraryTransparent">#00000000</color>
+    <color name="send_money_sky_blue">#00CCCC</color>
+    <color name="indicator_grey">#E5E5E5</color>
+    <color name="interest_green_color">#00873C</color>
+    <color name="orange_color">#FF6600</color>
+
+
+    <color name="seek_bar_background">#C4C4C4</color>
+    <color name="seek_bar_progress">#00CCCC</color>
+    <color name="seek_bar_secondary_progress">#3399CC</color>
+    <color name="green_bg_promo">#1EAE5F</color>
+    <color name="green_bg_promo_32">#511EAE5F</color>
+    <color name="insuranceInfoBgColor">#DEDEDE</color>
+    <color name="darkBlueColor">#0569FF</color>
+    <color name="colorRefundable">#FB8B00</color>
+    <color name="colorNonRefundable">#FF3366</color>
+
+
 </resources>
