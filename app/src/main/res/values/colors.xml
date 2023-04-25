@@ -9,6 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">#FF03DAC5</color>
 
+    <color name="orange">#dd8b37</color>
+    <color name="grey_blue">#464646</color>
+
     <color name="colorPrimaryDark">#e72429</color>
     <color name="colorAccent">#7b7a7a</color>
     <color name="colorControlActivated">#e72429</color>
