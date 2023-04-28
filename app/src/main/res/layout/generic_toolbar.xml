@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
-    android:background="@color/white"
+    android:background="#323232"
     android:elevation="0dp"
     android:fitsSystemWindows="true"
     android:minHeight="?android:attr/actionBarSize"
@@ -17,14 +17,15 @@
         android:orientation="horizontal">
 
         <TextView
+
+            android:text="Currencies"
             android:id="@+id/toolbarTitle"
-            style="@style/IMEPayTextStyle.SemiBold16"
+            style="@style/BudgetPlanStyle.SemiBoldWhite18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="bottom"
             android:letterSpacing="0"
-            android:singleLine="true"
-            android:textColor="@color/black_opacity_87" />
+            android:singleLine="true" />
 
 
 

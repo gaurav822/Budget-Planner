@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">#FF03DAC5</color>
 
+    <color name="darkBackground">#323232</color>
+
     <color name="orange">#dd8b37</color>
     <color name="grey_blue">#464646</color>
 

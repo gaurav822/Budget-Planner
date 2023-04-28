@@ -125,7 +125,7 @@
 <!--    </style>-->
 
     <style name="ActivityAnim">
-        <item name="android:windowEnterAnimation">@anim/enter_from_right</item>
+        <item name="android:windowEnterAnimation">@anim/slide_in_right</item>
         <item name="android:windowExitAnimation">@anim/exit_to_left</item>
     </style>
 
@@ -323,7 +323,7 @@
         <item name="android:windowAnimationStyle">@android:style/Animation</item>
     </style>
 
-    <style name="IMEPayTextStyle" parent="TextAppearance.AppCompat"></style>
+    <style name="BudgetPlanStyle" parent="TextAppearance.AppCompat"></style>
 
 <!--    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
 <!--        <item name="boxStrokeColor">@color/text_input_box_stroke</item>-->
@@ -365,132 +365,139 @@
         <item name="android:textSize">12dp</item>
     </style>
 
-    <style name="IMEPayTextStyle.H1">
+    <style name="BudgetPlanStyle.H1">
         <item name="fontFamily">@font/volte_medium</item>
         <item name="android:textSize">96dp</item>
         <item name="android:textColor">#000000DE</item>
     </style>
 
-    <style name="IMEPayTextStyle.H2">
+    <style name="BudgetPlanStyle.H2">
         <item name="fontFamily">@font/volte_medium</item>
         <item name="android:textSize">60dp</item>
         <item name="android:textColor">#000000DE</item>
     </style>
 
-    <style name="IMEPayTextStyle.H3">
+    <style name="BudgetPlanStyle.H3">
         <item name="fontFamily">@font/volte_medium</item>
         <item name="android:textSize">96dp</item>
         <item name="android:textColor">#000000DE</item>
     </style>
 
-    <style name="IMEPayTextStyle.H4">
+    <style name="BudgetPlanStyle.H4">
         <item name="fontFamily">@font/volte_medium</item>
         <item name="android:textSize">34dp</item>
         <item name="android:textColor">#000000DE</item>
     </style>
 
-    <style name="IMEPayTextStyle.H5">
+    <style name="BudgetPlanStyle.H5">
         <item name="fontFamily">@font/volte_medium</item>
         <item name="android:textSize">23dp</item>
         <item name="android:textColor">#000000DE</item>
     </style>
 
-    <style name="IMEPayTextStyle.H6">
+    <style name="BudgetPlanStyle.H6">
         <item name="fontFamily">@font/volte_medium</item>
         <item name="android:textSize">20dp</item>
         <item name="android:textColor">#DE020202</item>
     </style>
 
-    <style name="IMEPayTextStyle.Body1">
+    <style name="BudgetPlanStyle.Body1">
         <item name="fontFamily">@font/volte_medium</item>
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">#000000DE</item>
     </style>
 
-    <style name="IMEPayTextStyle.Body2">
+    <style name="BudgetPlanStyle.Body2">
         <item name="fontFamily">@font/volte_medium</item>
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">#99000000</item>
     </style>
 
-    <style name="IMEPayTextStyle.Light">
+    <style name="BudgetPlanStyle.Light">
         <item name="fontFamily">@font/volte_light</item>
         <item name="android:textSize">96dp</item>
         <item name="android:textColor">#000000DE</item>
     </style>
 
-    <style name="IMEPayTextStyle.SemiBold20">
+    <style name="BudgetPlanStyle.SemiBold20">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">20dp</item>
         <item name="android:textColor">#000000DE</item>
     </style>
 
-    <style name="IMEPayTextStyle.BlackSemiBold20">
+    <style name="BudgetPlanStyle.BlackSemiBold20">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">20dp</item>
         <item name="android:textColor">#000000</item>
     </style>
 
-    <style name="IMEPayTextStyle.SemiBold10">
+    <style name="BudgetPlanStyle.SemiBold10">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">10dp</item>
         <item name="android:textColor">#000000DE</item>
     </style>
 
-    <style name="IMEPayTextStyle.SemiBold12Grey">
+    <style name="BudgetPlanStyle.SemiBold12Grey">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">12dp</item>
         <item name="android:textColor">#666666</item>
     </style>
 
-    <style name="IMEPayTextStyle.SemiBold32">
+    <style name="BudgetPlanStyle.SemiBold32">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">32dp</item>
 
         <item name="android:textColor">#000000DE</item>
     </style>
 
-    <style name="IMEPayTextStyle.SemiBold16">
+    <style name="BudgetPlanStyle.SemiBold16">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">#000000DE</item>
     </style>
 
-    <style name="IMEPayTextStyle.VolteSemiBold60">
+    <style name="BudgetPlanStyle.VolteSemiBold60">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">60dp</item>
         <item name="android:textColor">#00000099</item>
 
     </style>
 
-    <style name="IMEPayTextStyle.VolteSemiBold20">
+    <style name="BudgetPlanStyle.VolteSemiBold20">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">20dp</item>
         <item name="android:textColor">#000000DE</item>
     </style>
 
-    <style name="IMEPayTextStyle.VolteSemiBold16">
+    <style name="BudgetPlanStyle.VolteSemiBold16">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">#000000DE</item>
     </style>
 
 
-    <style name="IMEPayTextStyle.VolteSemiBold14">
+    <style name="BudgetPlanStyle.VolteSemiBold14">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">#00000099</item>
 
     </style>
 
-    <style name="IMEPayTextStyle.VolteSemiBold12">
+    <style name="BudgetPlanStyle.SemiBoldWhite18">
+        <item name="fontFamily">@font/volte_semi_bold</item>
+        <item name="android:textSize">@dimen/_18sdp</item>
+        <item name="android:textColor">@color/white</item>
+
+    </style>
+
+    <style name="BudgetPlanStyle.VolteSemiBold12">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">12dp</item>
         <item name="android:textColor">#00000099</item>
 
     </style>
 
-<!--    <style name="IMEPayTextStyle.Blue10withBackground">-->
+<!--    <style name="BudgetPlanStyle.Blue10withBackground">-->
 <!--        <item name="fontFamily">@font/volte_semi_bold</item>-->
 <!--        <item name="android:textSize">10dp</item>-->
 <!--        <item name="android:textColor">#FFFFFF</item>-->
@@ -498,88 +505,101 @@
 
 <!--    </style>-->
 
-<!--    <style name="IMEPayTextStyle.RegularOCR">-->
+<!--    <style name="BudgetPlanStyle.RegularOCR">-->
 <!--        <item name="fontFamily">@font/ocr_regular</item>-->
 <!--        <item name="android:textSize">16dp</item>-->
 <!--        <item name="android:textColor">#000000DE</item>-->
 <!--    </style>-->
 
-    <style name="IMEPayTextStyle.Caption">
+    <style name="BudgetPlanStyle.Caption">
         <item name="fontFamily">@font/volte_medium</item>
         <item name="android:textSize">12dp</item>
         <item name="android:textColor">#000000DE</item>
     </style>
 
-    <style name="IMEPayTextStyle.Button">
+    <style name="BudgetPlanStyle.Button">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
-    <style name="IMEPayTextStyle.Button12Red">
+    <style name="BudgetPlanStyle.Button12Red">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">12dp</item>
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
-    <style name="IMEPayTextStyle.Button16Red">
+    <style name="BudgetPlanStyle.Button16Red">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
 
-    <style name="IMEPayTextStyle.Black12Semibold">
+    <style name="BudgetPlanStyle.Black12Semibold">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">12dp</item>
         <item name="android:textColor">#000000</item>
     </style>
 
-    <style name="IMEPayTextStyle.ButtonWhite">
+    <style name="BudgetPlanStyle.ButtonWhite">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/color_white</item>
     </style>
 
-    <style name="IMEPayTextStyle.ButtonWhite16">
+    <style name="BudgetPlanStyle.ButtonWhite16">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/color_white</item>
     </style>
 
-    <style name="IMEPayTextStyle.Medium14White">
+    <style name="BudgetPlanStyle.Medium14White">
         <item name="fontFamily">@font/volte_medium</item>
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/color_white</item>
     </style>
 
-    <style name="IMEPayTextStyle.Semibold14">
+    <style name="BudgetPlanStyle.Semibold14">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">#99000000</item>
     </style>
 
-    <style name="IMEPayTextStyle.BlackSemibold13">
+    <style name="BudgetPlanStyle.BlackSemibold13">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">13dp</item>
         <item name="android:fontWeight" tools:targetApi="o">500</item>
         <item name="android:textColor">#000</item>
     </style>
 
-    <style name="IMEPayTextStyle.SemiboldGery14">
+    <style name="BudgetPlanStyle.SemiboldGery14">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">#969696</item>
     </style>
 
-    <style name="IMEPayTextStyle.Semibold60Black14">
+    <style name="BudgetPlanStyle.Semibold60Black14">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">#9E000000</item>
     </style>
 
+    <style name="BudgetPlanStyle.SemiboldWhite14">
+        <item name="fontFamily">@font/volte_semi_bold</item>
+        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
-    <style name="IMEPayTextStyle.Keyboard">
+    <style name="BudgetPlanStyle.VolteMediumWhite14">
+        <item name="fontFamily">@font/volte_medium</item>
+        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+
+    <style name="BudgetPlanStyle.Keyboard">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">20dp</item>
         <item name="android:textColor">#000000DE</item>
@@ -596,37 +616,37 @@
         </item> <!-- Disable the zoom animation when switch tab -->
     </style>
 
-    <style name="IMEPayTextStyle.Black60SemiBold16">
+    <style name="BudgetPlanStyle.Black60SemiBold16">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">#99000000</item>
     </style>
-    <style name="IMEPayTextStyle.BlackSemiBold16">
+    <style name="BudgetPlanStyle.BlackSemiBold16">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">#E8000000</item>
     </style>
 
-    <style name="IMEPayTextStyle.GreenSemibold16">
+    <style name="BudgetPlanStyle.GreenSemibold16">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">#1EAE5F</item>
     </style>
 
-    <style name="IMEPayTextStyle.RedSemibold10">
+    <style name="BudgetPlanStyle.RedSemibold10">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">10dp</item>
         <item name="android:textColor">#FB0037</item>
     </style>
 
-    <style name="IMEPayTextStyle.BlackSemiBold22">
+    <style name="BudgetPlanStyle.BlackSemiBold22">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">22dp</item>
         <item name="android:textColor">#212121</item>
     </style>
 
 
-    <style name="IMEPayTextStyle.VolteSemiBold14Light">
+    <style name="BudgetPlanStyle.VolteSemiBold14Light">
         <item name="fontFamily">@font/volte_semi_bold</item>
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">#666666</item>
