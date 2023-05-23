@@ -1,11 +1,9 @@
-package com.gaurav.budgetplanner.Features.Converter.Activities
+package com.gaurav.budgetplanner.features.converter.Activities
 
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
-
-import com.gaurav.budgetplanner.Features.Converter.Fragments.CountrySelectFragment
-import com.gaurav.budgetplanner.Features.Converter.Model.Country
-import com.gaurav.budgetplanner.Features.Converter.ViewModel.CountryViewModel
+import androidx.lifecycle.ViewModelProviders
+import com.gaurav.budgetplanner.features.converter.Fragments.CountrySelectFragment
+import com.gaurav.budgetplanner.features.converter.model.Country
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityCountryListBinding
@@ -38,5 +36,6 @@ class CountryListActivity : BaseActivity() {
             }
 
         })
+
     }
 }

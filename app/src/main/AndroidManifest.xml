@@ -12,12 +12,12 @@
         android:theme="@style/Theme.BudgetPlanner"
         tools:targetApi="31">
         <activity
-            android:name=".Features.Converter.Activities.CountryListActivity"
+            android:name=".features.converter.Activities.CountryListActivity"
             android:exported="false"
             android:theme="@style/IMEPayAppTheme.NoActionBar"/>
         <activity
             android:theme="@style/IMEPayAppTheme.NoActionBar"
-            android:name=".Features.Converter.Activities.CurrencyConvertActivity"
+            android:name=".features.converter.Activities.CurrencyConvertActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

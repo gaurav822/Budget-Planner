@@ -1,17 +1,20 @@
-package com.gaurav.budgetplanner.Features.Converter.Activities
+package com.gaurav.budgetplanner.features.converter.Activities
 
 import android.content.Intent
 import android.os.Bundle
+import com.gaurav.budgetplanner.features.converter.ViewModel.CountryViewModel
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityCurrencyConvertBinding
 import java.text.NumberFormat
 import java.util.*
+import androidx.activity.viewModels
 
 class CurrencyConvertActivity : BaseActivity() {
     private var _binding:ActivityCurrencyConvertBinding?= null
     private val binding get() = _binding!!
     private var currentNumber:String = ""
     private var toCurrencyVal: Double = 88.0
+    private val model:CountryViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,5 +105,12 @@ class CurrencyConvertActivity : BaseActivity() {
 
     private fun openCountryList(){
         startActivity(Intent(this, CountryListActivity::class.java))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        model.getCountry().observe(this) {
+            binding.tvSymbol1.text = it.currencyCode
+        }
     }
 }
