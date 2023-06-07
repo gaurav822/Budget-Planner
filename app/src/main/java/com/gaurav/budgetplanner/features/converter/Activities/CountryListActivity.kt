@@ -16,8 +16,8 @@ class CountryListActivity : BaseActivity() {
         _binding = ActivityCountryListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbarCountry.mainGenericToolbar)
-        binding.toolbarCountry.toolbarTitle.text =  "Currencies"
+//        setSupportActionBar(binding.toolbarCountry.mainGenericToolbar)
+//        binding.toolbarCountry.toolbarTitle.text =  "Currencies"
 
         init()
     }

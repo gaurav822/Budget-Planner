@@ -150,6 +150,7 @@
     <color name="scanner_line">#00ceff</color>
     <color name="new_red_color">#CC0000</color>
     <color name="disable_red_color">#EB9D9D</color>
+    <color name="yellow_color">#fdc22a</color>
     <color name="light_grey_header">#E3E3E3</color>
     <color name="light_grey_desc">#99000000</color>
 
