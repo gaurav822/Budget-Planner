@@ -46,7 +46,7 @@ class CountrySelectFragment: BaseFragment() {
     }
 
     interface CountryClickListener {
-        fun onCountryClick(country:Country)
+        fun onCountryClick(country:Map.Entry<String,String>)
     }
 
     fun setListener(listener: CountryClickListener) {

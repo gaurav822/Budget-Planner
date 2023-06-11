@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Budget Planner</string>
+    <string name="choose_your_default_currency">Choose your default currency</string>
+    <string name="search_here">Search</string>
+    <string name="next">Next</string>
 </resources>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1a1e03"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/chooseCurr"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/BudgetPlanStyle.SemiBold16"
+        android:textColor="@color/white"
+        android:text="@string/choose_your_default_currency"
+        android:layout_marginTop="@dimen/_20sdp"/>
+
+    <RelativeLayout
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chooseCurr"
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_42sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:background="@drawable/search_button_background"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/search_image"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_13sdp"
+            android:layout_marginRight="@dimen/_13sdp"
+            android:textAlignment="center"
+            android:textColor="@color/md_black_1000"
+            app:srcCompat="@drawable/ic_search_svg" />
+
+        <com.gaurav.budgetplanner.Utils.CustomTextFormat.CustomEditText
+            android:id="@+id/et_search_country"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/search_image"
+            android:background="@null"
+            android:hint="@string/search_here"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/black_opacity_87"
+            android:textSize="@dimen/_12sdp" />
+
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintBottom_toTopOf="@id/proceedStart"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@+id/search_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:clipToPadding="false"
+        android:id="@+id/rvCountry" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/proceedStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="@dimen/_200sdp"
+        android:background="@drawable/boundry_proceed_button"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_20sdp">
+
+        <TextView
+            android:textColor="@color/black"
+            style="@style/BudgetPlanStyle.Body1"
+            android:text="@string/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

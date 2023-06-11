@@ -28,14 +28,14 @@ class CountryListActivity : BaseActivity() {
         fragmentTransaction.replace(R.id.countriesFrameLayout, countrySelectFragment)
         fragmentTransaction.commit()
 
-        countrySelectFragment?.setListener(object : CountrySelectFragment.CountryClickListener{
-            override fun onCountryClick(country: Country) {
-//                val model: CountryViewModel = ViewModelProvider(this)[CountryViewModel::class.java]
-//                model.select(country)
-//                finish()
-            }
-
-        })
+//        countrySelectFragment?.setListener(object : CountrySelectFragment.CountryClickListener{
+//            override fun onCountryClick(country: Country) {
+////                val model: CountryViewModel = ViewModelProvider(this)[CountryViewModel::class.java]
+////                model.select(country)
+////                finish()
+//            }
+//
+//        })
 
     }
 }

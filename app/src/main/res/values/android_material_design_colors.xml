@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="md_grey_50">#fafafa</color>
+    <color name="md_grey_300">#e0e0e0</color>
+    <color name="md_black_1000">#000000</color>
+    <color name="md_white_1000">#ffffff</color>
+
+</resources>
