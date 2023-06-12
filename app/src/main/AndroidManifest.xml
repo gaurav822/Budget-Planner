@@ -12,19 +12,23 @@
         android:theme="@style/Theme.BudgetPlanner"
         tools:targetApi="31">
         <activity
+            android:name=".Views.SplashScreen"
+            android:exported="false"/>
+        <activity
             android:name=".Views.HomeScreenActivity"
-            android:exported="false" />
-        <activity
-            android:name=".features.Onboarding.Views.Activities.CurrencySelectActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OnBoardActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".features.Onboarding.Views.Activities.CurrencySelectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OnBoardActivity"
+            android:exported="true">
         </activity>
         <activity
             android:name=".features.converter.Activities.CountryListActivity"

@@ -1,0 +1,47 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillAfter="true"
+    android:fillEnabled="true"
+    android:interpolator="@android:anim/accelerate_decelerate_interpolator">
+
+    <!-- Translate Animation -->
+
+<!--    <translate-->
+<!--        android:fromYDelta="-50%"-->
+<!--        android:toYDelta="-55%"-->
+<!--        android:duration="10" />-->
+
+<!--    &lt;!&ndash; Second translate animation &ndash;&gt;-->
+<!--    <translate-->
+<!--        android:fromYDelta="-55%"-->
+<!--        android:toYDelta="40%p"-->
+<!--        android:duration="1"-->
+<!--        android:startOffset="500"-->
+<!--        />-->
+
+    <translate
+        android:fromYDelta="-50%p"
+        android:toYDelta="0"
+        android:duration="500"
+        android:interpolator="@android:anim/accelerate_interpolator" />
+
+    <!-- Second translate animation (slight bounce) -->
+    <translate
+        android:fromYDelta="0"
+        android:toYDelta="10%p"
+        android:startOffset="500"
+        android:duration="100" />
+
+    <!-- Third translate animation (final settle down) -->
+    <translate
+        android:fromYDelta="10%p"
+        android:toYDelta="40"
+        android:startOffset="600"
+        android:duration="100" />
+
+    <alpha
+        android:duration="500"
+        android:fromAlpha="1"
+        android:toAlpha="0"
+        android:startOffset = "100"/>
+
+</set>

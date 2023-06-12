@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!--<gradient-->
+    <!--android:startColor="@color/generic_dialog_start_color"-->
+    <!--android:endColor="@color/generic_dialog_center_color"-->
+    <!--/>-->
+    <solid
+        android:color="@color/dark_green_color"/>
+    <corners
+        android:bottomLeftRadius="@dimen/_20sdp"
+        android:bottomRightRadius="@dimen/_20sdp"/>
+</shape>
+

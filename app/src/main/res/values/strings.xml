@@ -3,4 +3,7 @@
     <string name="choose_your_default_currency">Choose your default currency</string>
     <string name="search_here">Search</string>
     <string name="next">Next</string>
+    <string name="expenses">EXPENSES</string>
+    <string name="income">INCOME</string>
+    <string name="total">Total</string>
 </resources>
