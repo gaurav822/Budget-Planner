@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:src="@drawable/img_money_bag"
+        app:layout_constraintStart_toStartOf="@id/tv_transaction"
+        app:layout_constraintEnd_toEndOf="@id/tv_transaction"
+        app:layout_constraintBottom_toTopOf="@id/tv_transaction"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:id="@+id/ivTransaction" />
+
+    <TextView
+        style="@style/BudgetPlanStyle.H6"
+        android:textColor="@color/white"
+        android:text="Transportation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_transaction" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.expensetracker.Activity.TransactionActivity">
+
+    <View
+        android:id="@+id/view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_95sdp"
+        android:background="@drawable/bottom_corner_bg" />
+
+
+    <androidx.appcompat.widget.Toolbar
+        app:title="Add Transaction"
+        app:titleTextColor="@color/white"
+        app:titleTextAppearance="@style/BudgetPlanStyle.H6"
+        android:backgroundTint="@color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:navigationIcon="@drawable/icon_arrow_back"/>
+
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--        android:id="@+id/appbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@color/transparent"-->
+<!--        android:fitsSystemWindows="true"-->
+<!--        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/toolbar"-->
+<!--        app:elevation="0dp"-->
+<!--        android:layout_marginTop="@dimen/_8sdp">-->
+
+
+<!--        <com.google.android.material.tabs.TabLayout-->
+<!--            android:background="@null"-->
+<!--            android:id="@+id/tab_layout_terms_language"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:visibility="visible"-->
+<!--            app:tabGravity="fill"-->
+<!--            app:tabIndicator="@drawable/ic_tab_indicator_selected"-->
+<!--            app:tabIndicatorFullWidth="false"-->
+<!--            app:tabMode="fixed"-->
+<!--            app:tabSelectedTextColor="@color/white"-->
+<!--            app:tabTextColor="@color/lightGrey"-->
+<!--            app:tabTextAppearance="@style/BudgetPlanStyle.VolteSemiBold20">-->
+
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/expenses" />-->
+
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/income"/>-->
+
+<!--        </com.google.android.material.tabs.TabLayout>-->
+<!--    </com.google.android.material.appbar.AppBarLayout>-->
+
+    <EditText
+        android:layout_marginRight="@dimen/_20sdp"
+        android:textSize="@dimen/_20sdp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:focusableInTouchMode="true"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        android:id="@+id/input_amount"
+        android:inputType="number"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:id="@+id/liner"
+        app:layout_constraintTop_toBottomOf="@id/input_amount"
+        app:layout_constraintStart_toStartOf="@id/input_amount"
+        app:layout_constraintEnd_toEndOf="@id/input_amount"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="2dp"
+        android:background="@color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/npr"
+        android:textColor="@color/green"
+        style="@style/BudgetPlanStyle.VolteSemiBold20"
+        app:layout_constraintStart_toEndOf="@id/liner"
+        android:layout_marginLeft="@dimen/_10sdp"
+        app:layout_constraintTop_toTopOf="@id/input_amount"
+        app:layout_constraintBottom_toBottomOf="@id/liner"/>
+
+    <TextView
+        android:id="@+id/tv_categories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/BudgetPlanStyle.Body1"
+        android:text="Categories"
+        android:textColor="@color/lightGrey"
+        app:layout_constraintTop_toBottomOf="@id/liner"
+        android:layout_marginTop="@dimen/_30sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="@dimen/_10sdp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="@id/tv_categories"
+        app:layout_constraintTop_toBottomOf="@id/tv_categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rvCategories" />
+
+    <TextView
+        android:id="@+id/tv_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/BudgetPlanStyle.Body1"
+        android:text="Comment"
+        android:textColor="@color/lightGrey"
+        app:layout_constraintTop_toBottomOf="@id/rvCategories"
+        android:layout_marginTop="@dimen/_30sdp"
+        app:layout_constraintStart_toStartOf="@id/tv_categories" />
+
+    <TextView
+        android:id="@+id/tv_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/BudgetPlanStyle.Body1"
+        android:text="Photo"
+        android:textColor="@color/lightGrey"
+        app:layout_constraintTop_toBottomOf="@id/tv_comment"
+        android:layout_marginTop="@dimen/_30sdp"
+        app:layout_constraintStart_toStartOf="@id/tv_categories" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/proceedStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="@dimen/_200sdp"
+        android:background="@drawable/boundry_proceed_disabled"
+        android:layout_height="@dimen/_40sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/_20sdp">
+
+        <TextView
+            android:textColor="@color/disabled_text"
+            style="@style/BudgetPlanStyle.Body1"
+            android:text="Add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
