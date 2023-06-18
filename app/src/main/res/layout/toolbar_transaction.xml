@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/bottom_corner_bg"
+    android:layout_height="wrap_content">
+
+
+<androidx.appcompat.widget.Toolbar
+    app:titleTextColor="@color/white"
+    app:titleTextAppearance="@style/BudgetPlanStyle.H6"
+    android:backgroundTint="@color/transparent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_95sdp"
+    android:elevation="0dp"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:navigationIcon="@drawable/icon_arrow_back">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_marginTop="@dimen/_12sdp"
+            android:id="@+id/tv_profile_name"
+            style="@style/BudgetPlanStyle.H6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Add Transactions" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.appcompat.widget.Toolbar>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

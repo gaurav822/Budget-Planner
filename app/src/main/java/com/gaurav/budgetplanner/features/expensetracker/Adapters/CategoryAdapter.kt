@@ -23,24 +23,11 @@ class CategoryAdapter():RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return 6
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        holder.binding.currencyName.text =  allItem[position].key.uppercase()
-//        holder.binding.currencyCode.text = allItem[position].value.capitalize()
-//        holder.itemView.setOnClickListener {
-//            onItemClick?.invoke(allItem[position])
-//            selectedItemPosition = holder.adapterPosition
-//            notifyDataSetChanged()
-//        }
 
-//        if(selectedItemPosition==position){
-//            holder.binding.parentContainer.setBackgroundColor(Color.parseColor("#29371d"))
-//        }
-//        else{
-//            holder.binding.parentContainer.setBackgroundColor(Color.parseColor("#1a1e03"))
-//        }
     }
 
 
