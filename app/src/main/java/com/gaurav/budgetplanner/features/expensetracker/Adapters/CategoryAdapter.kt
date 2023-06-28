@@ -12,9 +12,9 @@ import com.gaurav.budgetplanner.databinding.ItemTransactionCategoryBinding
 import com.gaurav.budgetplanner.features.converter.ViewModel.CountryViewModel
 import java.util.*
 
-class CategoryAdapter(private val categories:Map<String,Int>):RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
+class CategoryAdapter(private var categories:Map<String,Int>):RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
-    var onItemClick : ((Map.Entry<String,String>) -> Unit)? = null
+    var onItemClick : ((Map.Entry<String,Int>) -> Unit)? = null
     private var selectedItemPosition:Int = -1
 
     var data = categories.entries.toList()
@@ -29,6 +29,7 @@ class CategoryAdapter(private val categories:Map<String,Int>):RecyclerView.Adapt
         return data.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val eachData = data[position]
         holder.binding.tvTransaction.text = eachData.key
@@ -36,8 +37,11 @@ class CategoryAdapter(private val categories:Map<String,Int>):RecyclerView.Adapt
         holder.binding.ivTransaction.setBackgroundResource(getRespectiveCircle(position))
 
         holder.itemView.setOnClickListener {
-            selectedItemPosition = holder.adapterPosition
-            notifyDataSetChanged()
+            if(position!=data.size-1){
+                onItemClick?.invoke(data[position])
+                selectedItemPosition = holder.adapterPosition
+                notifyDataSetChanged()
+            }
         }
 
         if(selectedItemPosition==position){
@@ -51,6 +55,12 @@ class CategoryAdapter(private val categories:Map<String,Int>):RecyclerView.Adapt
 
     class ViewHolder(b: ItemTransactionCategoryBinding) : RecyclerView.ViewHolder(b.root) {
         var binding: ItemTransactionCategoryBinding = b
+    }
+
+    fun updateData(newCategories:List<Map.Entry<String,Int>>){
+        this.data = newCategories
+        selectedItemPosition = -1
+        notifyDataSetChanged()
     }
 
     private fun getRespectiveCircle(index:Int):Int{
