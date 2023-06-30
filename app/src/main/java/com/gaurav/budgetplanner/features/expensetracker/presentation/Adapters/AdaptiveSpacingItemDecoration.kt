@@ -1,4 +1,4 @@
-package com.gaurav.budgetplanner.features.expensetracker.Adapters
+package com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters
 
 import android.graphics.Rect
 import android.view.View

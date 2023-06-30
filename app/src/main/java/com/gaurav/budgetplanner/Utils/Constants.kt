@@ -1,5 +1,7 @@
 package com.gaurav.budgetplanner.Utils
 
+import com.gaurav.budgetplanner.R
+
 class Constants {
      companion object {
           const val baseUrl = "https to//cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json"
@@ -278,7 +280,27 @@ class Constants {
                "zmk" to "Zambian kwacha",
                "zmw" to "Zambian Kwacha",
                "zwl" to "Zimbabwean Dollar")
+
+
+           val categories:Map<String,Int> =
+               mapOf("Transportation" to R.drawable.img_transport,
+                    "Workout" to R.drawable.img_gym,
+                    "Family" to R.drawable.img_family,
+                    "Groceries" to R.drawable.img_groceries,
+                    "Gifts" to R.drawable.img_gifts,
+                    "More" to R.drawable.img_add,)
+
+           val incomeCategories:Map<String,Int> =
+               mapOf(
+                    "Interest" to R.drawable.img_transport,
+                    "Gift" to R.drawable.img_gym,
+                    "Paycheck" to R.drawable.img_family,
+                    "Other" to R.drawable.img_groceries,
+                    "More" to R.drawable.img_add,
+               )
      }
+
+
 
      enum class BaseUrl {
           CURRENCY_BASE_URL, DASHBOARD

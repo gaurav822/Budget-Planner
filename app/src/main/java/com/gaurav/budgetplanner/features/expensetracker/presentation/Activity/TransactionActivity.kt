@@ -1,4 +1,4 @@
-package com.gaurav.budgetplanner.features.expensetracker.Activity
+package com.gaurav.budgetplanner.features.expensetracker.presentation.Activity
 
 import android.R.attr.button
 import android.graphics.Color
@@ -11,9 +11,10 @@ import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.gaurav.budgetplanner.R
+import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityTransactionBinding
-import com.gaurav.budgetplanner.features.expensetracker.Adapters.CategoryAdapter
+import com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters.CategoryAdapter
 import com.google.android.material.tabs.TabLayout
 
 
@@ -27,35 +28,6 @@ class TransactionActivity : BaseActivity() {
     private var isCategorySelected = false
     private var isAmountValid = false
     private var isCommentValid = false
-
-    private var categories:Map<String,Int> =
-        mapOf("Transportation" to R.drawable.img_transport,
-        "Workout" to R.drawable.img_gym,
-            "Family" to R.drawable.img_family,
-            "Groceries" to R.drawable.img_groceries,
-            "Gifts" to R.drawable.img_gifts,
-            "More" to R.drawable.img_add,
-            "Transportation" to R.drawable.img_transport,
-            "Workout" to R.drawable.img_gym,
-            "Family" to R.drawable.img_family,
-            "Groceries" to R.drawable.img_groceries,
-            "Gifts" to R.drawable.img_gifts,
-            "More" to R.drawable.img_add)
-
-    private var incomeCategories:Map<String,Int> =
-        mapOf(
-            "Interest" to R.drawable.img_transport,
-            "Gift" to R.drawable.img_gym,
-            "Paycheck" to R.drawable.img_family,
-            "Other" to R.drawable.img_groceries,
-            "More" to R.drawable.img_add,
-            "Transportation" to R.drawable.img_transport,
-            "Workout" to R.drawable.img_gym,
-            "Family" to R.drawable.img_family,
-            "Groceries" to R.drawable.img_groceries,
-            "Gifts" to R.drawable.img_gifts,
-            "More" to R.drawable.img_add
-        )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +47,7 @@ class TransactionActivity : BaseActivity() {
 
     private fun setRecyclerView(){
         recyclerView = binding.rvCategories
-        categoryAdapter = CategoryAdapter(categories)
+        categoryAdapter = CategoryAdapter(Constants.categories)
         recyclerView.layoutManager = StaggeredGridLayoutManager(3,1)
         recyclerView.isNestedScrollingEnabled=false
         recyclerView.adapter = categoryAdapter
@@ -90,18 +62,18 @@ class TransactionActivity : BaseActivity() {
 
     private fun clickEventListener(){
         binding.proceedStart.setOnClickListener {
-            categoryAdapter.updateData(incomeCategories.entries.toList())
+//            categoryAdapter.updateData(Constants. .entries.toList())
         }
 
         binding.tabLayoutIncomeExpenses.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                  when(tab?.position){
                     0 -> {
-                        categoryAdapter.updateData(categories.entries.toList())
+                        categoryAdapter.updateData(Constants.categories.entries.toList())
                     }
 
                     1 -> {
-                        categoryAdapter.updateData(incomeCategories.entries.toList())
+                        categoryAdapter.updateData(Constants.incomeCategories.entries.toList())
                     }
                 }
             }

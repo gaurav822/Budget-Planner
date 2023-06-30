@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityHomeScreenBinding
-import com.gaurav.budgetplanner.features.expensetracker.Activity.TransactionActivity
+import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.TransactionActivity
 
 class HomeScreenActivity : BaseActivity() {
     private var _binding:ActivityHomeScreenBinding?=null
@@ -20,7 +20,7 @@ class HomeScreenActivity : BaseActivity() {
 
     private fun clickEvents(){
         binding.addIcon.setOnClickListener {
-            startActivity(Intent(this,TransactionActivity::class.java))
+            startActivity(Intent(this, TransactionActivity::class.java))
         }
     }
 }
