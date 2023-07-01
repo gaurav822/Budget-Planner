@@ -1,18 +1,20 @@
 package com.gaurav.budgetplanner.features.expensetracker.domain.model
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.gaurav.budgetplanner.R
 
-@Entity
+@Entity(tableName = "recordTable")
 data class Account(
-    val amount:String,
-    val category:String,
+    @ColumnInfo("amount")val amount:String,
+    @ColumnInfo("category")val category:String,
 
-    val comment:String,
-    val transactionType:String,
-    val timeStamp:Long,
-    @PrimaryKey val id:Int? =null
+    @ColumnInfo("comment") val comment:String,
+    @ColumnInfo("transactionType")val transactionType:String,
+    @ColumnInfo("timeStamp") val timeStamp:Long,
+    @PrimaryKey (autoGenerate = true)
+    var id:Int =0
 ){
     companion object {
         val categories:Map<String,Int> =

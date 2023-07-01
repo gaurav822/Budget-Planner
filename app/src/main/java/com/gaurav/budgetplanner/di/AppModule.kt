@@ -5,10 +5,7 @@ import androidx.room.Room
 import com.gaurav.budgetplanner.features.expensetracker.data.data_source.TransactionDatabase
 import com.gaurav.budgetplanner.features.expensetracker.data.repository.TransactionRepositoryImpl
 import com.gaurav.budgetplanner.features.expensetracker.domain.repository.TransactionRepository
-import com.gaurav.budgetplanner.features.expensetracker.domain.use_case.AddTransaction
-import com.gaurav.budgetplanner.features.expensetracker.domain.use_case.DeleteTransaction
-import com.gaurav.budgetplanner.features.expensetracker.domain.use_case.GetTransactions
-import com.gaurav.budgetplanner.features.expensetracker.domain.use_case.TransactionUseCases
+import com.gaurav.budgetplanner.features.expensetracker.domain.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,7 +39,8 @@ object AppModule {
         return TransactionUseCases(
             getTransactions = GetTransactions(repository),
             deleteTransaction = DeleteTransaction(repository),
-            addTransaction = AddTransaction((repository))
+            addTransaction = AddTransaction((repository)),
+            getTransaction = GetTransaction(repository)
         )
     }
 }

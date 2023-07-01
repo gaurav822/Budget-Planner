@@ -1,5 +1,6 @@
 package com.gaurav.budgetplanner.features.expensetracker.data.repository
 
+import androidx.lifecycle.LiveData
 import com.gaurav.budgetplanner.features.expensetracker.data.data_source.TransactionDao
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import com.gaurav.budgetplanner.features.expensetracker.domain.repository.TransactionRepository
@@ -10,7 +11,7 @@ class TransactionRepositoryImpl
     private val dao: TransactionDao
             ):TransactionRepository {
 
-    override fun getTransactions(): Flow<List<Account>> {
+    override fun getTransactions(): LiveData<List<Account>> {
         return dao.getTransaction()
     }
 

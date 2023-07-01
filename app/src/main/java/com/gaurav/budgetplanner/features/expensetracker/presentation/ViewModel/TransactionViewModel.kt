@@ -29,7 +29,7 @@ class TransactionViewModel @Inject constructor(
     private var recentlyDeletedTrx:Account?=null
 
     init {
-        getTransaction(TransactionType.Expense)
+//        getTransaction(TransactionType.Expense)
     }
 
     fun onEvent(event:TransactionEvents){
@@ -39,7 +39,7 @@ class TransactionViewModel @Inject constructor(
                     return
                 }
 
-                getTransaction(event.transactionType)
+//                getTransaction(event.transactionType)
             }
 
             is TransactionEvents.DeleteTransaction -> {
@@ -58,12 +58,12 @@ class TransactionViewModel @Inject constructor(
         }
     }
 
-    private fun getTransaction(transactionType: TransactionType){
-        getTrxJob?.cancel()
-        getTrxJob = transactionUseCases.getTransactions(transactionType).onEach {
-            trx->
-            _state.value = state.value.copy(transactions = trx,transactionType=transactionType)
-        }
-            .launchIn(viewModelScope)
-    }
+//    private fun getTransaction(transactionType: TransactionType){
+//        getTrxJob?.cancel()
+//        getTrxJob = transactionUseCases.getTransactions(transactionType).onEach {
+//            trx->
+//            _state.value = state.value.copy(transactions = trx,transactionType=transactionType)
+//        }
+//            .launchIn(viewModelScope)
+//    }
 }

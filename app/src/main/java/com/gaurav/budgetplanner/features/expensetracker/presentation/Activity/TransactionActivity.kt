@@ -8,16 +8,23 @@ import android.text.TextWatcher
 import android.view.View.OnFocusChangeListener
 import android.view.WindowManager
 import android.widget.EditText
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityTransactionBinding
+import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters.CategoryAdapter
+import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel
+import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.TransactionViewModel
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class TransactionActivity : BaseActivity() {
     private var _binding:ActivityTransactionBinding?=null
     private val binding get() = _binding!!
@@ -28,6 +35,8 @@ class TransactionActivity : BaseActivity() {
     private var isCategorySelected = false
     private var isAmountValid = false
     private var isCommentValid = false
+//    private var viewModel:TransactionViewModel = hiltViewModel()
+private lateinit var viewModel: RecordViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +48,15 @@ class TransactionActivity : BaseActivity() {
         setSupportActionBar(binding.constraintToolbar.toolbar)
         setMaterialTextWatcher(binding.inputAmount,R.id.input_amount)
         setMaterialTextWatcher(binding.inputComment.editText!!,R.id.inputComment)
+        init()
         setRecyclerView()
         clickEventListener()
 
 
+    }
+
+    private fun init(){
+        viewModel = ViewModelProvider(this)[RecordViewModel::class.java]
     }
 
     private fun setRecyclerView(){
@@ -62,8 +76,13 @@ class TransactionActivity : BaseActivity() {
 
     private fun clickEventListener(){
         binding.proceedStart.setOnClickListener {
-//            categoryAdapter.updateData(Constants. .entries.toList())
+            if(isValid){
+                val account = Account(amount = "1000", category = "Transport", comment = "Hello World", timeStamp = System.currentTimeMillis(), transactionType = "E")
+                viewModel.addRecord(account)
+                finish()
+            }
         }
+
 
         binding.tabLayoutIncomeExpenses.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -73,6 +92,7 @@ class TransactionActivity : BaseActivity() {
                     }
 
                     1 -> {
+
                         categoryAdapter.updateData(Constants.incomeCategories.entries.toList())
                     }
                 }
