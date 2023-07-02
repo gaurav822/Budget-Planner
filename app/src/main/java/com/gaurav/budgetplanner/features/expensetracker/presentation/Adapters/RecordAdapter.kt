@@ -21,7 +21,9 @@ class RecordAdapter: RecyclerView.Adapter<RecordAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-
+        val eachItem = allRecords[position]
+        holder.binding.categoryTitle.text = eachItem.category
+        holder.binding.tvAmount.text = "NRS ${eachItem.amount}"
     }
 
     class MyViewHolder(b:ItemEachRecordBinding): RecyclerView.ViewHolder(b.root){

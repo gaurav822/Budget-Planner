@@ -13,12 +13,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
- class RecordViewModel @Inject constructor(val useCases: TransactionUseCases):ViewModel() {
-
-    val allRecords = useCases.getTransactions(transactionType = TransactionType.Expense)
+ class RecordViewModel @Inject constructor(private val useCases: TransactionUseCases):ViewModel() {
 
     fun deleteRecord(record:Account) = viewModelScope.launch(Dispatchers.IO) {
         useCases.deleteTransaction(record)
+    }
+
+    fun getAllRecords(transactionType: TransactionType):LiveData<List<Account>>{
+        return useCases.getTransactions(transactionType = transactionType)
     }
 
     fun updateRecord(record: Account) = viewModelScope.launch(Dispatchers.IO) {

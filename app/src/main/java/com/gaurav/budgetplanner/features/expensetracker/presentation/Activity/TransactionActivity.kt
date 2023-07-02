@@ -35,8 +35,10 @@ class TransactionActivity : BaseActivity() {
     private var isCategorySelected = false
     private var isAmountValid = false
     private var isCommentValid = false
+    private var trxType = "E"
 //    private var viewModel:TransactionViewModel = hiltViewModel()
 private lateinit var viewModel: RecordViewModel
+private lateinit var selectedCategory:Map.Entry<String,Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +68,7 @@ private lateinit var viewModel: RecordViewModel
         recyclerView.isNestedScrollingEnabled=false
         recyclerView.adapter = categoryAdapter
         categoryAdapter.onItemClick = {
+            selectedCategory = it
             isCategorySelected = true
             checkForValidation()
         }
@@ -77,7 +80,12 @@ private lateinit var viewModel: RecordViewModel
     private fun clickEventListener(){
         binding.proceedStart.setOnClickListener {
             if(isValid){
-                val account = Account(amount = "1000", category = "Transport", comment = "Hello World", timeStamp = System.currentTimeMillis(), transactionType = "E")
+                val account = Account(
+                    amount = binding.inputAmount.editableText.toString().trim(),
+                    category = selectedCategory.key,
+                    comment = binding.inputComment.editText.toString(),
+                    timeStamp = System.currentTimeMillis(),
+                    transactionType = trxType)
                 viewModel.addRecord(account)
                 finish()
             }
@@ -88,11 +96,12 @@ private lateinit var viewModel: RecordViewModel
             override fun onTabSelected(tab: TabLayout.Tab?) {
                  when(tab?.position){
                     0 -> {
+                        trxType = "E"
                         categoryAdapter.updateData(Constants.categories.entries.toList())
                     }
 
                     1 -> {
-
+                        trxType = "I"
                         categoryAdapter.updateData(Constants.incomeCategories.entries.toList())
                     }
                 }
@@ -129,11 +138,6 @@ private lateinit var viewModel: RecordViewModel
                     R.id.input_amount -> {
                         isValidAmount()
                     }
-
-
-                    R.id.inputComment -> {
-                        isValidComment()
-                    }
                 }
             }
 
@@ -147,13 +151,9 @@ private lateinit var viewModel: RecordViewModel
         isAmountValid = binding.inputAmount.text.toString().isNotEmpty()
         checkForValidation()
     }
-    private fun isValidComment() {
-        isCommentValid = binding.inputComment.editText?.text.toString().isNotEmpty()
-        checkForValidation()
-    }
 
     private fun checkForValidation (){
-        isValid = isAmountValid && isCategorySelected && isCommentValid
+        isValid = isAmountValid && isCategorySelected
         if(isValid) {
             binding.proceedStart.setBackgroundResource(R.drawable.boundry_proceed_button)
             binding.addText.setTextColor(Color.parseColor("#c6000000"))

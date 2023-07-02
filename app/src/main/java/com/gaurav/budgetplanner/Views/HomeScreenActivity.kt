@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityHomeScreenBinding
+import com.gaurav.budgetplanner.features.expensetracker.domain.util.TransactionType
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.TransactionActivity
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters.RecordAdapter
 import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel
@@ -34,7 +35,7 @@ class HomeScreenActivity : BaseActivity() {
         binding.rvRecords.layoutManager = LinearLayoutManager(this)
         binding.rvRecords.adapter = adapter
 
-        viewModel.allRecords.observe(this) { list ->
+        viewModel.getAllRecords(TransactionType.Income).observe(this) { list ->
             list?.let {
                 adapter.updateList(it)
             }
