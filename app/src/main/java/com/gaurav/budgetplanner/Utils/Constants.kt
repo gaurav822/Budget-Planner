@@ -292,10 +292,10 @@ class Constants {
 
            val incomeCategories:Map<String,Int> =
                mapOf(
-                    "Interest" to R.drawable.img_transport,
-                    "Gift" to R.drawable.img_gym,
-                    "Paycheck" to R.drawable.img_family,
-                    "Other" to R.drawable.img_groceries,
+                    "Interest" to R.drawable.img_interest,
+                    "Gift" to R.drawable.img_gifts,
+                    "Paycheck" to R.drawable.img_paycheck,
+                    "Other" to R.drawable.img_other,
                     "More" to R.drawable.img_add,
                )
      }

@@ -8,22 +8,8 @@ import com.gaurav.budgetplanner.features.expensetracker.domain.util.TransactionT
 
 class GetTransactions(private val repository:TransactionRepository)
 {
-    operator fun invoke(transactionType: TransactionType=TransactionType.Expense): LiveData<List<Account>>{
-        return repository.getTransactions().map {
-            trx ->
-            when(transactionType){
-                TransactionType.Expense -> {
-                    trx.filter { 
-                        transaction ->  transaction.transactionType=="E"
-                    }
-                }
-                TransactionType.Income -> {
-                    trx.filter {
-                            transaction ->  transaction.transactionType=="I"
-                    }
-                }
-            }
-        }
+    operator fun invoke(): LiveData<List<Account>>{
+        return repository.getTransactions()
     }
 
 }

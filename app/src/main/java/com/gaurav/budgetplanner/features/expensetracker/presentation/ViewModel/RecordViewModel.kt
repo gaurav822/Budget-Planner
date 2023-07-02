@@ -19,8 +19,8 @@ import javax.inject.Inject
         useCases.deleteTransaction(record)
     }
 
-    fun getAllRecords(transactionType: TransactionType):LiveData<List<Account>>{
-        return useCases.getTransactions(transactionType = transactionType)
+    fun getAllRecords():LiveData<List<Account>>{
+        return useCases.getTransactions()
     }
 
     fun updateRecord(record: Account) = viewModelScope.launch(Dispatchers.IO) {

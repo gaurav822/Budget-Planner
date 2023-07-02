@@ -21,7 +21,7 @@
            android:id="@+id/imgCategory"
            android:layout_width="@dimen/_20sdp"
            android:layout_height="@dimen/_20sdp"
-           android:src="@drawable/img_transport"
+           tools:src="@drawable/img_transport"
            android:layout_gravity="center_vertical"
        />
 
@@ -49,6 +49,7 @@
            app:layout_constraintBottom_toBottomOf="parent"/>
 
        <TextView
+           android:id="@+id/tvPercent"
            android:textColor="@color/lightGrey"
            style="@style/BudgetPlanStyle.SemiBold16"
            android:text="40%"

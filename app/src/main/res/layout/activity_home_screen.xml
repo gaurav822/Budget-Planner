@@ -87,46 +87,46 @@
         android:layout_marginBottom="@dimen/_10sdp"
         android:src="@drawable/add_icon" />
 
-<!--    <com.google.android.material.appbar.AppBarLayout-->
-<!--        android:id="@+id/appbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@color/transparent"-->
-<!--        android:fitsSystemWindows="true"-->
-<!--        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/cl_total_amount"-->
-<!--        app:elevation="0dp"-->
-<!--        android:layout_marginTop="@dimen/_10sdp">-->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_total_amount"
+        app:elevation="0dp"
+        android:layout_marginTop="@dimen/_10sdp">
 
 
-<!--        <com.google.android.material.tabs.TabLayout-->
-<!--            android:background="@null"-->
-<!--            android:id="@+id/tab_layout_terms_language"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:visibility="visible"-->
-<!--            app:tabGravity="fill"-->
-<!--            app:tabIndicator="@drawable/ic_tab_indicator_selected"-->
-<!--            app:tabIndicatorFullWidth="false"-->
-<!--            app:tabMode="fixed"-->
-<!--            app:tabSelectedTextColor="@color/white"-->
-<!--            app:tabTextColor="@color/lightGrey"-->
-<!--            app:tabTextAppearance="@style/BudgetPlanStyle.VolteSemiBold20">-->
+        <com.google.android.material.tabs.TabLayout
+            android:background="@null"
+            android:id="@+id/tab_layout_income_expenses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:tabGravity="fill"
+            app:tabIndicator="@drawable/ic_tab_indicator_selected"
+            app:tabIndicatorFullWidth="false"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/lightGrey"
+            app:tabTextAppearance="@style/BudgetPlanStyle.VolteSemiBold20">
 
-<!--            <com.google.android.material.tabs.TabItem-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/expenses" />-->
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/expenses" />
 
-<!--            <com.google.android.material.tabs.TabItem-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/income"/>-->
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/income"/>
 
-<!--        </com.google.android.material.tabs.TabLayout>-->
-<!--    </com.google.android.material.appbar.AppBarLayout>-->
+        </com.google.android.material.tabs.TabLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:orientation="vertical"
