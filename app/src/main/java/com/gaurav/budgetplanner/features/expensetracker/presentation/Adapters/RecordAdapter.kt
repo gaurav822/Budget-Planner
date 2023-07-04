@@ -1,5 +1,6 @@
 package com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -23,12 +24,13 @@ class RecordAdapter: RecyclerView.Adapter<RecordAdapter.MyViewHolder>() {
        return allRecords.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val eachItem = allRecords[position]
         holder.binding.categoryTitle.text = eachItem.category
         holder.binding.tvAmount.text = "NRS ${eachItem.amount}"
         holder.binding.imgCategory.setImageResource(IconMapper.getIconByName(eachItem.category))
-        holder.binding.tvPercent.text =  (eachItem.amount.toInt() * 100 / sum).toString()
+        holder.binding.tvPercent.text = "${(eachItem.amount.toInt() * 100 / sum)}%"
 
         if(allRecords.isEmpty()){
 
@@ -39,18 +41,28 @@ class RecordAdapter: RecyclerView.Adapter<RecordAdapter.MyViewHolder>() {
         var binding: ItemEachRecordBinding = b
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(data:List<Account>, trxType:String){
-        var newData:List<Account> = if(trxType == "E"){
+        sum = 0
+        val newData:List<Account> = if(trxType == "E"){
             data.filter { transaction ->  transaction.transactionType=="E"
             }
         } else{
             data.filter { transaction ->  transaction.transactionType=="I"
             }
         }
-        this.allRecords = newData
-        for(i in newData){
+       val mergedList = newData.groupBy {
+            it.category
+        }.map {
+               (category, accounts) ->
+           val totalAmount = accounts.sumOf { it.amount.toInt() }
+           Account(totalAmount.toString(), category, "", "", 0)
+        }
+        this.allRecords = mergedList
+        for(i in mergedList){
             sum+= i.amount.toInt()
         }
+
         notifyDataSetChanged()
     }
 }
