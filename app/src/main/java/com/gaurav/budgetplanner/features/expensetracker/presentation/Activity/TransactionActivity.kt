@@ -1,14 +1,14 @@
 package com.gaurav.budgetplanner.features.expensetracker.presentation.Activity
 
-import android.R.attr.button
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.view.WindowManager
 import android.widget.EditText
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -19,8 +19,8 @@ import com.gaurav.budgetplanner.databinding.ActivityTransactionBinding
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters.CategoryAdapter
 import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel
-import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.TransactionViewModel
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -63,9 +63,8 @@ private lateinit var selectedCategory:Map.Entry<String,Int>
 
     private fun setRecyclerView(){
         recyclerView = binding.rvCategories
-        categoryAdapter = CategoryAdapter(Constants.categories)
+        categoryAdapter = CategoryAdapter(Constants.categories,this)
         recyclerView.layoutManager = StaggeredGridLayoutManager(3,1)
-        recyclerView.isNestedScrollingEnabled=false
         recyclerView.adapter = categoryAdapter
         categoryAdapter.onItemClick = {
             selectedCategory = it
@@ -91,6 +90,14 @@ private lateinit var selectedCategory:Map.Entry<String,Int>
             }
         }
 
+        binding.editinputComment.onFocusChangeListener =
+            OnFocusChangeListener { _, hasFocus ->
+                if(hasFocus){
+                    val scrollY = (binding.inputComment.y - 100).toInt()
+                    binding.scrollView.smoothScrollTo(0, scrollY)
+                }
+            }
+
 
         binding.tabLayoutIncomeExpenses.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -105,6 +112,8 @@ private lateinit var selectedCategory:Map.Entry<String,Int>
                         categoryAdapter.updateData(Constants.incomeCategories.entries.toList())
                     }
                 }
+                isCategorySelected=false
+                checkForValidation()
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {

@@ -166,6 +166,8 @@
     <color name="dialog_white_trans">#EEFFFFFF</color>
     <color name="light_grey_text">#40000000</color>
 
+    <color name="mtrl_textinput_default_box_stroke_color">#fff</color>
+
     <color name="outlin_color">#00CCCC</color>
     <color name="outlin_color_opacity">#5100CCCC</color>
 

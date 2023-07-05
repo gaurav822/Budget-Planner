@@ -1,18 +1,20 @@
 package com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.databinding.ItemTransactionCategoryBinding
 import com.gaurav.budgetplanner.features.converter.ViewModel.CountryViewModel
 import java.util.*
 
-class CategoryAdapter(private var categories:Map<String,Int>):RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
+class CategoryAdapter(categories:Map<String,Int>,var context:Context):RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
     var onItemClick : ((Map.Entry<String,Int>) -> Unit)? = null
     private var selectedItemPosition:Int = -1
@@ -33,7 +35,11 @@ class CategoryAdapter(private var categories:Map<String,Int>):RecyclerView.Adapt
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val eachData = data[position]
         holder.binding.tvTransaction.text = eachData.key
-        holder.binding.ivTransaction.setImageResource(eachData.value)
+        Glide.with(context)
+            .asBitmap()
+            .load(eachData.value)
+            .into(holder.binding.ivTransaction)
+
         holder.binding.ivTransaction.setBackgroundResource(getRespectiveCircle(position))
 
         holder.itemView.setOnClickListener {

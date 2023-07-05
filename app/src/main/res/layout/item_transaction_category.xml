@@ -13,7 +13,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         app:civ_border_width="@dimen/_10sdp"
         app:civ_border_color="@color/transparent"
-        android:src="@drawable/img_transport"
+        tools:src="@drawable/img_transport"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
