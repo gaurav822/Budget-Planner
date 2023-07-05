@@ -63,12 +63,13 @@
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView"
-            android:fillViewport="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/_20sdp"
+            android:paddingBottom="@dimen/_200sdp"
             android:clipToPadding="false"
             app:layout_constrainedHeight="true">
+
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -183,6 +184,14 @@
                     app:layout_constraintTop_toBottomOf="@id/inputComment"
                     android:layout_marginTop="@dimen/_30sdp"
                     app:layout_constraintStart_toStartOf="@id/tv_categories" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_photo"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

@@ -129,6 +129,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
         android:orientation="vertical"
         android:layout_marginTop="@dimen/_90sdp"
         tools:listitem="@layout/item_each_record"
@@ -137,6 +138,19 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/cl_total_amount"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:text="No Expenses Found !"
+        style="@style/BudgetPlanStyle.Body1"
+        android:textColor="@color/lightGrey"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/noDataTv" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

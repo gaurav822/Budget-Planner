@@ -2,6 +2,7 @@ package com.gaurav.budgetplanner.Views
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -65,6 +66,18 @@ class HomeScreenActivity : BaseActivity() {
                         adapter.updateList(currentList,"I")
                         trxState = "I"
                     }
+                }
+                if(currentList.isEmpty() && trxState == "E"){
+
+                }
+                else if(currentList.isEmpty() && trxState == "I"){
+
+                }
+                else if(currentList.isNotEmpty() && trxState=="E"){
+
+                }
+                else{
+
                 }
             }
 
