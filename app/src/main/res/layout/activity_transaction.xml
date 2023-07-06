@@ -133,23 +133,14 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/rvCategories" />
 
-                <TextView
-                    android:id="@+id/tv_comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/BudgetPlanStyle.Body1"
-                    android:text="Comment"
-                    android:textColor="@color/lightGrey"
-                    app:layout_constraintTop_toBottomOf="@id/rvCategories"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:layout_constraintStart_toStartOf="@id/tv_categories" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:id="@+id/inputComment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
-                    app:layout_constraintTop_toBottomOf="@id/tv_comment"
+                    app:layout_constraintTop_toBottomOf="@id/rvCategories"
                     android:textColorHint="@color/lightGrey"
                     android:hint="@string/comment"
                     app:hintTextColor="@color/lightGrey"

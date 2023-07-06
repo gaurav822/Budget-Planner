@@ -11,6 +11,7 @@ import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityHomeScreenBinding
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import com.gaurav.budgetplanner.features.expensetracker.domain.util.TransactionType
+import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.CategoryActivity
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.TransactionActivity
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters.RecordAdapter
 import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel
@@ -41,9 +42,14 @@ class HomeScreenActivity : BaseActivity() {
         binding.rvRecords.layoutManager = LinearLayoutManager(this)
         binding.rvRecords.adapter = adapter
 
+        adapter.onItemClick = {
+            startActivity(Intent(this, CategoryActivity::class.java))
+        }
+
         viewModel.getAllRecords().observe(this) { list ->
             list?.let {
-                adapter.updateList(it,trxState)
+                val data = splitAndMergedData(it)
+                adapter.updateList(data)
                 currentList = it
             }
         }
@@ -58,27 +64,14 @@ class HomeScreenActivity : BaseActivity() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab?.position){
                     0 -> {
-                        adapter.updateList(currentList,"E")
                         trxState = "E"
                     }
-
                     1 -> {
-                        adapter.updateList(currentList,"I")
                         trxState = "I"
                     }
-                }
-                if(currentList.isEmpty() && trxState == "E"){
 
                 }
-                else if(currentList.isEmpty() && trxState == "I"){
-
-                }
-                else if(currentList.isNotEmpty() && trxState=="E"){
-
-                }
-                else{
-
-                }
+                adapter.updateList(splitAndMergedData(currentList))
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -89,5 +82,39 @@ class HomeScreenActivity : BaseActivity() {
 
             }
         })
+    }
+
+    private fun splitAndMergedData(data:List<Account>):List<Account>{
+        val newData: List<Account>
+        if(trxState == "E"){
+                newData =  data.filter { transaction ->  transaction.transactionType=="E" }
+                checkIfDataEmpty(newData)
+        } else{
+               newData = data.filter { transaction ->  transaction.transactionType=="I" }
+               checkIfDataEmpty(newData)
+        }
+        val mergedList = newData.groupBy {
+            it.category
+        }.map {
+                (category, accounts) ->
+            val totalAmount = accounts.sumOf { it.amount.toInt() }
+            Account(totalAmount.toString(), category, "", "", 0)
+        }
+        return mergedList
+    }
+
+    private fun checkIfDataEmpty(data:List<Account>){
+        if(data.isEmpty()){
+            binding.noDataTv.visibility=View.VISIBLE
+            if(trxState=="E"){
+                binding.noDataTv.text = "No Expenses Found !"
+            }
+            else{
+                binding.noDataTv.text = "No Income Found !"
+            }
+        }
+        else{
+            binding.noDataTv.visibility=View.GONE
+        }
     }
 }

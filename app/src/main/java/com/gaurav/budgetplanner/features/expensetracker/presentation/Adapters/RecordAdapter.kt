@@ -13,6 +13,7 @@ class RecordAdapter: RecyclerView.Adapter<RecordAdapter.MyViewHolder>() {
 
     private var allRecords = emptyList<Account>()
     private var sum:Int = 0
+    var onItemClick : ((Account) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view =
@@ -32,8 +33,8 @@ class RecordAdapter: RecyclerView.Adapter<RecordAdapter.MyViewHolder>() {
         holder.binding.imgCategory.setImageResource(IconMapper.getIconByName(eachItem.category))
         holder.binding.tvPercent.text = "${(eachItem.amount.toInt() * 100 / sum)}%"
 
-        if(allRecords.isEmpty()){
-
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(eachItem)
         }
     }
 
@@ -42,24 +43,10 @@ class RecordAdapter: RecyclerView.Adapter<RecordAdapter.MyViewHolder>() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateList(data:List<Account>, trxType:String){
+    fun updateList(data:List<Account>){
         sum = 0
-        val newData:List<Account> = if(trxType == "E"){
-            data.filter { transaction ->  transaction.transactionType=="E"
-            }
-        } else{
-            data.filter { transaction ->  transaction.transactionType=="I"
-            }
-        }
-       val mergedList = newData.groupBy {
-            it.category
-        }.map {
-               (category, accounts) ->
-           val totalAmount = accounts.sumOf { it.amount.toInt() }
-           Account(totalAmount.toString(), category, "", "", 0)
-        }
-        this.allRecords = mergedList
-        for(i in mergedList){
+        this.allRecords = data
+        for(i in data){
             sum+= i.amount.toInt()
         }
 

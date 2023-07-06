@@ -129,7 +129,6 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:visibility="gone"
         android:orientation="vertical"
         android:layout_marginTop="@dimen/_90sdp"
         tools:listitem="@layout/item_each_record"
@@ -140,6 +139,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:visibility="gone"
         android:text="No Expenses Found !"
         style="@style/BudgetPlanStyle.Body1"
         android:textColor="@color/lightGrey"
