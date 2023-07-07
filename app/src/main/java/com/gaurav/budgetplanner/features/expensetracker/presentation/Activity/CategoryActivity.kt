@@ -38,11 +38,12 @@ class CategoryActivity : AppCompatActivity() {
             list?.let { it ->
                 val data = getRespectiveData(it)
                 adapter.updateList(data)
-                binding.constraintToolbar.totalAmount.text = "NRs"+list.sumOf {
+                binding.constraintToolbar.totalAmount.text = "NRs"+data.sumOf {
                     it.amount.toInt()
                 }.toString()
+                if(data.isEmpty()) finish()
             }
-            if(list.isEmpty()) finish()
+
         }
 
 

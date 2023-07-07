@@ -2,11 +2,13 @@ package com.gaurav.budgetplanner.Views
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gaurav.budgetplanner.Utils.Constants
+import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityHomeScreenBinding
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
@@ -51,9 +53,15 @@ class HomeScreenActivity : BaseActivity() {
         viewModel.getAllRecords().observe(this) { list ->
             list?.let {
                 val data = splitAndMergedData(it)
+                Utils.getTotalBudget(it)
                 adapter.updateList(data)
                 currentList = it
+                binding.totalAmount.text = Utils.getTotalBudget(it)
             }
+        }
+
+        viewModel.amount.observe(this) { result ->
+            Log.d("DebugData",result.toString())
         }
     }
 
