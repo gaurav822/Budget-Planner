@@ -45,7 +45,6 @@ class HomeScreenActivity : BaseActivity() {
         adapter.onItemClick = {
             val intent = Intent(this, CategoryActivity::class.java)
             intent.putExtra("category", it.category)
-            intent.putExtra("amount",it.amount)
             startActivity(intent)
         }
 

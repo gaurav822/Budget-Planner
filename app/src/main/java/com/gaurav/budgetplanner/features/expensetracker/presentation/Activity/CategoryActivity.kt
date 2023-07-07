@@ -20,7 +20,6 @@ class CategoryActivity : AppCompatActivity() {
     private lateinit var adapter: IndividualRecordAdapter
     private lateinit var viewModel:RecordViewModel
     private lateinit var category: String
-    private lateinit var amount:String
     private lateinit var bundle:Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,10 +35,14 @@ class CategoryActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[RecordViewModel::class.java]
 
         viewModel.getAllRecords().observe(this) { list ->
-            list?.let {
+            list?.let { it ->
                 val data = getRespectiveData(it)
                 adapter.updateList(data)
+                binding.constraintToolbar.totalAmount.text = "NRs"+list.sumOf {
+                    it.amount.toInt()
+                }.toString()
             }
+            if(list.isEmpty()) finish()
         }
 
 
@@ -47,10 +50,8 @@ class CategoryActivity : AppCompatActivity() {
 
     private fun init(){
         category = intent?.extras?.getString("category")!!
-        amount = intent?.extras?.getString("amount")!!
         binding.constraintToolbar.apply {
             tvCategory.text = category
-            totalAmount.text = "${getString(R.string.nrs)}$amount"
         }
     }
 
