@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.gaurav.budgetplanner.Views.Components.IconMapper
 import com.gaurav.budgetplanner.databinding.ItemEachRecordBinding
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
@@ -30,7 +31,10 @@ class RecordAdapter: RecyclerView.Adapter<RecordAdapter.MyViewHolder>() {
         val eachItem = allRecords[position]
         holder.binding.categoryTitle.text = eachItem.category
         holder.binding.tvAmount.text = "NRS ${eachItem.amount}"
-        holder.binding.imgCategory.setImageResource(IconMapper.getIconByName(eachItem.category))
+        Glide.with(holder.binding.categoryTitle.context)
+            .asBitmap()
+            .load(IconMapper.getIconByName(eachItem.category))
+            .into(holder.binding.imgCategory)
         holder.binding.tvPercent.text = "${(eachItem.amount.toInt() * 100 / sum)}%"
 
         holder.itemView.setOnClickListener {

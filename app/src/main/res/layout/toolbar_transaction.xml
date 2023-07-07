@@ -11,7 +11,8 @@
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:navigationIcon="@drawable/icon_arrow_back"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -55,15 +56,17 @@
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintEnd_toStartOf="@id/searchButton"
                app:layout_constraintTop_toTopOf="parent"
-               android:text="WORKOUT" />
+               tools:text="WORKOUT" />
 
            <TextView
+               android:id="@+id/totalAmount"
                style="@style/BudgetPlanStyle.SemiBoldWhite18"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                app:layout_constraintTop_toBottomOf="@+id/tv_category"
                app:layout_constraintStart_toStartOf="@id/tv_category"
-               android:text="NRs600"/>
+               app:layout_constraintEnd_toEndOf="@id/tv_category"
+               tools:text="NRs600"/>
 
            <androidx.constraintlayout.widget.ConstraintLayout
                android:id="@+id/cl_toolbar_extend_category"

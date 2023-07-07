@@ -43,7 +43,10 @@ class HomeScreenActivity : BaseActivity() {
         binding.rvRecords.adapter = adapter
 
         adapter.onItemClick = {
-            startActivity(Intent(this, CategoryActivity::class.java))
+            val intent = Intent(this, CategoryActivity::class.java)
+            intent.putExtra("category", it.category)
+            intent.putExtra("amount",it.amount)
+            startActivity(intent)
         }
 
         viewModel.getAllRecords().observe(this) { list ->

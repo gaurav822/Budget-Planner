@@ -15,7 +15,7 @@ data class Account(
     @ColumnInfo("timeStamp") val timeStamp:Long,
     @PrimaryKey (autoGenerate = true)
     var id:Int =0
-){
+):java.io.Serializable{
     companion object {
         val categories:Map<String,Int> =
             mapOf("Transportation" to R.drawable.img_transport,

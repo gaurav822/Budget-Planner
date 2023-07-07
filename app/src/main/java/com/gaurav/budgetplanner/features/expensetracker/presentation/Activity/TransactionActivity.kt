@@ -82,7 +82,7 @@ private lateinit var selectedCategory:Map.Entry<String,Int>
                 val account = Account(
                     amount = binding.inputAmount.editableText.toString().trim(),
                     category = selectedCategory.key,
-                    comment = binding.inputComment.editText.toString(),
+                    comment = binding.inputComment.editText?.text.toString(),
                     timeStamp = System.currentTimeMillis(),
                     transactionType = trxType)
                 viewModel.addRecord(account)

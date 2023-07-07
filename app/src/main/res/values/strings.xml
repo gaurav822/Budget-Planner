@@ -8,4 +8,6 @@
     <string name="total">Total</string>
     <string name="npr">NPR</string>
     <string name="comment">Comment</string>
+    <string name="nrs">NRs</string>
+    <string name="delete">DELETE</string>
 </resources>
