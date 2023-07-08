@@ -1,5 +1,6 @@
 package com.gaurav.budgetplanner.features.expensetracker.presentation.Activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
@@ -20,7 +21,7 @@ class TransactionDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityTransactionDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        setSupportActionBar(binding.toolbar.mainGenericToolbar)
         init()
         clickEvents()
     }
@@ -30,6 +31,14 @@ class TransactionDetailActivity : AppCompatActivity() {
             viewModel.deleteRecord(account!!)
             finish()
         }
+
+        binding.toolbar.toolbarGPSIcon.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putSerializable("account",account)
+            val intent = Intent(this,TransactionActivity::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent)
+        }
     }
 
     private fun init(){
@@ -38,5 +47,14 @@ class TransactionDetailActivity : AppCompatActivity() {
             account = bundle?.getSerializable("account") as Account
         }
         viewModel = ViewModelProvider(this)[RecordViewModel::class.java]
+        binding.amount.text = "NRs "+account?.amount
+        binding.category.text = account?.category
+        binding.date.text
+        binding.comment.text = account?.comment
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true;
     }
 }

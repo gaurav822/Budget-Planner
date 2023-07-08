@@ -10,4 +10,8 @@
     <string name="comment">Comment</string>
     <string name="nrs">NRs</string>
     <string name="delete">DELETE</string>
+    <string name="amount">Amount</string>
+    <string name="category">Category</string>
+    <string name="day">Day</string>
+    <string name="date">Date</string>
 </resources>

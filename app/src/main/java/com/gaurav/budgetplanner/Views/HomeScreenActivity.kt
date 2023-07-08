@@ -59,10 +59,6 @@ class HomeScreenActivity : BaseActivity() {
                 binding.totalAmount.text = Utils.getTotalBudget(it)
             }
         }
-
-        viewModel.amount.observe(this) { result ->
-            Log.d("DebugData",result.toString())
-        }
     }
 
     private fun clickEvents(){

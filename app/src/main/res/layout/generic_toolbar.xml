@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
-    android:background="#323232"
+    android:background="@drawable/bottom_corner_bg"
     android:elevation="0dp"
     android:fitsSystemWindows="true"
     android:minHeight="?android:attr/actionBarSize"
@@ -17,8 +17,8 @@
         android:orientation="horizontal">
 
         <TextView
-
-            android:text="Currencies"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:text="Transaction details"
             android:id="@+id/toolbarTitle"
             style="@style/BudgetPlanStyle.SemiBoldWhite18"
             android:layout_width="wrap_content"
@@ -26,8 +26,6 @@
             android:gravity="bottom"
             android:letterSpacing="0"
             android:singleLine="true" />
-
-
 
         <RelativeLayout
             android:id="@+id/toolbar_icon_layout"
@@ -37,9 +35,10 @@
             android:visibility="visible">
 
             <ImageView
+                android:src="@drawable/img_edit"
                 android:id="@+id/toolbarGPSIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="7dp"
                 android:layout_marginRight="7dp"

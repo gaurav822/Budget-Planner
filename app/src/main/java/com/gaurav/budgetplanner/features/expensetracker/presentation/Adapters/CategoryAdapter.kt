@@ -79,4 +79,14 @@ class CategoryAdapter(categories:Map<String,Int>,var context:Context):RecyclerVi
             else -> R.drawable.circle_grey
         }
     }
+
+    fun updateSelectedItem(category:String){
+        for (i in data.indices){
+            if(data[i].key==category){
+                selectedItemPosition = i
+                break
+            }
+        }
+        notifyDataSetChanged()
+    }
 }

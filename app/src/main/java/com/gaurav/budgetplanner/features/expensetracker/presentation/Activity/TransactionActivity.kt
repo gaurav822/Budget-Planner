@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
+import com.gaurav.budgetplanner.Views.Components.IconMapper
 import com.gaurav.budgetplanner.databinding.ActivityTransactionBinding
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters.CategoryAdapter
@@ -39,6 +40,9 @@ class TransactionActivity : BaseActivity() {
 //    private var viewModel:TransactionViewModel = hiltViewModel()
 private lateinit var viewModel: RecordViewModel
 private lateinit var selectedCategory:Map.Entry<String,Int>
+
+  private var account:Account?= null
+    private var bundle:Bundle? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +75,26 @@ private lateinit var selectedCategory:Map.Entry<String,Int>
             isCategorySelected = true
             checkForValidation()
         }
+        bundle = intent?.extras
+        bundle?.let {
+            account = bundle?.getSerializable("account") as Account
+        }
+        account?.let {
+            binding.constraintToolbar.tvProfileName.text = "Edit Transaction"
+            binding.inputAmount.setText(account?.amount)
+            binding.inputComment.editText?.setText(account?.comment)
+            binding.addText.text = "Save"
+            binding.proceedStart.setBackgroundResource(R.drawable.boundry_proceed_button)
+            binding.addText.setTextColor(Color.parseColor("#c6000000"))
+            isValid = true
+            selectedCategory= mapOf(account?.category!! to IconMapper.getIconByName(account?.category!!)).entries.first()
+            if(account?.transactionType=="I"){
+                binding.tabLayoutIncomeExpenses.getTabAt(1)?.select()
+                categoryAdapter.updateData(Constants.incomeCategories.entries.toList())
+            }
+            categoryAdapter.updateSelectedItem(account?.category!!)
+        }
+
 //        recyclerView.addItemDecoration(AdaptiveSpacingItemDecoration(8,true));
 //        bindAdapter(recyclerView,8.0f,true)
 
