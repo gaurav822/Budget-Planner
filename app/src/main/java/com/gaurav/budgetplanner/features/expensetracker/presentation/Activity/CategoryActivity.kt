@@ -78,4 +78,9 @@ class CategoryActivity : AppCompatActivity() {
         onBackPressed()
         return true;
     }
+
+    override fun onResume() {
+        super.onResume()
+
+    }
 }

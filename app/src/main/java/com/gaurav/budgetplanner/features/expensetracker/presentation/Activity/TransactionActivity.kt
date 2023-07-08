@@ -1,5 +1,7 @@
 package com.gaurav.budgetplanner.features.expensetracker.presentation.Activity
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -43,6 +45,7 @@ private lateinit var selectedCategory:Map.Entry<String,Int>
 
   private var account:Account?= null
     private var bundle:Bundle? = null
+    private var editModeOn = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,19 +83,7 @@ private lateinit var selectedCategory:Map.Entry<String,Int>
             account = bundle?.getSerializable("account") as Account
         }
         account?.let {
-            binding.constraintToolbar.tvProfileName.text = "Edit Transaction"
-            binding.inputAmount.setText(account?.amount)
-            binding.inputComment.editText?.setText(account?.comment)
-            binding.addText.text = "Save"
-            binding.proceedStart.setBackgroundResource(R.drawable.boundry_proceed_button)
-            binding.addText.setTextColor(Color.parseColor("#c6000000"))
-            isValid = true
-            selectedCategory= mapOf(account?.category!! to IconMapper.getIconByName(account?.category!!)).entries.first()
-            if(account?.transactionType=="I"){
-                binding.tabLayoutIncomeExpenses.getTabAt(1)?.select()
-                categoryAdapter.updateData(Constants.incomeCategories.entries.toList())
-            }
-            categoryAdapter.updateSelectedItem(account?.category!!)
+            triggerUpdate()
         }
 
 //        recyclerView.addItemDecoration(AdaptiveSpacingItemDecoration(8,true));
@@ -100,16 +91,43 @@ private lateinit var selectedCategory:Map.Entry<String,Int>
 
     }
 
+    private fun triggerUpdate(){
+        editModeOn = true
+        binding.constraintToolbar.tvProfileName.text = getString(R.string.edit_trx)
+        binding.inputAmount.setText(account?.amount)
+        binding.inputComment.editText?.setText(account?.comment)
+        binding.addText.text = getString(R.string.save)
+        binding.proceedStart.setBackgroundResource(R.drawable.boundry_proceed_button)
+        binding.addText.setTextColor(Color.parseColor("#c6000000"))
+        isCategorySelected = true
+        selectedCategory= mapOf(account?.category!! to IconMapper.getIconByName(account?.category!!)).entries.first()
+        if(account?.transactionType=="I"){
+            binding.tabLayoutIncomeExpenses.getTabAt(1)?.select()
+            categoryAdapter.updateData(Constants.incomeCategories.entries.toList())
+        }
+        categoryAdapter.updateSelectedItem(account?.category!!)
+    }
+
     private fun clickEventListener(){
         binding.proceedStart.setOnClickListener {
             if(isValid){
-                val account = Account(
+                val insertAcc = Account(
                     amount = binding.inputAmount.editableText.toString().trim(),
                     category = selectedCategory.key,
                     comment = binding.inputComment.editText?.text.toString(),
                     timeStamp = System.currentTimeMillis(),
-                    transactionType = trxType)
-                viewModel.addRecord(account)
+                    transactionType = trxType,
+                )
+                if(editModeOn){
+                    insertAcc.id = account?.id!!
+                    viewModel.updateRecord(insertAcc)
+                    val bundle = Bundle()
+                    bundle.putSerializable("account",insertAcc)
+                    val intent = Intent(this,TransactionDetailActivity::class.java)
+                    intent.putExtras(bundle)
+                    setResult(Activity.RESULT_OK, intent)
+                }
+                else viewModel.addRecord(insertAcc)
                 finish()
             }
         }

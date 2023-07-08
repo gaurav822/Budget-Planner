@@ -31,7 +31,7 @@ import javax.inject.Inject
     }
 
     fun updateRecord(record: Account) = viewModelScope.launch(Dispatchers.IO) {
-        useCases.addTransaction(record)
+        useCases.updateTransaction(record)
     }
 
     fun addRecord(record: Account) = viewModelScope.launch(Dispatchers.IO) {

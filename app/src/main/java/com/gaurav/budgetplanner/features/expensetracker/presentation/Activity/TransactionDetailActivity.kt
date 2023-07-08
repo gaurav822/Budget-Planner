@@ -1,8 +1,10 @@
 package com.gaurav.budgetplanner.features.expensetracker.presentation.Activity
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import com.gaurav.budgetplanner.databinding.ActivityTransactionDetailBinding
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
@@ -37,7 +39,17 @@ class TransactionDetailActivity : AppCompatActivity() {
             bundle.putSerializable("account",account)
             val intent = Intent(this,TransactionActivity::class.java)
             intent.putExtras(bundle)
-            startActivity(intent)
+            resultLauncher.launch(intent)
+        }
+    }
+
+    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val intent: Intent? = result.data
+            intent?.extras.let {
+                account = it?.getSerializable("account") as Account
+                setData()
+            }
         }
     }
 
@@ -47,6 +59,10 @@ class TransactionDetailActivity : AppCompatActivity() {
             account = bundle?.getSerializable("account") as Account
         }
         viewModel = ViewModelProvider(this)[RecordViewModel::class.java]
+        setData()
+    }
+
+    private fun setData(){
         binding.amount.text = "NRs "+account?.amount
         binding.category.text = account?.category
         binding.date.text

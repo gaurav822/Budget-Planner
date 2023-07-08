@@ -23,6 +23,10 @@ class TransactionRepositoryImpl
         dao.insertTrx(transaction)
     }
 
+    override suspend fun updateTransaction(transaction: Account) {
+        dao.updateTrx(transaction)
+    }
+
     override suspend fun deleteTrx(transaction: Account) {
         dao.deleteTrx(transaction)
     }
