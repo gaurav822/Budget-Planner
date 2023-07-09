@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gaurav.budgetplanner.R
+import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.Views.Components.IconMapper
 import com.gaurav.budgetplanner.databinding.ItemEachRecordBinding
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
@@ -36,7 +37,9 @@ class RecordAdapter: RecyclerView.Adapter<RecordAdapter.MyViewHolder>() {
             .asBitmap()
             .load(IconMapper.getIconByName(eachItem.category))
             .into(holder.binding.imgCategory)
-        holder.binding.tvPercent.text = "${(eachItem.amount.toInt() * 100 / sum)}%"
+        holder.binding.tvPercent.text = Utils.calculatePercentage(allRecords.map {
+            it.amount.toInt()
+        }.toList(),position).toString() + "%"
 
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(eachItem)
