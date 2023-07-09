@@ -20,7 +20,6 @@ class CurrencySelectActivity : AppCompatActivity() {
     private var _binding: ActivityCurrencySelectBinding?= null
     private val binding get() = _binding!!
     private var listener: CountrySelectFragment.CountryClickListener?=null
-    private val model: CountryViewModel by viewModels()
     private var allItemAdapter:CountryListAdapter?=null
     private var isSelected = false
 
@@ -42,7 +41,7 @@ class CurrencySelectActivity : AppCompatActivity() {
 
 
     private fun setUpRecyclerView(){
-        allItemAdapter = CountryListAdapter(model)
+        allItemAdapter = CountryListAdapter()
         binding.rvCountry.layoutManager = LinearLayoutManager(this)
         binding.rvCountry.adapter = allItemAdapter
         allItemAdapter?.onItemClick = {
@@ -60,6 +59,7 @@ class CurrencySelectActivity : AppCompatActivity() {
                     // buttonClose.setVisibility(View.GONE);
                     searchItem("")
                 } else {
+                    isSelected = false
                     searchItem(s)
                 }
             }

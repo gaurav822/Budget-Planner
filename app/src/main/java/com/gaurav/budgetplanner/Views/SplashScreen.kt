@@ -21,6 +21,7 @@ class SplashScreen : AppCompatActivity() {
     private val binding get() = _binding!!
     private lateinit var splashIcon: ImageView
     val scaleDownFactor = 0.7f
+    private var isCurrencySelected = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +32,7 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun init(){
+        isCurrencySelected = false
         val width = splashIcon.width
         val height = splashIcon.height
         splashAnimation = AnimationUtils.loadAnimation(
@@ -62,7 +64,9 @@ class SplashScreen : AppCompatActivity() {
             splashIcon.startAnimation(secondAnimation)
 
             Handler(Looper.getMainLooper()).postDelayed({
-                startActivity(Intent(this,OnBoardActivity::class.java))
+                val intent = Intent(this,if(!isCurrencySelected) OnBoardActivity::class.java else HomeScreenActivity::class.java)
+                startActivity(intent)
+
 
             }, 300)
 

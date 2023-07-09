@@ -22,4 +22,13 @@ class OnBoardActivity : BaseActivity() {
             startActivity(Intent(this,CurrencySelectActivity::class.java))
         }
     }
+
+    override fun onBackPressed() {
+        finishAffinity()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finishAffinity()
+        return true
+    }
 }

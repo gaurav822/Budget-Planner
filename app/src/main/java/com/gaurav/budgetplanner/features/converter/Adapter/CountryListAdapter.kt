@@ -15,7 +15,7 @@ import com.gaurav.budgetplanner.features.converter.model.Country
 import java.util.*
 
 
-class CountryListAdapter(private val countryViewModel: CountryViewModel):RecyclerView.Adapter<CountryListAdapter.ViewHolder>() {
+class CountryListAdapter():RecyclerView.Adapter<CountryListAdapter.ViewHolder>() {
 
     var onItemClick : ((Map.Entry<String,String>) -> Unit)? = null
     private var selectedItemPosition:Int = -1
@@ -51,6 +51,7 @@ class CountryListAdapter(private val countryViewModel: CountryViewModel):Recycle
     }
 
     fun getFilter(): Filter {
+        selectedItemPosition=-1
         return object : Filter() {
             override fun performFiltering(charSequence: CharSequence): FilterResults {
                 val charString = charSequence.toString()

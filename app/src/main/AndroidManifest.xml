@@ -25,9 +25,6 @@
             android:exported="false" />
         <activity
             android:name=".Views.SplashScreen"
-            android:exported="false" />
-        <activity
-            android:name=".Views.HomeScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,11 +33,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Views.HomeScreenActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".features.Onboarding.Views.Activities.CurrencySelectActivity"
             android:exported="false" />
         <activity
             android:name=".OnBoardActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".features.converter.Activities.CountryListActivity"
             android:exported="false"

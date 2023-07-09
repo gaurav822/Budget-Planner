@@ -17,7 +17,6 @@ class CountrySelectFragment: BaseFragment() {
     private var _binding: FragmentCountryListBinding?= null
     private val binding get() = _binding!!
     private var listener: CountryClickListener?=null
-    private val model: CountryViewModel by viewModels()
 
 //    private val model: CountryViewModel by viewModels {
 //        CountryViewModelFactory((application as NewsApplication).repository)
@@ -37,7 +36,7 @@ class CountrySelectFragment: BaseFragment() {
     }
 
     private fun setUpRecyclerView(){
-        val adapter = CountryListAdapter(model)
+        val adapter = CountryListAdapter()
         binding.rvCountry.layoutManager = LinearLayoutManager(context)
         binding.rvCountry.adapter = adapter
         adapter.onItemClick = {
