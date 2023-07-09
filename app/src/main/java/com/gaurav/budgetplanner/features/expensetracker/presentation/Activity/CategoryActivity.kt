@@ -38,10 +38,10 @@ class CategoryActivity : AppCompatActivity() {
             list?.let { it ->
                 val data = getRespectiveData(it)
                 adapter.updateList(data)
-                binding.constraintToolbar.totalAmount.text = "NRs"+data.sumOf {
+                val sum = data.sumOf {
                     it.amount.toInt()
-                }.toString()
-                if(data.isEmpty()) finish()
+                }
+                binding.constraintToolbar.totalAmount.text = getString(R.string.nrs,sum)
             }
 
         }
@@ -77,10 +77,5 @@ class CategoryActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true;
-    }
-
-    override fun onResume() {
-        super.onResume()
-
     }
 }

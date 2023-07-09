@@ -7,6 +7,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
@@ -113,10 +114,10 @@ class HomeScreenActivity : BaseActivity() {
         if(data.isEmpty()){
             binding.noDataTv.visibility=View.VISIBLE
             if(trxState=="E"){
-                binding.noDataTv.text = "No Expenses Found !"
+                binding.noDataTv.text = getString(R.string.no_expenses)
             }
             else{
-                binding.noDataTv.text = "No Income Found !"
+                binding.noDataTv.text = getString(R.string.no_income)
             }
         }
         else{

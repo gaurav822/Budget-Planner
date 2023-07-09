@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
+import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.databinding.ActivityTransactionDetailBinding
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel
@@ -63,7 +64,7 @@ class TransactionDetailActivity : AppCompatActivity() {
     }
 
     private fun setData(){
-        binding.amount.text = "NRs "+account?.amount
+        binding.amount.text = getString(R.string.nrs,account?.amount?.toInt())
         binding.category.text = account?.category
         binding.date.text
         binding.comment.text = account?.comment

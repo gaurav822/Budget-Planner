@@ -8,7 +8,7 @@
     <string name="total">Total</string>
     <string name="npr">NPR</string>
     <string name="comment">Comment</string>
-    <string name="nrs">NRs</string>
+    <string name="nrs">NRs %1$d</string>
     <string name="delete">DELETE</string>
     <string name="amount">Amount</string>
     <string name="category">Category</string>
@@ -16,4 +16,6 @@
     <string name="date">Date</string>
     <string name="save">Save</string>
     <string name="edit_trx">Edit Transaction</string>
+    <string name="no_expenses">No Expenses Found !</string>
+    <string name="no_income">No Income Found !</string>
 </resources>

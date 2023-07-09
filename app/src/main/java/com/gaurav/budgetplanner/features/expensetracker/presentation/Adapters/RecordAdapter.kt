@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Views.Components.IconMapper
 import com.gaurav.budgetplanner.databinding.ItemEachRecordBinding
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
@@ -30,7 +31,7 @@ class RecordAdapter: RecyclerView.Adapter<RecordAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val eachItem = allRecords[position]
         holder.binding.categoryTitle.text = eachItem.category
-        holder.binding.tvAmount.text = "NRS ${eachItem.amount}"
+        holder.binding.tvAmount.text = holder.itemView.context.getString(R.string.nrs,eachItem.amount.toInt())
         Glide.with(holder.binding.categoryTitle.context)
             .asBitmap()
             .load(IconMapper.getIconByName(eachItem.category))

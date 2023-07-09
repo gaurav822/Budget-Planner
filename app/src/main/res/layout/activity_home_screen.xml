@@ -39,7 +39,7 @@
             style="@style/BudgetPlanStyle.VolteSemiBold16"
             android:text="@string/total"
             app:layout_constraintLeft_toRightOf="@id/bag_icon"
-            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_5sdp"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <ImageView
@@ -48,7 +48,7 @@
             android:layout_height="@dimen/_20sdp"
             android:src="@drawable/drop_down"
            app:layout_constraintStart_toEndOf="@id/tv_total"
-            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_5sdp"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/BudgetPlanStyle.VolteSemiBold20"
-            android:text="NRS 0"
+            tools:text="NRS 0"
             app:layout_constraintStart_toStartOf="@id/bag_icon"
             app:layout_constraintEnd_toEndOf="@id/drop_down"
             app:layout_constraintTop_toBottomOf="@id/bag_icon"
@@ -65,17 +65,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/BudgetPlanStyle.VolteSemiBold16"
-        android:textColor="@color/white"
-        android:text="There were no expenses this week"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ImageView
         android:id="@+id/add_icon"
@@ -140,7 +129,7 @@
 
     <TextView
         android:visibility="gone"
-        android:text="No Expenses Found !"
+        tools:text="No Expenses Found !"
         style="@style/BudgetPlanStyle.Body1"
         android:textColor="@color/lightGrey"
         app:layout_constraintTop_toTopOf="parent"

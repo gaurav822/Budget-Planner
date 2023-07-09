@@ -31,19 +31,20 @@ import dagger.hilt.android.AndroidEntryPoint
 class TransactionActivity : BaseActivity() {
     private var _binding:ActivityTransactionBinding?=null
     private val binding get() = _binding!!
-    private lateinit var categoryAdapter: CategoryAdapter
 
+
+    private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var recyclerView:RecyclerView
+
     private var isValid = false
     private var isCategorySelected = false
     private var isAmountValid = false
     private var isCommentValid = false
     private var trxType = "E"
-//    private var viewModel:TransactionViewModel = hiltViewModel()
-private lateinit var viewModel: RecordViewModel
-private lateinit var selectedCategory:Map.Entry<String,Int>
+    private lateinit var viewModel: RecordViewModel
+    private lateinit var selectedCategory:Map.Entry<String,Int>
 
-  private var account:Account?= null
+    private var account:Account?= null
     private var bundle:Bundle? = null
     private var editModeOn = false
 
@@ -58,7 +59,6 @@ private lateinit var selectedCategory:Map.Entry<String,Int>
         setMaterialTextWatcher(binding.inputAmount,R.id.input_amount)
         setMaterialTextWatcher(binding.inputComment.editText!!,R.id.inputComment)
         init()
-        setRecyclerView()
         clickEventListener()
 
 
@@ -66,6 +66,8 @@ private lateinit var selectedCategory:Map.Entry<String,Int>
 
     private fun init(){
         viewModel = ViewModelProvider(this)[RecordViewModel::class.java]
+        setRecyclerView()
+        getIntentData()
     }
 
     private fun setRecyclerView(){
@@ -78,30 +80,37 @@ private lateinit var selectedCategory:Map.Entry<String,Int>
             isCategorySelected = true
             checkForValidation()
         }
-        bundle = intent?.extras
-        bundle?.let {
-            account = bundle?.getSerializable("account") as Account
-        }
-        account?.let {
-            triggerUpdate()
-        }
 
 //        recyclerView.addItemDecoration(AdaptiveSpacingItemDecoration(8,true));
 //        bindAdapter(recyclerView,8.0f,true)
 
     }
 
-    private fun triggerUpdate(){
+    private fun getIntentData(){
+        bundle = intent?.extras
+        bundle?.let {
+            account = bundle?.getSerializable("account") as Account
+        }
+        account?.let {
+            triggerEditMode()
+        }
+    }
+
+    private fun triggerEditMode(){
         editModeOn = true
-        binding.constraintToolbar.tvProfileName.text = getString(R.string.edit_trx)
-        binding.inputAmount.setText(account?.amount)
-        binding.inputComment.editText?.setText(account?.comment)
-        binding.addText.text = getString(R.string.save)
-        binding.proceedStart.setBackgroundResource(R.drawable.boundry_proceed_button)
-        binding.addText.setTextColor(Color.parseColor("#c6000000"))
+        binding.apply {
+            constraintToolbar.tvProfileName.text = getString(R.string.edit_trx)
+            inputAmount.setText(account?.amount)
+            inputComment.editText?.setText(account?.comment)
+            addText.text = getString(R.string.save)
+        }
         isCategorySelected = true
+        isAmountValid = true
+        checkForValidation()
+
         selectedCategory= mapOf(account?.category!! to IconMapper.getIconByName(account?.category!!)).entries.first()
         if(account?.transactionType=="I"){
+            trxType = "I"
             binding.tabLayoutIncomeExpenses.getTabAt(1)?.select()
             categoryAdapter.updateData(Constants.incomeCategories.entries.toList())
         }
