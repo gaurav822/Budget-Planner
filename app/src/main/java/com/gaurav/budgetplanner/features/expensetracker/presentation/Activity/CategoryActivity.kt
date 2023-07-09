@@ -42,6 +42,7 @@ class CategoryActivity : AppCompatActivity() {
                     it.amount.toInt()
                 }
                 binding.constraintToolbar.totalAmount.text = getString(R.string.nrs,sum)
+                if(data.isEmpty()) finish()
             }
 
         }
