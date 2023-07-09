@@ -89,6 +89,7 @@
 
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_comment"
             android:textColor="@color/white_opacity_32"
             style="@style/BudgetPlanStyle.Body1"
@@ -100,6 +101,7 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
+            android:visibility="gone"
             android:layout_marginTop="@dimen/_6sdp"
             android:textColor="@color/white"
             style="@style/BudgetPlanStyle.VolteSemiBold16"

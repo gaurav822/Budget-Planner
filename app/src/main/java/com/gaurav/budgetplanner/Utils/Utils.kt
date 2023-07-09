@@ -1,6 +1,8 @@
 package com.gaurav.budgetplanner.Utils
 
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.math.ceil
 
 class Utils {
@@ -46,6 +48,26 @@ class Utils {
             }
 
             return roundedPercentages[position]
+        }
+
+        fun getFormattedDateFromMillis(millis: Long, dateFormat: String?): String? {
+            var dateFormat = dateFormat
+            return try {
+                if (dateFormat == null || dateFormat.isEmpty()) dateFormat = "yyyy-MM-dd"
+                val inputFormat: SimpleDateFormat = SimpleDateFormat(
+                    dateFormat,
+                    getEnglishLocale()
+                )
+                val date = Date()
+                date.time = millis
+                inputFormat.format(millis)
+            } catch (e: Exception) {
+                null
+            }
+        }
+
+        fun getEnglishLocale(): Locale {
+            return Locale.US
         }
     }
 

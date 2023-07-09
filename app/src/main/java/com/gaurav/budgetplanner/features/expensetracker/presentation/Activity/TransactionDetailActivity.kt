@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import com.gaurav.budgetplanner.R
@@ -66,8 +67,19 @@ class TransactionDetailActivity : AppCompatActivity() {
     private fun setData(){
         binding.amount.text = getString(R.string.nrs,account?.amount?.toInt())
         binding.category.text = account?.category
-        binding.date.text
-        binding.comment.text = account?.comment
+        binding.date.text = account?.date
+
+        if(account?.comment?.isNotEmpty()!!){
+            binding.apply {
+                comment.visibility= View.VISIBLE
+                comment.text = account?.comment
+                tvComment.visibility=View.VISIBLE
+            }
+        }
+        else{
+            binding.comment.visibility=View.GONE
+            binding.tvComment.visibility=View.GONE
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

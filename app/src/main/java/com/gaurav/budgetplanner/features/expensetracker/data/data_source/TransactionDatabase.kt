@@ -7,7 +7,7 @@ import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 
 @Database(
     entities = [Account::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class TransactionDatabase:RoomDatabase() {

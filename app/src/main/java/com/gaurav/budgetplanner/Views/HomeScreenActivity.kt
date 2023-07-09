@@ -105,7 +105,7 @@ class HomeScreenActivity : BaseActivity() {
         }.map {
                 (category, accounts) ->
             val totalAmount = accounts.sumOf { it.amount.toInt() }
-            Account(totalAmount.toString(), category, "", "", 0)
+            Account(totalAmount.toString(), category, "", "", "", 0)
         }
         return mergedList
     }

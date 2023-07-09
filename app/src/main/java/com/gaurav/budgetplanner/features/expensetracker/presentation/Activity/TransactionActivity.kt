@@ -16,15 +16,18 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Constants
+import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.Views.Components.IconMapper
 import com.gaurav.budgetplanner.databinding.ActivityTransactionBinding
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters.CategoryAdapter
 import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -47,6 +50,7 @@ class TransactionActivity : BaseActivity() {
     private var account:Account?= null
     private var bundle:Bundle? = null
     private var editModeOn = false
+    private var selectedDate: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,9 +69,11 @@ class TransactionActivity : BaseActivity() {
     }
 
     private fun init(){
+        selectedDate = Utils.getFormattedDateFromMillis(System.currentTimeMillis(),null)
         viewModel = ViewModelProvider(this)[RecordViewModel::class.java]
         setRecyclerView()
         getIntentData()
+        binding.inputDateOfTrx.editText?.setText(selectedDate)
     }
 
     private fun setRecyclerView(){
@@ -106,6 +112,7 @@ class TransactionActivity : BaseActivity() {
         }
         isCategorySelected = true
         isAmountValid = true
+        selectedDate = account?.date
         checkForValidation()
 
         selectedCategory= mapOf(account?.category!! to IconMapper.getIconByName(account?.category!!)).entries.first()
@@ -118,6 +125,10 @@ class TransactionActivity : BaseActivity() {
     }
 
     private fun clickEventListener(){
+        binding.inputDateOfTrx.editText?.setOnClickListener {
+            pickDate()
+        }
+
         binding.proceedStart.setOnClickListener {
             if(isValid){
                 val insertAcc = Account(
@@ -126,6 +137,7 @@ class TransactionActivity : BaseActivity() {
                     comment = binding.inputComment.editText?.text.toString(),
                     timeStamp = System.currentTimeMillis(),
                     transactionType = trxType,
+                    date = selectedDate!!
                 )
                 if(editModeOn){
                     insertAcc.id = account?.id!!
@@ -205,6 +217,27 @@ class TransactionActivity : BaseActivity() {
                 //
             }
         })
+    }
+
+    private var trackDate: Long = 0L
+
+
+    private fun pickDate() {
+        val materialDateBuilder = MaterialDatePicker.Builder.datePicker()
+        if (trackDate == 0L) {
+            trackDate = System.currentTimeMillis()
+        }
+        materialDateBuilder.setSelection(trackDate)
+        materialDateBuilder.setTitleText(getText(R.string.trx_day))
+        val materialDatePicker: MaterialDatePicker<Long> = materialDateBuilder.build()
+        materialDatePicker.show(supportFragmentManager, "MATERIAL_DATE_PICKER")
+        materialDatePicker.addOnPositiveButtonClickListener {
+            val calendar = Calendar.getInstance()
+            calendar.timeInMillis = it
+            trackDate = calendar.timeInMillis
+            selectedDate = Utils.getFormattedDateFromMillis(trackDate, null)
+            binding.inputDateOfTrx.editText?.setText(selectedDate)
+        }
     }
 
     private fun isValidAmount() {

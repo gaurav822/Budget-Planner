@@ -18,4 +18,5 @@
     <string name="edit_trx">Edit Transaction</string>
     <string name="no_expenses">No Expenses Found !</string>
     <string name="no_income">No Income Found !</string>
+    <string name="trx_day">DATE OF TRANSACTION</string>
 </resources>

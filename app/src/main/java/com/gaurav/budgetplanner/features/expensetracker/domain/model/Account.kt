@@ -9,7 +9,7 @@ import com.gaurav.budgetplanner.R
 data class Account(
     @ColumnInfo("amount")val amount:String,
     @ColumnInfo("category")val category:String,
-
+    @ColumnInfo("transactionDate") val date:String,
     @ColumnInfo("comment") val comment:String,
     @ColumnInfo("transactionType")val transactionType:String,
     @ColumnInfo("timeStamp") val timeStamp:Long,

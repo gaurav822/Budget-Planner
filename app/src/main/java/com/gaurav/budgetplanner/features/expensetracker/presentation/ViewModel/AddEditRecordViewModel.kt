@@ -76,7 +76,8 @@ class AddEditRecordViewModel @Inject constructor(
                                 comment = comment.value,
                                 transactionType = "E",
                                 id = currentRecordId!!,
-                                timeStamp = System.currentTimeMillis()
+                                timeStamp = System.currentTimeMillis(),
+                                date = ""
                             )
                         )
                         _eventFlow.emit(UIEvent.SaveRecord)
