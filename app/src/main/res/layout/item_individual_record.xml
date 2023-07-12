@@ -49,7 +49,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/BudgetPlanStyle.Body1"
-        tools:text="NRs600" />
+        tools:text="600" />
+
+    <TextView
+        android:layout_marginRight="@dimen/_2sdp"
+        android:id="@+id/tv_currency"
+        android:textColor="@color/white"
+        app:layout_constraintRight_toLeftOf="@id/tv_amount"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/BudgetPlanStyle.Body1"
+        tools:text="NRs" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

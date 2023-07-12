@@ -65,7 +65,6 @@ class TransactionActivity : BaseActivity() {
         init()
         clickEventListener()
 
-
     }
 
     private fun init(){
@@ -74,6 +73,7 @@ class TransactionActivity : BaseActivity() {
         setRecyclerView()
         getIntentData()
         binding.inputDateOfTrx.editText?.setText(selectedDate)
+        binding.currency.text = Utils.getSelectedCurrency(isSymbol = false)
     }
 
     private fun setRecyclerView(){

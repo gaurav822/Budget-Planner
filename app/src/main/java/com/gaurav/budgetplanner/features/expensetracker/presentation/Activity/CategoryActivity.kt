@@ -1,5 +1,6 @@
 package com.gaurav.budgetplanner.features.expensetracker.presentation.Activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,6 +21,7 @@ class CategoryActivity : AppCompatActivity() {
     private lateinit var adapter: IndividualRecordAdapter
     private lateinit var viewModel:RecordViewModel
     private lateinit var category: String
+    private lateinit var currency: String
     private lateinit var bundle:Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +43,8 @@ class CategoryActivity : AppCompatActivity() {
                 val sum = data.sumOf {
                     it.amount.toInt()
                 }
-                binding.constraintToolbar.totalAmount.text = getString(R.string.nrs,sum)
+                binding.constraintToolbar.totalAmount.text = sum.toString()
+                binding.constraintToolbar.tvCurrencySymbol.text = currency
                 if(data.isEmpty()) finish()
             }
 
@@ -52,6 +55,8 @@ class CategoryActivity : AppCompatActivity() {
 
     private fun init(){
         category = intent?.extras?.getString("category")!!
+        currency = intent?.extras?.getString("currency")!!
+
         binding.constraintToolbar.apply {
             tvCategory.text = category
         }
@@ -62,7 +67,7 @@ class CategoryActivity : AppCompatActivity() {
     }
 
     private fun setUpRecyclerView(){
-        adapter = IndividualRecordAdapter(category)
+        adapter = IndividualRecordAdapter(category,currency)
         binding.rvIndividualData.layoutManager = LinearLayoutManager(this)
         binding.rvIndividualData.adapter = adapter
         adapter.onItemClick = {
@@ -70,6 +75,7 @@ class CategoryActivity : AppCompatActivity() {
             bundle.putSerializable("account",it)
             val intent = Intent(this,TransactionDetailActivity::class.java)
             intent.putExtras(bundle)
+            intent.putExtra("currency",currency)
             startActivity(intent)
         }
     }

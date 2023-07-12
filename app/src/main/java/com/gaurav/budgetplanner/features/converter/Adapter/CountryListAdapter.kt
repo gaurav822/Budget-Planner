@@ -21,7 +21,7 @@ import java.util.*
 
 class CountryListAdapter():RecyclerView.Adapter<CountryListAdapter.ViewHolder>() {
 
-    var onItemClick : ((Map.Entry<String,Map<String,String>>) -> Unit)? = null
+    var onItemClick : ((String,String) -> Unit)? = null
     private var selectedItemPosition:Int = -1
     private val currencies = Constants.currencies.entries.toList()
     private var allItem= Constants.currencies.entries.toList()
@@ -41,7 +41,7 @@ class CountryListAdapter():RecyclerView.Adapter<CountryListAdapter.ViewHolder>()
         holder.binding.currencyName.text =  allItem[position].value["name"]
         holder.binding.currencyCode.text = allItem[position].key
         holder.itemView.setOnClickListener {
-            onItemClick?.invoke(allItem[position])
+            onItemClick?.invoke(allItem[position].value["symbol"]!!,allItem[position].key)
             selectedItemPosition = holder.adapterPosition
             notifyDataSetChanged()
         }

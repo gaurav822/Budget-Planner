@@ -39,9 +39,9 @@ class CountrySelectFragment: BaseFragment() {
         val adapter = CountryListAdapter()
         binding.rvCountry.layoutManager = LinearLayoutManager(context)
         binding.rvCountry.adapter = adapter
-        adapter.onItemClick = {
-//            listener?.onCountryClick(it)
-        }
+//        adapter.onItemClick = {
+////            listener?.onCountryClick(it)
+//        }
     }
 
 //    interface CountryClickListener {

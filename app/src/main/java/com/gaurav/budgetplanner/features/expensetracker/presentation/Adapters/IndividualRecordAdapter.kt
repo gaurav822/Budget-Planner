@@ -8,7 +8,7 @@ import com.gaurav.budgetplanner.Views.Components.IconMapper
 import com.gaurav.budgetplanner.databinding.ItemIndividualRecordBinding
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 
-class IndividualRecordAdapter(var category:String):RecyclerView.Adapter<IndividualRecordAdapter.ViewHolder>() {
+class IndividualRecordAdapter(var category:String,var currency:String):RecyclerView.Adapter<IndividualRecordAdapter.ViewHolder>() {
     private var allRecords = emptyList<Account>()
     var onItemClick : ((Account) -> Unit)? = null
     override fun onCreateViewHolder(
@@ -22,7 +22,8 @@ class IndividualRecordAdapter(var category:String):RecyclerView.Adapter<Individu
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val eachData = allRecords[position]
-        holder.binding.tvAmount.text = "NRs"+eachData.amount
+        holder.binding.tvAmount.text = eachData.amount
+        holder.binding.tvCurrency.text = currency
         holder.binding.tvCategory.text = category
         Glide.with(holder.binding.tvAmount.context)
             .asBitmap()

@@ -20,6 +20,7 @@ class TransactionDetailActivity : AppCompatActivity() {
     private lateinit var viewModel: RecordViewModel
     private var bundle:Bundle? = null
     private var account: Account? = null
+    private var currency:String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +58,7 @@ class TransactionDetailActivity : AppCompatActivity() {
 
     private fun init(){
         bundle = intent.extras
+        currency = bundle?.getString("currency")
         bundle.let {
             account = bundle?.getSerializable("account") as Account
         }
@@ -65,7 +67,8 @@ class TransactionDetailActivity : AppCompatActivity() {
     }
 
     private fun setData(){
-        binding.amount.text = getString(R.string.nrs,account?.amount?.toInt())
+        binding.amount.text = account?.amount?.toInt().toString()
+        binding.tvCurrency.text = currency
         binding.category.text = account?.category
         binding.date.text = account?.date
 

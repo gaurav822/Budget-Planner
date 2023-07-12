@@ -6,24 +6,22 @@ import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.gaurav.budgetplanner.BudgetPlannerApp
 import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.Views.HomeScreenActivity
 import com.gaurav.budgetplanner.databinding.ActivityCurrencySelectBinding
 import com.gaurav.budgetplanner.features.converter.Adapter.CountryListAdapter
-import com.gaurav.budgetplanner.features.converter.Fragments.CountrySelectFragment
-import com.gaurav.budgetplanner.features.converter.ViewModel.CountryViewModel
 import com.gaurav.budgetplanner.features.converter.model.Country
-import org.json.JSONArray
-import org.json.JSONObject
 
 class CurrencySelectActivity : AppCompatActivity() {
     private var _binding: ActivityCurrencySelectBinding?= null
     private val binding get() = _binding!!
     private var allItemAdapter:CountryListAdapter?=null
     private var isSelected = false
+    private lateinit var selectedCurrency:String
+    private lateinit var selectedCurrencyValue:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +34,20 @@ class CurrencySelectActivity : AppCompatActivity() {
                 Toast.makeText(this,"Please choose 1 from above",Toast.LENGTH_SHORT).show()
             }
             else{
-                startActivity(Intent(this,HomeScreenActivity::class.java))
+                BudgetPlannerApp.getStorage().edit().putBoolean(
+                    Constants.PREF_CURRENCY_SELECTION,
+               true).apply()
+
+                BudgetPlannerApp.getStorage().edit().putString(
+                    Constants.PREF_CURRENCY_SYMBOL,selectedCurrency).apply()
+
+                BudgetPlannerApp.getStorage().edit().putString(
+                    Constants.PREF_CURRENCY_VALUE,selectedCurrencyValue).apply()
+
+                val intent = Intent(this,HomeScreenActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+
             }
         }
 
@@ -48,7 +59,10 @@ class CurrencySelectActivity : AppCompatActivity() {
         binding.rvCountry.layoutManager = LinearLayoutManager(this)
         binding.rvCountry.adapter = allItemAdapter
         allItemAdapter?.onItemClick = {
+            symbol,value ->
             isSelected=true
+            selectedCurrency = symbol
+            selectedCurrencyValue = value
         }
     }
 

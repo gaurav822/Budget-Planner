@@ -1,5 +1,6 @@
 package com.gaurav.budgetplanner.Utils
 
+import com.gaurav.budgetplanner.BudgetPlannerApp
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,7 +22,7 @@ class Utils {
             }
             total = incomeSum - expenseSum
 
-            return "NRs $total"
+            return "$total"
         }
 
         fun calculatePercentage(numbers: List<Int>,position:Int): Int {
@@ -68,6 +69,11 @@ class Utils {
 
         fun getEnglishLocale(): Locale {
             return Locale.US
+        }
+
+        fun getSelectedCurrency(isSymbol:Boolean=true):String{
+            val data: String? = BudgetPlannerApp.getStorage().getString(if(isSymbol)Constants.PREF_CURRENCY_SYMBOL else Constants.PREF_CURRENCY_VALUE , "")
+            return data!!
         }
     }
 

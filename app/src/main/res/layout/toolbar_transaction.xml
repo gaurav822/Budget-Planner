@@ -56,17 +56,40 @@
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintEnd_toStartOf="@id/searchButton"
                app:layout_constraintTop_toTopOf="parent"
-               tools:text="WORKOUT" />
+               tools:text="Transport" />
 
-           <TextView
-               android:id="@+id/totalAmount"
-               style="@style/BudgetPlanStyle.SemiBoldWhite18"
+           <androidx.constraintlayout.widget.ConstraintLayout
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                app:layout_constraintTop_toBottomOf="@+id/tv_category"
                app:layout_constraintStart_toStartOf="@id/tv_category"
-               app:layout_constraintEnd_toEndOf="@id/tv_category"
-               tools:text="NRs600"/>
+               app:layout_constraintEnd_toEndOf="@id/tv_category">
+
+               <TextView
+                   android:id="@+id/tvCurrencySymbol"
+                   style="@style/BudgetPlanStyle.SemiBoldWhite18"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:layout_constraintTop_toTopOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   tools:text="NRs"/>
+
+               <TextView
+                   android:layout_marginLeft="@dimen/_2sdp"
+                   android:id="@+id/totalAmount"
+                   style="@style/BudgetPlanStyle.SemiBoldWhite18"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:layout_constraintTop_toTopOf="parent"
+                   app:layout_constraintLeft_toRightOf="@id/tvCurrencySymbol"
+                   tools:text="600"/>
+
+
+           </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
 
            <androidx.constraintlayout.widget.ConstraintLayout
                android:id="@+id/cl_toolbar_extend_category"

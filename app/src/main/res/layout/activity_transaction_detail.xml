@@ -38,8 +38,20 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/tv_currency"
+            tools:text="NRs"/>
+
+        <TextView
+            android:layout_marginTop="@dimen/_6sdp"
+            android:textColor="@color/white"
+            style="@style/BudgetPlanStyle.VolteSemiBold16"
+            app:layout_constraintTop_toBottomOf="@id/tv_amount"
+            app:layout_constraintStart_toEndOf="@id/tv_currency"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/amount"
-            tools:text="NRs 100"/>
+            tools:text="100"/>
 
 
         <TextView

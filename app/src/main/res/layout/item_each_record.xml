@@ -40,7 +40,7 @@
        <TextView
            android:textColor="@color/white"
            style="@style/BudgetPlanStyle.Body1"
-           tools:text="NRS200"
+           tools:text="200"
            android:id="@+id/tvAmount"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -49,14 +49,26 @@
            app:layout_constraintBottom_toBottomOf="parent"/>
 
        <TextView
+           android:layout_marginRight="@dimen/_2sdp"
+           android:textColor="@color/white"
+           style="@style/BudgetPlanStyle.Body1"
+           tools:text="Rs"
+           android:id="@+id/tvCurrencySymbol"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           app:layout_constraintEnd_toStartOf="@id/tvAmount"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintBottom_toBottomOf="parent"/>
+
+       <TextView
            android:id="@+id/tvPercent"
            android:textColor="@color/lightGrey"
            style="@style/BudgetPlanStyle.SemiBold16"
            android:text="40%"
-           android:layout_marginRight="@dimen/_20sdp"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           app:layout_constraintRight_toLeftOf="@id/tvAmount"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
            app:layout_constraintTop_toTopOf="parent"
            app:layout_constraintBottom_toBottomOf="parent"/>
 

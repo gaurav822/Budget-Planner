@@ -12,7 +12,7 @@ import com.gaurav.budgetplanner.databinding.ItemEachRecordBinding
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import com.gaurav.budgetplanner.features.expensetracker.domain.util.TransactionType
 
-class RecordAdapter: RecyclerView.Adapter<RecordAdapter.MyViewHolder>() {
+class RecordAdapter(private val currency:String): RecyclerView.Adapter<RecordAdapter.MyViewHolder>() {
 
     private var allRecords = emptyList<Account>()
     private var sum:Int = 0
@@ -32,7 +32,8 @@ class RecordAdapter: RecyclerView.Adapter<RecordAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val eachItem = allRecords[position]
         holder.binding.categoryTitle.text = eachItem.category
-        holder.binding.tvAmount.text = holder.itemView.context.getString(R.string.nrs,eachItem.amount.toInt())
+        holder.binding.tvCurrencySymbol.text =currency
+        holder.binding.tvAmount.text = eachItem.amount
         Glide.with(holder.binding.categoryTitle.context)
             .asBitmap()
             .load(IconMapper.getIconByName(eachItem.category))

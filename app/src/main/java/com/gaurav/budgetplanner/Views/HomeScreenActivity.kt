@@ -7,6 +7,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.gaurav.budgetplanner.BudgetPlannerApp
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.Utils.Utils
@@ -30,24 +31,31 @@ class HomeScreenActivity : BaseActivity() {
     private lateinit var adapter: RecordAdapter
     private var currentList:List<Account> = emptyList()
     private var trxState = "E"
+    private var selectedCurrency:String?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityHomeScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         viewModel = ViewModelProvider(this)[RecordViewModel::class.java]
+        init()
         setUpRecyclerView()
         clickEvents()
     }
 
+    private fun init() {
+        selectedCurrency = Utils.getSelectedCurrency()
+        binding.currencySymbol.text = selectedCurrency
+    }
+
     private fun setUpRecyclerView(){
-        adapter = RecordAdapter()
+        adapter = RecordAdapter(selectedCurrency!!)
         binding.rvRecords.layoutManager = LinearLayoutManager(this)
         binding.rvRecords.adapter = adapter
 
         adapter.onItemClick = {
             val intent = Intent(this, CategoryActivity::class.java)
             intent.putExtra("category", it.category)
+            intent.putExtra("currency",selectedCurrency)
             startActivity(intent)
         }
 
