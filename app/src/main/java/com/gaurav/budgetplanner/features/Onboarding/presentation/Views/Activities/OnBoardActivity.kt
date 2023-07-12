@@ -1,10 +1,9 @@
-package com.gaurav.budgetplanner
+package com.gaurav.budgetplanner.features.Onboarding.presentation.Views.Activities
 
 import android.content.Intent
 import android.os.Bundle
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityOnboardBinding
-import com.gaurav.budgetplanner.features.Onboarding.Views.Activities.CurrencySelectActivity
 
 class OnBoardActivity : BaseActivity() {
     private var _binding: ActivityOnboardBinding?= null
@@ -19,7 +18,7 @@ class OnBoardActivity : BaseActivity() {
 
     private fun init(){
         binding.proceedStart.setOnClickListener {
-            startActivity(Intent(this,CurrencySelectActivity::class.java))
+            startActivity(Intent(this, CurrencySelectActivity::class.java))
         }
     }
 

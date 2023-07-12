@@ -16,7 +16,7 @@ class CountrySelectFragment: BaseFragment() {
 
     private var _binding: FragmentCountryListBinding?= null
     private val binding get() = _binding!!
-    private var listener: CountryClickListener?=null
+//    private var listener: CountryClickListener?=null
 
 //    private val model: CountryViewModel by viewModels {
 //        CountryViewModelFactory((application as NewsApplication).repository)
@@ -40,15 +40,15 @@ class CountrySelectFragment: BaseFragment() {
         binding.rvCountry.layoutManager = LinearLayoutManager(context)
         binding.rvCountry.adapter = adapter
         adapter.onItemClick = {
-            listener?.onCountryClick(it)
+//            listener?.onCountryClick(it)
         }
     }
 
-    interface CountryClickListener {
-        fun onCountryClick(country:Map.Entry<String,String>)
-    }
+//    interface CountryClickListener {
+//        fun onCountryClick(country:Map.Entry<String,String>)
+//    }
 
-    fun setListener(listener: CountryClickListener) {
-        this.listener = listener
-    }
+//    fun setListener(listener: CountryClickListener) {
+//        this.listener = listener
+//    }
 }

@@ -1,6 +1,5 @@
 package com.gaurav.budgetplanner.Views
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,10 +7,8 @@ import android.os.Handler
 import android.os.Looper
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
-import androidx.core.os.postDelayed
-import com.gaurav.budgetplanner.OnBoardActivity
+import com.gaurav.budgetplanner.features.Onboarding.presentation.Views.Activities.OnBoardActivity
 import com.gaurav.budgetplanner.databinding.ActivitySplashScreenBinding
 
 class SplashScreen : AppCompatActivity() {

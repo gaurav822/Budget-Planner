@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".BudgetPlannerApp"
         android:allowBackup="true"
@@ -37,10 +40,10 @@
             android:exported="false">
         </activity>
         <activity
-            android:name=".features.Onboarding.Views.Activities.CurrencySelectActivity"
+            android:name=".features.Onboarding.presentation.Views.Activities.CurrencySelectActivity"
             android:exported="false" />
         <activity
-            android:name=".OnBoardActivity"
+            android:name=".features.Onboarding.presentation.Views.Activities.OnBoardActivity"
             android:exported="false" />
         <activity
             android:name=".features.converter.Activities.CountryListActivity"
@@ -51,7 +54,7 @@
             android:exported="true"
             android:theme="@style/IMEPayAppTheme.NoActionBar" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".features.Onboarding.presentation.Views.Activities.LoginActivity"
             android:exported="false" />
     </application>
 

@@ -1,4 +1,4 @@
-package com.gaurav.budgetplanner.features.Onboarding.Views.Activities
+package com.gaurav.budgetplanner.features.Onboarding.presentation.Views.Activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,17 +9,19 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.Views.HomeScreenActivity
 import com.gaurav.budgetplanner.databinding.ActivityCurrencySelectBinding
 import com.gaurav.budgetplanner.features.converter.Adapter.CountryListAdapter
 import com.gaurav.budgetplanner.features.converter.Fragments.CountrySelectFragment
 import com.gaurav.budgetplanner.features.converter.ViewModel.CountryViewModel
 import com.gaurav.budgetplanner.features.converter.model.Country
+import org.json.JSONArray
+import org.json.JSONObject
 
 class CurrencySelectActivity : AppCompatActivity() {
     private var _binding: ActivityCurrencySelectBinding?= null
     private val binding get() = _binding!!
-    private var listener: CountrySelectFragment.CountryClickListener?=null
     private var allItemAdapter:CountryListAdapter?=null
     private var isSelected = false
 
@@ -37,6 +39,7 @@ class CurrencySelectActivity : AppCompatActivity() {
                 startActivity(Intent(this,HomeScreenActivity::class.java))
             }
         }
+
     }
 
 
@@ -46,8 +49,6 @@ class CurrencySelectActivity : AppCompatActivity() {
         binding.rvCountry.adapter = allItemAdapter
         allItemAdapter?.onItemClick = {
             isSelected=true
-            listener?.onCountryClick(it)
-
         }
     }
 
