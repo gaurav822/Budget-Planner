@@ -1,13 +1,21 @@
 package com.gaurav.budgetplanner.features.converter.Activities
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import com.gaurav.budgetplanner.features.converter.ViewModel.CountryViewModel
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityCurrencyConvertBinding
 import java.text.NumberFormat
 import java.util.*
 import androidx.activity.viewModels
+import com.bumptech.glide.Glide
+import com.gaurav.budgetplanner.Utils.Utils
+import com.gaurav.budgetplanner.Views.Components.IconMapper
+import com.gaurav.budgetplanner.features.Onboarding.presentation.Views.Activities.CurrencySelectActivity
+import com.gaurav.budgetplanner.features.converter.model.CurrencyModel
+import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 
 class CurrencyConvertActivity : BaseActivity() {
     private var _binding:ActivityCurrencyConvertBinding?= null
@@ -15,6 +23,10 @@ class CurrencyConvertActivity : BaseActivity() {
     private var currentNumber:String = ""
     private var toCurrencyVal: Double = 88.0
     private val model:CountryViewModel by viewModels()
+    private var selectedCurrency:CurrencyModel?=null
+    private var isFrom:Boolean = true
+    private lateinit var fromCurrency:CurrencyModel
+    private lateinit var toCurrency:CurrencyModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,15 +38,23 @@ class CurrencyConvertActivity : BaseActivity() {
     }
 
     private fun init(){
-
+        fromCurrency = CurrencyModel(currencySymbol = "$", currencyCode = "AUD", countryFlag = "")
+        toCurrency = CurrencyModel(currencySymbol = "Rs", currencyCode = "NPR", countryFlag = "")
+        binding.tvLatestTime.text = Utils.getCurrentDateTime()
+        binding.apply {
+            tvFromData.text = "1 AUD = "
+            tvToData.text = "88.76 NPR"
+        }
     }
 
     private fun clickEvents(){
         binding.clDetails1.setOnClickListener {
+            isFrom=true
             openCountryList()
         }
 
         binding.clDetails2.setOnClickListener {
+            isFrom = false
             openCountryList()
         }
 
@@ -89,7 +109,41 @@ class CurrencyConvertActivity : BaseActivity() {
             binding.toCurrValue.text = "0"
         }
 
+        binding.imgRefresh.setOnClickListener {
+            binding.tvLatestTime.text = Utils.getCurrentDateTime()
+        }
 
+    }
+
+    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val intent: Intent? = result.data
+            intent?.extras.let {
+                selectedCurrency = it?.getSerializable("currency") as CurrencyModel
+                binding.apply {
+                    if(isFrom){
+                        tvSymbol1.text=selectedCurrency?.currencyCode
+                        Glide.with(applicationContext)
+                            .asBitmap()
+                            .load(selectedCurrency?.countryFlag)
+                            .into(binding.ivCountry1)
+                        fromCurrency = selectedCurrency!!
+                    }
+                    else{
+                        tvSymbol2.text =selectedCurrency?.currencyCode
+                        Glide.with(applicationContext)
+                            .asBitmap()
+                            .load(selectedCurrency?.countryFlag)
+                            .into(binding.ivCountry2)
+                        toCurrency = selectedCurrency!!
+                    }
+
+                    tvFromData.text = "1 ${fromCurrency.currencyCode} = "
+                    tvToData .text =  "2000 ${toCurrency.currencyCode}"
+
+                }
+            }
+        }
     }
 
     private fun setNumberOnHeader(number:String){
@@ -104,7 +158,9 @@ class CurrencyConvertActivity : BaseActivity() {
     }
 
     private fun openCountryList(){
-        startActivity(Intent(this, CountryListActivity::class.java))
+        val intent = Intent(this,CurrencySelectActivity::class.java)
+        intent.putExtra("fromConverter",true)
+        resultLauncher.launch(intent)
     }
 
     override fun onResume() {

@@ -553,13 +553,20 @@
         <TextView
             style="@style/BudgetPlanStyle.Semibold14"
            app:layout_constraintTop_toBottomOf="@id/guideline"
-            app:layout_constraintStart_toEndOf="@id/imgRefresh"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/tv_latest_value"
+            app:layout_constraintStart_toStartOf="@id/tv_latest_time"
+            android:id="@+id/tv_from_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1 AUD = 88.91 NPR" />
+            tools:text="1 AUD = " />
 
+        <TextView
+            style="@style/BudgetPlanStyle.Semibold14"
+            app:layout_constraintTop_toBottomOf="@id/guideline"
+            app:layout_constraintLeft_toRightOf="@id/tv_from_data"
+            android:id="@+id/tv_to_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="88.91 NPR" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

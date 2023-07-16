@@ -1,19 +1,23 @@
 package com.gaurav.budgetplanner.features.Onboarding.presentation.Views.Activities
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gaurav.budgetplanner.BudgetPlannerApp
+import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.Views.HomeScreenActivity
 import com.gaurav.budgetplanner.databinding.ActivityCurrencySelectBinding
+import com.gaurav.budgetplanner.features.converter.Activities.CurrencyConvertActivity
 import com.gaurav.budgetplanner.features.converter.Adapter.CountryListAdapter
-import com.gaurav.budgetplanner.features.converter.model.Country
+import com.gaurav.budgetplanner.features.converter.model.CurrencyModel
 
 class CurrencySelectActivity : AppCompatActivity() {
     private var _binding: ActivityCurrencySelectBinding?= null
@@ -22,11 +26,14 @@ class CurrencySelectActivity : AppCompatActivity() {
     private var isSelected = false
     private lateinit var selectedCurrency:String
     private lateinit var selectedCurrencyValue:String
+    private var isFromConverter:Boolean?=null
+    private lateinit var bundle:Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityCurrencySelectBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initData()
         setUpRecyclerView()
         setSearchFieldListener()
         binding.proceedStart.setOnClickListener {
@@ -53,16 +60,32 @@ class CurrencySelectActivity : AppCompatActivity() {
 
     }
 
+    private fun initData(){
+       bundle = Bundle()
+      isFromConverter=  intent.extras?.getBoolean("fromConverter")
+      isFromConverter?.let {
+          binding.proceedStart.visibility=View.GONE
+          binding.chooseCurr.text = getString(R.string.select_currency)
+      }
+    }
+
 
     private fun setUpRecyclerView(){
         allItemAdapter = CountryListAdapter()
         binding.rvCountry.layoutManager = LinearLayoutManager(this)
         binding.rvCountry.adapter = allItemAdapter
-        allItemAdapter?.onItemClick = {
-            symbol,value ->
+        allItemAdapter?.onEachItemClick = {
+            data ->
+            isFromConverter?.let {
+                val intent = Intent(this, CurrencyConvertActivity::class.java)
+                bundle.putSerializable("currency",data)
+                intent.putExtras(bundle)
+                setResult(Activity.RESULT_OK, intent)
+                finish()
+            }
             isSelected=true
-            selectedCurrency = symbol
-            selectedCurrencyValue = value
+            selectedCurrency = data.currencySymbol
+            selectedCurrencyValue = data.currencyCode
         }
     }
 
@@ -90,7 +113,7 @@ class CurrencySelectActivity : AppCompatActivity() {
     }
 
     interface CountryClickListener {
-        fun onCountryClick(country: Country)
+        fun onCountryClick(country: CurrencyModel)
     }
 
 //    fun setListener(listener: CountryClickListener) {

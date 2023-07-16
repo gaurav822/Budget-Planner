@@ -18,6 +18,7 @@ import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityHomeScreenBinding
 import com.gaurav.budgetplanner.features.Onboarding.presentation.Views.Activities.CurrencySelectActivity
+import com.gaurav.budgetplanner.features.converter.Activities.CurrencyConvertActivity
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import com.gaurav.budgetplanner.features.expensetracker.domain.util.TransactionType
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.CategoryActivity
@@ -74,7 +75,7 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
         setNavMenuData(R.id.nav_home, getString(R.string.home), R.drawable.icon_home)
         setNavMenuData(R.id.nav_categories, getString(R.string.categories), R.drawable.ico_category)
         setNavMenuData(R.id.nav_reminders, getString(R.string.reminders), R.drawable.icon_remindeer)
-        setNavMenuData(R.id.nav_currency, getString(R.string.currency), R.drawable.icon_currency)
+        setNavMenuData(R.id.nav_currency, getString(R.string.converter), R.drawable.icon_currency)
         setNavMenuData(R.id.nav_settings, getString(R.string.settings), R.drawable.img_settings)
         setNavMenuData(
             R.id.nav_share_friends,
@@ -207,13 +208,14 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
                 true
             }
             R.id.nav_settings -> {
+                startActivity(Intent(this,CurrencySelectActivity::class.java))
                 true
             }
             R.id.nav_share_friends -> {
                 true
             }
             R.id.nav_currency -> {
-                startActivity(Intent(this,CurrencySelectActivity::class.java))
+                startActivity(Intent(this,CurrencyConvertActivity::class.java))
                 true
             }
             else -> {

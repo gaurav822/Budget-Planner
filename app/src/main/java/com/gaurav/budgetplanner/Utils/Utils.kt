@@ -3,6 +3,8 @@ package com.gaurav.budgetplanner.Utils
 import com.gaurav.budgetplanner.BudgetPlannerApp
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.math.ceil
 
@@ -74,6 +76,12 @@ class Utils {
         fun getSelectedCurrency(isSymbol:Boolean=true):String{
             val data: String? = BudgetPlannerApp.getStorage().getString(if(isSymbol)Constants.PREF_CURRENCY_SYMBOL else Constants.PREF_CURRENCY_VALUE , "")
             return data!!
+        }
+
+        fun getCurrentDateTime(): String {
+            val now: LocalDateTime = LocalDateTime.now()
+            val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+            return now.format(formatter)
         }
     }
 

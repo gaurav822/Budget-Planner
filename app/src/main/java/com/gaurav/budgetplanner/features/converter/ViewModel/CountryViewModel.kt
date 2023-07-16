@@ -3,17 +3,17 @@ package com.gaurav.budgetplanner.features.converter.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.gaurav.budgetplanner.features.converter.model.Country
+import com.gaurav.budgetplanner.features.converter.model.CurrencyModel
 
 class CountryViewModel:ViewModel() {
 
-    private val selectedCountry = MutableLiveData<Country>()
+    private val selectedCountry = MutableLiveData<CurrencyModel>()
 
-    fun select(item: Country) {
+    fun select(item: CurrencyModel) {
         selectedCountry.value = item
     }
 
-    fun getCountry(): LiveData<Country> = selectedCountry
+    fun getCountry(): LiveData<CurrencyModel> = selectedCountry
 }
 
 //class CountryViewModelFactory (private val repository: CountryRepository) : ViewModelProvider.Factory{
