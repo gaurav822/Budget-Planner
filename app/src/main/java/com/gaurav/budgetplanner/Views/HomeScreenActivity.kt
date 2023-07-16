@@ -39,7 +39,7 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
     private var trxState = "E"
     private var selectedCurrency: String? = null
     private lateinit var toggle: ActionBarDrawerToggle
-    private lateinit var navigationView: NavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityHomeScreenBinding.inflate(layoutInflater)
@@ -51,7 +51,6 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
     }
 
     private fun init() {
-        navigationView = binding.navigationView
         selectedCurrency = Utils.getSelectedCurrency()
         binding.currencySymbol.text = selectedCurrency
 
@@ -68,6 +67,9 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
 
         setSupportActionBar(binding.homeToolBar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+
 
         setNavMenuData(R.id.nav_home, getString(R.string.home), R.drawable.icon_home)
         setNavMenuData(R.id.nav_categories, getString(R.string.categories), R.drawable.ico_category)
@@ -84,20 +86,7 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
             getString(R.string.rate_the_app),
             R.drawable.img_rating
         )
-
-        navigationView.setNavigationItemSelectedListener(this)
-
-        navigationView.setNavigationItemSelectedListener {
-            menuItem ->
-            when(menuItem.itemId){
-                R.id.nav_currency -> {
-                    true
-                }
-                else -> {
-                    false
-                }
-            }
-        }
+        binding.navigationView.setNavigationItemSelectedListener(this)
 
     }
 
@@ -107,10 +96,7 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
         var image1 = menuItem?.actionView?.findViewById<ImageView>(R.id.menu_item_icon)
         image1?.setImageResource(icon)
         title1?.text = value
-        menuItem.setOnMenuItemClickListener {
-            print("Hello")
-            true
-        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -207,24 +193,33 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
+            R.id.nav_rate_the_app -> {
+                true
+            }
             R.id.nav_home -> {
-                // Handle menu item 1 click
+                true
+            }
+            R.id.nav_categories -> {
+                true
+            }
+            R.id.nav_reminders -> {
                 true
             }
             R.id.nav_settings -> {
-                // Handle menu item 2 click
                 true
             }
-
+            R.id.nav_share_friends -> {
+                true
+            }
             R.id.nav_currency -> {
-                startActivity(Intent(this, CurrencySelectActivity::class.java))
+                startActivity(Intent(this,CurrencySelectActivity::class.java))
                 true
             }
-
-            else -> false
+            else -> {
+                false
+            }
         }
-
-        return false
     }
+
 }
