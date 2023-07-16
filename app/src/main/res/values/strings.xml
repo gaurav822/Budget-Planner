@@ -19,4 +19,13 @@
     <string name="no_expenses">No Expenses Found !</string>
     <string name="no_income">No Income Found !</string>
     <string name="trx_day">DATE OF TRANSACTION</string>
+    <string name="open_drawer">Open Drawer</string>
+    <string name="close_drawer">Close Drawer</string>
+    <string name="home">Home</string>
+    <string name="categories">Categories</string>
+    <string name="reminders">Reminders</string>
+    <string name="currency">Currency</string>
+    <string name="settings">Settings</string>
+    <string name="share_with_friends">Share with friends</string>
+    <string name="rate_the_app">Rate the app</string>
 </resources>

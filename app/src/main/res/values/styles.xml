@@ -33,6 +33,10 @@
 
     </style>
 
+    <style name="NavDrawerMenuItemStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 
     <style name="IMEPay.MaterialDialog.Body" parent="MaterialAlertDialog.MaterialComponents.Title.Panel">
         <item name="android:fontFamily">@font/volte_medium</item>

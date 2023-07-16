@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+
+        <item
+            app:actionLayout="@layout/nav_menu_item"
+            android:id="@+id/nav_home"
+            android:title="@null" />
+
+        <item
+            app:actionLayout="@layout/nav_menu_item"
+            android:id="@+id/nav_categories"
+            android:title="@null" />
+
+        <item
+            app:actionLayout="@layout/nav_menu_item"
+            android:id="@+id/nav_reminders"
+            android:title="@null" />
+
+        <item
+            app:actionLayout="@layout/nav_menu_item"
+            android:id="@+id/nav_currency"
+            android:title="@null" />
+
+        <item
+            app:actionLayout="@layout/nav_menu_item"
+            android:id="@+id/nav_settings"
+            android:title="@null" />
+
+        <item
+            app:actionLayout="@layout/nav_menu_item"
+            android:id="@+id/nav_share_friends"
+            android:title="@null" />
+
+        <item
+            app:actionLayout="@layout/nav_menu_item"
+            android:id="@+id/nav_rate_the_app"
+            android:title="@null" />
+        <!-- Add more menu items as needed -->
+    </group>
+</menu>
