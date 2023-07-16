@@ -30,4 +30,5 @@
     <string name="rate_the_app">Rate the app</string>
     <string name="converter">Converter</string>
     <string name="select_currency">Select Currency</string>
+    <string name="currency_converter">Currency Converter</string>
 </resources>

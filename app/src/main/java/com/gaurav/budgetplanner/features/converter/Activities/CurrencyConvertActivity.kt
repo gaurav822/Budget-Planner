@@ -3,6 +3,7 @@ package com.gaurav.budgetplanner.features.converter.Activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import com.gaurav.budgetplanner.features.converter.ViewModel.CountryViewModel
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
@@ -11,6 +12,7 @@ import java.text.NumberFormat
 import java.util.*
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
+import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.Views.Components.IconMapper
 import com.gaurav.budgetplanner.features.Onboarding.presentation.Views.Activities.CurrencySelectActivity
@@ -38,6 +40,7 @@ class CurrencyConvertActivity : BaseActivity() {
     }
 
     private fun init(){
+        setSupportActionBar(binding.toolbar)
         fromCurrency = CurrencyModel(currencySymbol = "$", currencyCode = "AUD", countryFlag = "")
         toCurrency = CurrencyModel(currencySymbol = "Rs", currencyCode = "NPR", countryFlag = "")
         binding.tvLatestTime.text = Utils.getCurrentDateTime()
@@ -45,6 +48,11 @@ class CurrencyConvertActivity : BaseActivity() {
             tvFromData.text = "1 AUD = "
             tvToData.text = "88.76 NPR"
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        super.onBackPressed()
+        return true
     }
 
     private fun clickEvents(){

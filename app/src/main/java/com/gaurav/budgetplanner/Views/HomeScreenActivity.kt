@@ -194,34 +194,32 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
+        when (item.itemId) {
             R.id.nav_rate_the_app -> {
-                true
+
             }
             R.id.nav_home -> {
-                true
+
             }
             R.id.nav_categories -> {
-                true
+
             }
             R.id.nav_reminders -> {
-                true
+
             }
             R.id.nav_settings -> {
                 startActivity(Intent(this,CurrencySelectActivity::class.java))
-                true
+
             }
             R.id.nav_share_friends -> {
-                true
+
             }
             R.id.nav_currency -> {
                 startActivity(Intent(this,CurrencyConvertActivity::class.java))
-                true
-            }
-            else -> {
-                false
             }
         }
+        binding.drawerLayout.closeDrawers()
+        return false
     }
 
 }
