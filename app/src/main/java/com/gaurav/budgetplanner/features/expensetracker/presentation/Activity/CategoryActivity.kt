@@ -1,13 +1,11 @@
 package com.gaurav.budgetplanner.features.expensetracker.presentation.Activity
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.databinding.ActivityCategoryBinding
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters.IndividualRecordAdapter

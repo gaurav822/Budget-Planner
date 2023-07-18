@@ -2,29 +2,26 @@ package com.gaurav.budgetplanner.Views
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.provider.Settings
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.gaurav.budgetplanner.BudgetPlannerApp
 import com.gaurav.budgetplanner.R
-import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityHomeScreenBinding
 import com.gaurav.budgetplanner.features.Onboarding.presentation.Views.Activities.CurrencySelectActivity
 import com.gaurav.budgetplanner.features.converter.Activities.CurrencyConvertActivity
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
-import com.gaurav.budgetplanner.features.expensetracker.domain.util.TransactionType
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.CategoryActivity
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.TransactionActivity
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters.RecordAdapter
 import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel
+import com.gaurav.budgetplanner.features.settings.activities.SettingsActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -88,6 +85,7 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
             R.drawable.img_rating
         )
         binding.navigationView.setNavigationItemSelectedListener(this)
+        binding.navigationView.setCheckedItem(R.id.nav_home)
 
     }
 
@@ -208,7 +206,7 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_settings -> {
-                startActivity(Intent(this,CurrencySelectActivity::class.java))
+                startActivity(Intent(this,SettingsActivity::class.java))
 
             }
             R.id.nav_share_friends -> {
@@ -219,7 +217,7 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
             }
         }
         binding.drawerLayout.closeDrawers()
-        return false
+        return true
     }
 
 }

@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
-import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.databinding.ActivityTransactionDetailBinding
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel

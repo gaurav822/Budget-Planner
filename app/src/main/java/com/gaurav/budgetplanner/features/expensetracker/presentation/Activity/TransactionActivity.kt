@@ -6,11 +6,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.view.WindowManager
 import android.widget.EditText
-import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -25,7 +23,6 @@ import com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters.Ca
 import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
