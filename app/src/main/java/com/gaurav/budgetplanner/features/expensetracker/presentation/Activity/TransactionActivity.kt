@@ -238,7 +238,7 @@ class TransactionActivity : BaseActivity() {
     }
 
     private fun isValidAmount() {
-        isAmountValid = binding.inputAmount.text.toString().isNotEmpty()
+        isAmountValid = binding.inputAmount.text.toString().isNotEmpty() && binding.inputAmount.text.toString().toInt()>0
         checkForValidation()
     }
 

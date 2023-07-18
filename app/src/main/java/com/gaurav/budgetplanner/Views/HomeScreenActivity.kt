@@ -85,7 +85,6 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
             R.drawable.img_rating
         )
         binding.navigationView.setNavigationItemSelectedListener(this)
-        binding.navigationView.setCheckedItem(R.id.nav_home)
 
     }
 
@@ -218,6 +217,11 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
         }
         binding.drawerLayout.closeDrawers()
         return true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.navigationView.setCheckedItem(R.id.nav_home)
     }
 
 }
