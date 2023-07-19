@@ -3,9 +3,11 @@ package com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gaurav.budgetplanner.R
@@ -43,15 +45,15 @@ class CategoryAdapter(categories:Map<String,Int>,var context:Context):RecyclerVi
         holder.binding.ivTransaction.setBackgroundResource(getRespectiveCircle(position))
 
         holder.itemView.setOnClickListener {
-            if(position!=data.size-1){
                 onItemClick?.invoke(data[position])
                 selectedItemPosition = holder.adapterPosition
                 notifyDataSetChanged()
-            }
         }
 
         if(selectedItemPosition==position){
-            holder.itemView.setBackgroundColor(Color.parseColor("#0569FF"))
+            holder.itemView.setBackgroundColor(
+                ContextCompat.getColor(context,
+                getRespectiveBackColor(position)))
         }
         else{
             holder.itemView.setBackgroundColor(Color.TRANSPARENT)
@@ -75,8 +77,19 @@ class CategoryAdapter(categories:Map<String,Int>,var context:Context):RecyclerVi
             1 -> R.drawable.circle_green
             2 -> R.drawable.circle_red
             3 -> R.drawable.circle_light_blue
-            4 -> R.drawable.circle_light_green
+            4 -> R.drawable.circle_green
             else -> R.drawable.circle_grey
+        }
+    }
+
+    private fun getRespectiveBackColor(index: Int):Int {
+        return when(index){
+            0-> R.color.darkBlueColor
+            1 -> R.color.light_green
+            2 -> R.color.rippleColor
+            3 -> R.color.sky_blue
+            4 -> R.color.light_green
+            else -> R.color.lightGrey
         }
     }
 

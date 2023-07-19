@@ -10,11 +10,6 @@
 
         <item
             app:actionLayout="@layout/nav_menu_item"
-            android:id="@+id/nav_categories"
-            android:title="@null" />
-
-        <item
-            app:actionLayout="@layout/nav_menu_item"
             android:id="@+id/nav_reminders"
             android:title="@null" />
 

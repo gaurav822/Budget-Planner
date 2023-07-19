@@ -70,7 +70,6 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
 
 
         setNavMenuData(R.id.nav_home, getString(R.string.home), R.drawable.icon_home)
-        setNavMenuData(R.id.nav_categories, getString(R.string.categories), R.drawable.ico_category)
         setNavMenuData(R.id.nav_reminders, getString(R.string.reminders), R.drawable.icon_remindeer)
         setNavMenuData(R.id.nav_currency, getString(R.string.converter), R.drawable.icon_currency)
         setNavMenuData(R.id.nav_settings, getString(R.string.settings), R.drawable.img_settings)
@@ -198,9 +197,7 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
             R.id.nav_home -> {
 
             }
-            R.id.nav_categories -> {
 
-            }
             R.id.nav_reminders -> {
 
             }
