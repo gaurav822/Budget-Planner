@@ -33,4 +33,6 @@
     <string name="currency_converter">Currency Converter</string>
     <string name="default_currency">Default Currency</string>
     <string name="pin">PIN</string>
+    <string name="search">Search</string>
+    <string name="no_data_found">No Data Found !!</string>
 </resources>

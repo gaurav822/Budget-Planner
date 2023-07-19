@@ -1,5 +1,11 @@
 package com.gaurav.budgetplanner.Utils
 
+import android.app.Activity
+import android.content.Context
+import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import com.gaurav.budgetplanner.BudgetPlannerApp
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import java.text.SimpleDateFormat
@@ -7,6 +13,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.math.ceil
+
 
 class Utils {
 
@@ -82,6 +89,22 @@ class Utils {
             val now: LocalDateTime = LocalDateTime.now()
             val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
             return now.format(formatter)
+        }
+
+        fun hideSoftKeyboard(activity: AppCompatActivity,view:View) {
+                val inputMethodManager =
+                    activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+
+        fun showKeyboard(view: View) {
+            try {
+                val imm =
+                    view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+            } catch (e: NullPointerException) {
+                Log.d("EXCEPTION", "Null pointer while showing keyboard")
+            }
         }
     }
 

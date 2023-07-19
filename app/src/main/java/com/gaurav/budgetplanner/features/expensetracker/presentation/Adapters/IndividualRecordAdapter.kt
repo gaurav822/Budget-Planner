@@ -2,15 +2,19 @@ package com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gaurav.budgetplanner.Views.Components.IconMapper
 import com.gaurav.budgetplanner.databinding.ItemIndividualRecordBinding
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
+import java.util.*
 
 class IndividualRecordAdapter(var category:String,var currency:String):RecyclerView.Adapter<IndividualRecordAdapter.ViewHolder>() {
     private var allRecords = emptyList<Account>()
     var onItemClick : ((Account) -> Unit)? = null
+    var onEmptyData : ((Boolean) -> Unit)? = null
+    private var mData:List<Account>?=null
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -36,6 +40,38 @@ class IndividualRecordAdapter(var category:String,var currency:String):RecyclerV
         }
     }
 
+
+    fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(charSequence: CharSequence): FilterResults {
+                val charString = charSequence.toString()
+                allRecords = if (charString.isEmpty()) {
+                    mData!!
+                } else {
+                    val filteredList :MutableList<Account> = mutableListOf()
+                    for (i in allRecords) {
+                        if (i.comment.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(i)
+            //                            Log.d("TEST-ADD", row.getValue())
+                        }
+                    }
+                    filteredList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = allRecords
+                return filterResults
+            }
+
+            override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
+                allRecords = filterResults.values as List<Account>
+                notifyDataSetChanged()
+                onEmptyData?.invoke(allRecords.isEmpty())
+            }
+        }
+    }
+
     override fun getItemCount(): Int {
         return allRecords.size
     }
@@ -46,6 +82,7 @@ class IndividualRecordAdapter(var category:String,var currency:String):RecyclerV
 
     fun updateList(data:List<Account>){
         this.allRecords = data
+        this.mData=data
         notifyDataSetChanged()
     }
 }
