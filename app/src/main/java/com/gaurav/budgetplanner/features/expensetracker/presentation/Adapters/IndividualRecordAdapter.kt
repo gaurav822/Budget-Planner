@@ -49,7 +49,7 @@ class IndividualRecordAdapter(var category:String,var currency:String):RecyclerV
                     mData!!
                 } else {
                     val filteredList :MutableList<Account> = mutableListOf()
-                    for (i in allRecords) {
+                    for (i in mData!!) {
                         if (i.comment.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
@@ -60,12 +60,12 @@ class IndividualRecordAdapter(var category:String,var currency:String):RecyclerV
                     filteredList
                 }
                 val filterResults = FilterResults()
-                filterResults.values = allRecords
+                filterResults.values = mData
                 return filterResults
             }
 
             override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
-                allRecords = filterResults.values as List<Account>
+                mData = filterResults.values as List<Account>
                 notifyDataSetChanged()
                 onEmptyData?.invoke(allRecords.isEmpty())
             }

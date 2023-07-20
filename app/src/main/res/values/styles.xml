@@ -38,6 +38,11 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="CustomAlertDialogStyle" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorSurface">@color/darkBackground</item>
+        <item name="colorOnSurface">@color/white</item>
+    </style>
+
 
     <style name="IMEPay.MaterialDialog.Body" parent="MaterialAlertDialog.MaterialComponents.Title.Panel">
         <item name="android:fontFamily">@font/volte_medium</item>
