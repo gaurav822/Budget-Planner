@@ -1,4 +1,4 @@
-package com.gaurav.budgetplanner.features.converter.Adapter
+package com.gaurav.budgetplanner.features.converter.presentation.adapters
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.databinding.ItemEachCountryBinding
-import com.gaurav.budgetplanner.features.converter.model.CurrencyModel
+import com.gaurav.budgetplanner.features.converter.domain.model.CurrencyModel
 import java.util.*
 
 

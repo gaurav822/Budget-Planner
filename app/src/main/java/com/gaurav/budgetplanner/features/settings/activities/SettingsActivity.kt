@@ -22,12 +22,13 @@ class SettingsActivity : BaseActivity() {
 
     private fun viewClickEvents(){
         binding.clPin.setOnClickListener {
-
+            startActivity(Intent(this,AppPinActivity::class.java))
         }
 
         binding.clDefaultCurrency.setOnClickListener {
             startActivity(Intent(this,CurrencySelectActivity::class.java))
         }
+
     }
 
     private fun init(){

@@ -15,14 +15,14 @@ import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.Views.HomeScreenActivity
 import com.gaurav.budgetplanner.databinding.ActivityCurrencySelectBinding
-import com.gaurav.budgetplanner.features.converter.Activities.CurrencyConvertActivity
-import com.gaurav.budgetplanner.features.converter.Adapter.CountryListAdapter
-import com.gaurav.budgetplanner.features.converter.model.CurrencyModel
+import com.gaurav.budgetplanner.features.converter.presentation.activities.CurrencyConvertActivity
+import com.gaurav.budgetplanner.features.converter.presentation.adapters.CountryListAdapter
+import com.gaurav.budgetplanner.features.converter.domain.model.CurrencyModel
 
 class CurrencySelectActivity : AppCompatActivity() {
     private var _binding: ActivityCurrencySelectBinding?= null
     private val binding get() = _binding!!
-    private var allItemAdapter:CountryListAdapter?=null
+    private var allItemAdapter: CountryListAdapter?=null
     private var isSelected = false
     private lateinit var selectedCurrency:String
     private lateinit var selectedCurrencyValue:String

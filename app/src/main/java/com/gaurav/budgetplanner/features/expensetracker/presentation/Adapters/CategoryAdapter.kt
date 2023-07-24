@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.databinding.ItemTransactionCategoryBinding
-import com.gaurav.budgetplanner.features.converter.ViewModel.CountryViewModel
 import java.util.*
 
 class CategoryAdapter(categories:Map<String,Int>,var context:Context):RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {

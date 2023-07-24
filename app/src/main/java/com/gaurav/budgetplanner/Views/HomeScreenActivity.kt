@@ -2,7 +2,6 @@ package com.gaurav.budgetplanner.Views
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
@@ -14,8 +13,8 @@ import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityHomeScreenBinding
-import com.gaurav.budgetplanner.features.Onboarding.presentation.Views.Activities.CurrencySelectActivity
-import com.gaurav.budgetplanner.features.converter.Activities.CurrencyConvertActivity
+import com.gaurav.budgetplanner.features.converter.presentation.ViewModel.ConversionViewModel
+import com.gaurav.budgetplanner.features.converter.presentation.activities.CurrencyConvertActivity
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.CategoryActivity
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.TransactionActivity
@@ -209,7 +208,7 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_currency -> {
-                startActivity(Intent(this,CurrencyConvertActivity::class.java))
+                startActivity(Intent(this, CurrencyConvertActivity::class.java))
             }
         }
         binding.drawerLayout.closeDrawers()
@@ -220,5 +219,6 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
         super.onResume()
         binding.navigationView.setCheckedItem(R.id.nav_home)
     }
+
 
 }

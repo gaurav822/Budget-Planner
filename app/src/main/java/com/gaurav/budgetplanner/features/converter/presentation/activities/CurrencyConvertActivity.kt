@@ -1,34 +1,28 @@
-package com.gaurav.budgetplanner.features.converter.Activities
+package com.gaurav.budgetplanner.features.converter.presentation.activities
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
-import com.gaurav.budgetplanner.features.converter.ViewModel.CountryViewModel
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityCurrencyConvertBinding
 import java.text.NumberFormat
 import java.util.*
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
-import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Utils
-import com.gaurav.budgetplanner.Views.Components.IconMapper
 import com.gaurav.budgetplanner.features.Onboarding.presentation.Views.Activities.CurrencySelectActivity
-import com.gaurav.budgetplanner.features.converter.model.CurrencyModel
-import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
+import com.gaurav.budgetplanner.features.converter.domain.model.CurrencyModel
 
 class CurrencyConvertActivity : BaseActivity() {
     private var _binding:ActivityCurrencyConvertBinding?= null
     private val binding get() = _binding!!
     private var currentNumber:String = ""
     private var toCurrencyVal: Double = 88.0
-    private val model:CountryViewModel by viewModels()
-    private var selectedCurrency:CurrencyModel?=null
+    private var selectedCurrency: CurrencyModel?=null
     private var isFrom:Boolean = true
-    private lateinit var fromCurrency:CurrencyModel
-    private lateinit var toCurrency:CurrencyModel
+    private lateinit var fromCurrency: CurrencyModel
+    private lateinit var toCurrency: CurrencyModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -173,8 +167,5 @@ class CurrencyConvertActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        model.getCountry().observe(this) {
-            binding.tvSymbol1.text = it.currencyCode
-        }
     }
 }
