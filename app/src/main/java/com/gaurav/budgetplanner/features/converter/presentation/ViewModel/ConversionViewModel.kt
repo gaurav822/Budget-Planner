@@ -9,7 +9,8 @@ import com.gaurav.budgetplanner.features.converter.common.Resource
 import com.gaurav.budgetplanner.features.converter.domain.model.Conversion
 import com.gaurav.budgetplanner.features.converter.domain.use_case.ConvertUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -17,11 +18,10 @@ import javax.inject.Inject
 @HiltViewModel
 class ConversionViewModel @Inject constructor(
     private val convertUseCase:ConvertUseCase,
-    savedStateHandle: SavedStateHandle
 ):ViewModel() {
 
-    private val _state = mutableStateOf(ConversionState())
-    val state: State<ConversionState> = _state
+    private val _state = MutableStateFlow(ConversionState())
+    val state: StateFlow<ConversionState> = _state
 
     fun convertCurrency(baseCode:String,targetCode:String) {
         convertUseCase(baseCode, targetCode).onEach {

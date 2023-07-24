@@ -9,31 +9,40 @@ import com.gaurav.budgetplanner.databinding.ActivityCurrencyConvertBinding
 import java.text.NumberFormat
 import java.util.*
 import androidx.activity.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.features.Onboarding.presentation.Views.Activities.CurrencySelectActivity
 import com.gaurav.budgetplanner.features.converter.domain.model.CurrencyModel
+import com.gaurav.budgetplanner.features.converter.presentation.ViewModel.ConversionViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import java.text.DecimalFormat
 
+@AndroidEntryPoint
 class CurrencyConvertActivity : BaseActivity() {
     private var _binding:ActivityCurrencyConvertBinding?= null
     private val binding get() = _binding!!
-    private var currentNumber:String = ""
-    private var toCurrencyVal: Double = 88.0
+    private var currentNumber:String = "0"
     private var selectedCurrency: CurrencyModel?=null
     private var isFrom:Boolean = true
     private lateinit var fromCurrency: CurrencyModel
     private lateinit var toCurrency: CurrencyModel
+    private val viewModel: ConversionViewModel by viewModels()
+    private var conversionRate:Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityCurrencyConvertBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         init()
         clickEvents()
     }
 
     private fun init(){
+        viewModel.convertCurrency("AUD", "NPR")
         setSupportActionBar(binding.toolbar)
         fromCurrency = CurrencyModel(currencySymbol = "$", currencyCode = "AUD", countryFlag = "")
         toCurrency = CurrencyModel(currencySymbol = "Rs", currencyCode = "NPR", countryFlag = "")
@@ -42,6 +51,26 @@ class CurrencyConvertActivity : BaseActivity() {
             tvFromData.text = "1 AUD = "
             tvToData.text = "88.76 NPR"
         }
+
+        viewModel.state.onEach { conversionState ->
+
+            val isLoading = conversionState.isLoading
+            val data = conversionState.data
+            val error = conversionState.error
+
+            if (isLoading) {
+
+            } else{
+                conversionRate = DecimalFormat("#.##").format(data?.rate).toDouble()
+               binding.apply {
+                   tvFromData.text = "1 ${fromCurrency.currencyCode} = "
+                   val rateText = conversionRate ?: "N/A" // Replace "N/A" with an appropriate default value
+                   val currencyCode = toCurrency.currencyCode
+                   tvToData.text = "$conversionRate $currencyCode"
+                }
+                convertCurrency()
+            }
+        }.launchIn(lifecycleScope)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -149,13 +178,16 @@ class CurrencyConvertActivity : BaseActivity() {
     }
 
     private fun setNumberOnHeader(number:String){
-            currentNumber += number
-            binding.fromValueCurr.text = currentNumber
-            convertCurrency()
+        if(currentNumber == "0"){
+            currentNumber = ""
+        }
+        currentNumber += number
+        binding.fromValueCurr.text = currentNumber
+        convertCurrency()
     }
 
     private fun convertCurrency(){
-        val result = currentNumber.toDouble() * toCurrencyVal
+        val result = currentNumber.toDouble() * conversionRate!!
         binding.toCurrValue.text = NumberFormat.getNumberInstance(Locale.getDefault()).format(result)
     }
 
@@ -166,6 +198,7 @@ class CurrencyConvertActivity : BaseActivity() {
     }
 
     override fun onResume() {
+        viewModel.convertCurrency(fromCurrency.currencyCode,toCurrency.currencyCode)
         super.onResume()
     }
 }

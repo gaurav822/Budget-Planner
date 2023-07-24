@@ -6,7 +6,7 @@ import retrofit2.http.Path
 
 interface CurrencyConvertApi {
 
-    @GET("/{baseCode}/{targetCode}")
+    @GET("pair/{baseCode}/{targetCode}")
     suspend fun convertCurrency(
         @Path("baseCode") baseCode:String,
         @Path("targetCode") targetCode:String) : ConversionDto
