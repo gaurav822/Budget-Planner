@@ -16,6 +16,7 @@ class AppPinActivity : AppCompatActivity() {
         _binding = ActivityAppPinBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
+        clickEvents()
     }
 
     private fun init(){
@@ -24,6 +25,12 @@ class AppPinActivity : AppCompatActivity() {
             toolbarIconLayout.visibility= View.GONE
             toolbarTitle.text = getString(R.string.PIN)
             toolbarTitle.textSize = 20f
+        }
+    }
+
+    private fun clickEvents(){
+        binding.tvSetPin.setOnClickListener {
+
         }
     }
 }

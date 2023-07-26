@@ -11,66 +11,27 @@
         android:id="@+id/toolbar"
         layout="@layout/generic_toolbar" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_pin"
+    <TextView
+        android:id="@+id/tv_you_can"
+        android:layout_marginTop="@dimen/_16sdp"
+        style="@style/BudgetPlanStyle.ButtonWhite16"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_12sdp"
-        android:layout_marginTop="@dimen/_20sdp">
+        android:text="@string/you_can_set_pin"/>
 
-        <ImageView
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/img_lock"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:id="@+id/pinIcon" />
-
-        <TextView
-            android:layout_marginLeft="@dimen/_16sdp"
-            android:textColor="@color/white"
-            style="@style/BudgetPlanStyle.VolteSemiBold16"
-            android:text="@string/pin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toRightOf="@id/pinIcon"
-            app:layout_constraintTop_toTopOf="@id/pinIcon"
-            app:layout_constraintBottom_toBottomOf="@id/pinIcon"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_default_currency"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_set_pin"
+        android:layout_marginTop="@dimen/_16sdp"
+        style="@style/BudgetPlanStyle.GreenSemibold16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_you_can"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/cl_pin"
-        android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintStart_toStartOf="@id/cl_pin"
-        android:layout_marginLeft="@dimen/_12sdp">
-
-        <ImageView
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/icon_currency"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:id="@+id/currencyIcon" />
-
-        <TextView
-            android:layout_marginLeft="@dimen/_16sdp"
-            android:textColor="@color/white"
-            style="@style/BudgetPlanStyle.VolteSemiBold16"
-            android:text="@string/default_currency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toRightOf="@id/currencyIcon"
-            app:layout_constraintTop_toTopOf="@id/currencyIcon"
-            app:layout_constraintBottom_toBottomOf="@id/currencyIcon"/>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="@string/set_pin"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

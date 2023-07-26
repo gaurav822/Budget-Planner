@@ -39,4 +39,6 @@
     <string name="export_data_as">Export data as:</string>
     <string name="export">EXPORT</string>
     <string name="PIN">PIN</string>
+    <string name="you_can_set_pin">You can set a 4-digit PIN to log in to the app</string>
+    <string name="set_pin">Set PIN</string>
 </resources>

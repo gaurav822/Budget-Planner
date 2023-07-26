@@ -140,10 +140,6 @@ class CurrencyConvertActivity : BaseActivity() {
             binding.toCurrValue.text = "0"
         }
 
-        binding.imgRefresh.setOnClickListener {
-            binding.tvLatestTime.text = Utils.getCurrentDateTime()
-        }
-
     }
 
     private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -168,10 +164,6 @@ class CurrencyConvertActivity : BaseActivity() {
                             .into(binding.ivCountry2)
                         toCurrency = selectedCurrency!!
                     }
-
-                    tvFromData.text = "1 ${fromCurrency.currencyCode} = "
-                    tvToData .text =  "2000 ${toCurrency.currencyCode}"
-
                 }
             }
         }

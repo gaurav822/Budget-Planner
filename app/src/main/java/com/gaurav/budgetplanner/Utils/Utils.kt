@@ -87,7 +87,7 @@ class Utils {
 
         fun getCurrentDateTime(): String {
             val now: LocalDateTime = LocalDateTime.now()
-            val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+            val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd, yyyy")
             return now.format(formatter)
         }
 
