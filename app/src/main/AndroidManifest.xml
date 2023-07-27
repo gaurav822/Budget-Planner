@@ -20,6 +20,9 @@
         android:windowSoftInputMode="stateVisible|adjustResize"
         tools:targetApi="31">
         <activity
+            android:name=".features.settings.activities.PinSetActivity"
+            android:exported="false" />
+        <activity
             android:name=".features.settings.activities.AppPinActivity"
             android:exported="false" />
 

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--CustomTabSimple-->
+    <declare-styleable name="CustomTabSimple">
+        <!--<attr name="width" format="dimension"/>-->
+        <!--<attr name="height" format="dimension"/>-->
+
+        <attr name="tabTitleCharacterSpacing" format="dimension" />
+        <attr name="tabTitlePaddingLeft" format="dimension" />
+        <attr name="tabTitlePaddingRight" format="dimension" />
+        <attr name="tabTitlePaddingTop" format="dimension" />
+        <attr name="tabTitlePaddingBottom" format="dimension" />
+
+        <attr name="tabStatus" format="enum">
+            <enum name="activated" value="1" />
+            <enum name="deactivated" value="0" />
+        </attr>
+
+        <attr name="tabActivatedColor" format="color" />
+        <attr name="tabDeactivatedColor" format="color" />
+
+        <attr name="tabBorderSize" format="dimension" />
+
+
+        <attr name="tabBackgroundColor" format="color" />
+        <!--<attr name="tabContentPaddingLeft" format="dimension" />-->
+        <!--<attr name="tabContentPaddingRight" format="dimension" />-->
+        <!--<attr name="tabContentPaddingTop" format="dimension" />-->
+        <!--<attr name="tabContentPaddingBottom" format="dimension"/>-->
+
+        <attr name="tabTitle" format="string" />
+        <attr name="tabTitleSize" format="dimension" />
+
+        <attr name="tabBackgroundDrawable" format="reference" />
+        <attr name="tabContentPaddingLeft" format="dimension" />
+        <attr name="tabContentPaddingRight" format="dimension" />
+        <attr name="tabContentPaddingTop" format="dimension" />
+        <attr name="tabContentPaddingBottom" format="dimension" />
+
+        <attr name="tabIconDrawable" format="reference" />
+        <attr name="tabIconPaddingLeft" format="dimension" />
+        <attr name="tabIconPaddingRight" format="dimension" />
+        <attr name="tabIconPaddingTop" format="dimension" />
+        <attr name="tabIconPaddingBottom" format="dimension" />
+
+    </declare-styleable>
+
+
+    <!--Custom PIN Entry Edit Text-->
+    <declare-styleable name="IMEPayOTPEntryEditText">
+        <attr name="pinAnimationType" format="enum">
+            <enum name="popIn" value="0" />
+            <enum name="fromBottom" value="1" />
+            <enum name="none" value="-1" />
+        </attr>
+        <attr name="pinCharacterMask" format="string" />
+        <attr name="pinRepeatedHint" format="string" />
+        <attr name="pinLineStroke" format="dimension" />
+        <attr name="pinLineStrokeSelected" format="dimension" />
+        <attr name="pinCharacterSpacing" format="dimension" />
+        <attr name="pinTextBottomPadding" format="dimension" />
+        <attr name="pinLineColors" format="color" />
+        <attr name="pinBackgroundDrawable" format="reference" />
+        <attr name="pinBackgroundIsSquare" format="boolean" />
+    </declare-styleable>
+
+
+    <!--CustomTabSimple-->
+    <declare-styleable name="ImePayMaskedEditText">
+
+        <attr name="textType" format="enum">
+            <enum name="scno" value="2" />
+            <enum name="landline" value="1" />
+            <enum name="mobile" value="0" />
+            <enum name="dob" value="3" />
+        </attr>
+
+        <attr name="prefixText" format="string" />
+
+    </declare-styleable>
+
+    <declare-styleable name="RangeBar">
+        <attr name="mrb_tickStart" format="float" />
+        <attr name="mrb_tickEnd" format="float" />
+        <attr name="mrb_tickInterval" format="float" />
+        <attr name="mrb_tickHeight" format="dimension" />
+        <attr name="mrb_tickColor" format="color" />
+        <attr name="mrb_barWeight" format="dimension" />
+        <attr name="mrb_rangeBarColor" format="reference|color" />
+        <attr name="mrb_selectorSize" format="dimension" />
+        <attr name="mrb_selectorBoundaryColor" format="reference|color" />
+        <attr name="mrb_selectorBoundarySize" format="dimension" />
+        <attr name="mrb_pinTextColor" format="reference|color" />
+        <attr name="mrb_pinColor" format="reference|color" />
+        <attr name="mrb_pinPadding" format="dimension" />
+        <attr name="mrb_pinMinFont" format="dimension" />
+        <attr name="mrb_pinMaxFont" format="dimension" />
+        <attr name="mrb_rangeBarPaddingBottom" format="dimension" />
+        <attr name="mrb_selectorColor" format="reference|color" />
+        <attr name="mrb_rangeBar" format="boolean" />
+        <attr name="mrb_temporaryPins" format="boolean" />
+        <attr name="mrb_connectingLineWeight" format="dimension" />
+        <attr name="mrb_connectingLineColor" format="reference|color" />
+        <attr name="mrb_pinRadius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="PagerBullet">
+
+        <attr name="panelHeightInDp" format="dimension" />
+
+    </declare-styleable>
+
+
+    <!--============SWAP LAYOUT=================-->
+    <declare-styleable name="SwipeRevealLayout">
+        <attr name="dragEdge">
+            <flag name="left" value="1" />
+            <flag name="right" value="2" />
+            <flag name="top" value="4" />
+            <flag name="bottom" value="8" />
+        </attr>
+
+        <attr name="mode">
+            <enum name="normal" value="0" />
+            <enum name="same_level" value="1" />
+        </attr>
+
+        <attr name="flingVelocity" format="integer" />
+
+        <attr name="minDistRequestDisallowParent" format="dimension" />
+    </declare-styleable>
+    <!--============SWAP LAYOUT=================-->
+
+    <!--=============SWITCH BUTTON=====================-->
+    <declare-styleable name="SwitchButton">
+        <attr name="sb_shadow_radius" format="reference|dimension" />
+        <attr name="sb_shadow_offset" format="reference|dimension" />
+        <attr name="sb_shadow_color" format="reference|color" />
+        <attr name="sb_uncheck_color" format="reference|color" />
+        <attr name="sb_checked_color" format="reference|color" />
+
+        <attr name="sb_border_width" format="reference|dimension" />
+        <attr name="sb_checkline_color" format="reference|color" />
+        <attr name="sb_checkline_width" format="reference|dimension" />
+        <attr name="sb_uncheckcircle_color" format="reference|color" />
+        <attr name="sb_uncheckcircle_width" format="reference|dimension" />
+        <attr name="sb_uncheckcircle_radius" format="reference|dimension" />
+
+        <attr name="sb_checked" format="reference|boolean" />
+        <attr name="sb_shadow_effect" format="reference|boolean" />
+        <attr name="sb_effect_duration" format="reference|integer" />
+        <attr name="sb_button_color" format="reference|color" />
+        <attr name="sb_show_indicator" format="reference|boolean" />
+        <attr name="sb_background" format="reference|color" />
+        <attr name="sb_enable_effect" format="reference|boolean" />
+    </declare-styleable>
+    <!--==============SWITCH BUTTON====================-->
+
+
+    <!--===============TOGGLE BUTTON======================-->
+    <declare-styleable name="Toggle">
+
+        <attr name="textOn" format="string" />
+
+        <attr name="textOff" format="string" />
+
+        <attr name="colorOff" format="color" />
+
+        <attr name="colorOn" format="color" />
+
+        <attr name="colorBorder" format="color" />
+
+        <attr name="colorDisabled" format="color" />
+
+        <attr name="on" format="boolean" />
+
+        <attr name="android:textSize" />
+
+        <attr name="android:enabled" />
+    </declare-styleable>
+    <!--===============TOGGLE BUTTON======================-->
+
+
+    <declare-styleable name="CircleProgressBar">
+        <attr name="min" format="integer" />
+        <attr name="max" format="integer" />
+        <attr name="progress1" format="integer" />
+        <attr name="progressbarColor" format="color" />
+        <attr name="progressBarThickness" format="dimension" />
+
+    </declare-styleable>
+
+
+    <declare-styleable name="FlowLayout">
+        <attr name="android:gravity" />
+    </declare-styleable>
+    <declare-styleable name="FlowLayout_Layout">
+        <attr name="android:layout_gravity" />
+    </declare-styleable>
+
+    <declare-styleable name="ScannerOverlay">
+        <attr name="square_width" format="integer" />
+        <attr name="square_height" format="integer" />
+        <attr name="line_color" format="color" />
+        <attr name="line_width" format="integer" />
+        <attr name="line_speed" format="integer" />
+        <attr name="scan_line_width" format="integer" />
+        <attr name="scan_line_height" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="BarcodeReader">
+        <attr name="auto_focus" format="boolean" />
+        <attr name="use_flash" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="PinField">
+        <attr name="noOfFields" format="integer" />
+        <attr name="distanceInBetween" format="dimension" />
+        <attr name="lineThickness" format="dimension" />
+        <attr name="fieldColor" format="color" />
+        <attr name="highlightColor" format="color" />
+        <attr name="highlightEnabled" format="boolean" />
+        <attr name="isCustomBackground" format="boolean" />
+        <attr name="isCursorEnabled" format="boolean" />
+        <!--Single Field Mode is deprecated use highlight type to define how to highlight the fields-->
+        <attr name="highlightSingleFieldMode" format="boolean" />
+        <attr name="highlightType" format="enum">
+            <enum name="allFields" value="0" />
+            <enum name="currentField" value="1" />
+            <enum name="completedFields" value="2" />
+            <enum name="noFields" value="3" />
+        </attr>
+        <attr name="fieldBgColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="CirclePinField">
+        <attr name="circleRadius" format="dimension" />
+        <attr name="fillerColor" format="color" />
+        <attr name="fillerRadius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="SquarePinField">
+        <attr name="cornerRadius" format="dimension" />
+    </declare-styleable>
+</resources>

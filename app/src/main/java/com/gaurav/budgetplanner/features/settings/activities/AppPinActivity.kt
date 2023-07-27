@@ -1,5 +1,6 @@
 package com.gaurav.budgetplanner.features.settings.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -30,7 +31,12 @@ class AppPinActivity : AppCompatActivity() {
 
     private fun clickEvents(){
         binding.tvSetPin.setOnClickListener {
-
+            startActivity(Intent(this,PinSetActivity::class.java))
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        super.onBackPressed()
+        return true
     }
 }

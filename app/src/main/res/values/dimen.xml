@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="corner_radius">@dimen/_30sdp</dimen>
+
+    <dimen name="text_12_sp">11sp</dimen>
+    <dimen name="nine_sp">9sp</dimen>
+    <dimen name="gen45dp">45dp</dimen>
+    <dimen name="header_text_size">@dimen/_12ssp</dimen>
+    <dimen name="description_text_size">@dimen/_10ssp</dimen>
+    <dimen name="gen_11dp">11dp</dimen>
+    <dimen name="keypad_box_size">@dimen/_50sdp</dimen>
+    <dimen name="keypad_text_size">@dimen/_17ssp</dimen>
+    <dimen name="pin_keypad_box_size">@dimen/_55sdp</dimen>
+    <dimen name="pin_keypad_text_size">@dimen/_17ssp</dimen>
+    <dimen name="textFontWeight">@dimen/_17ssp</dimen>
+    <dimen name="input_field_gap">@dimen/_12sdp</dimen>
+
+    <dimen name="viewpager_next_item_visible">@dimen/_32sdp</dimen>
+    <dimen name="viewpager_current_item_horizontal_margin">@dimen/_24sdp</dimen>
+    <dimen name="divider_width">@dimen/_6sdp</dimen>
+    <dimen name="gen24dp">24dp</dimen>
 </resources>

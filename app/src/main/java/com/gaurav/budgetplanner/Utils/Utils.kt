@@ -1,7 +1,7 @@
 package com.gaurav.budgetplanner.Utils
 
-import android.app.Activity
 import android.content.Context
+import android.content.res.Resources
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -105,6 +105,10 @@ class Utils {
             } catch (e: NullPointerException) {
                 Log.d("EXCEPTION", "Null pointer while showing keyboard")
             }
+        }
+
+        fun dpToPx1(dp: Float): Float {
+            return dp * Resources.getSystem().displayMetrics.density
         }
     }
 

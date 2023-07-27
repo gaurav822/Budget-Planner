@@ -41,4 +41,8 @@
     <string name="PIN">PIN</string>
     <string name="you_can_set_pin">You can set a 4-digit PIN to log in to the app</string>
     <string name="set_pin">Set PIN</string>
+    <string name="verify_transaction">Verify Transaction</string>
+    <string name="cancel_keyboard">Cancel</string>
+    <string name="forgot_wallet_pin">FORGOT WALLET PIN?</string>
+    <string name="touch_the_fingerprint_sensor">Touch the fingerprint sensor</string>
 </resources>
