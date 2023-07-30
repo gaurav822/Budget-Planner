@@ -12,6 +12,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.features.Onboarding.presentation.Views.Activities.CurrencySelectActivity
 import com.gaurav.budgetplanner.features.converter.domain.model.CurrencyModel
@@ -38,22 +39,46 @@ class CurrencyConvertActivity : BaseActivity() {
         _binding = ActivityCurrencyConvertBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
+        initData()
+        listenViewModel()
         clickEvents()
     }
 
     private fun init(){
         viewModel.convertCurrency("AUD", "NPR")
+        initData()
+    }
+
+    private fun initData(){
         setSupportActionBar(binding.toolbar)
-        fromCurrency = CurrencyModel(currencySymbol = "$", currencyCode = "AUD", countryFlag = "")
-        toCurrency = CurrencyModel(currencySymbol = "Rs", currencyCode = "NPR", countryFlag = "")
+        fromCurrency = CurrencyModel(currencySymbol = "$", currencyCode = "AUD", countryFlag = "https://flagsapi.com/AU/flat/64.png")
+        toCurrency = CurrencyModel(currencySymbol = "Rs", currencyCode = "NPR", countryFlag = "https://flagsapi.com/NP/flat/64.png")
+        setConversionData(fromCurrency,toCurrency)
         binding.tvLatestTime.text = Utils.getCurrentDateTime()
-        binding.apply {
-            tvFromData.text = "1 AUD = "
-            tvToData.text = "88.76 NPR"
-        }
+        binding.tvConversionData.text = String.format(
+            getString(R.string.currency_conversion_format),
+            "AUD", conversionRate, "NPR"
+        )
+    }
 
+    private fun setConversionData(from:CurrencyModel,to:CurrencyModel){
+
+        Glide.with(applicationContext)
+            .asBitmap()
+            .load(from.countryFlag)
+            .into(binding.ivCountry1)
+
+        Glide.with(applicationContext)
+            .asBitmap()
+            .load(to.countryFlag)
+            .into(binding.ivCountry2)
+
+        binding.tvSymbol1.text = from.currencyCode
+        binding.tvSymbol2.text = to.currencyCode
+    }
+
+    private fun listenViewModel(){
         viewModel.state.onEach { conversionState ->
-
             val isLoading = conversionState.isLoading
             val data = conversionState.data
             val error = conversionState.error
@@ -62,12 +87,10 @@ class CurrencyConvertActivity : BaseActivity() {
 
             } else{
                 conversionRate = DecimalFormat("#.##").format(data?.rate).toDouble()
-               binding.apply {
-                   tvFromData.text = "1 ${fromCurrency.currencyCode} = "
-                   val rateText = conversionRate ?: "N/A" // Replace "N/A" with an appropriate default value
-                   val currencyCode = toCurrency.currencyCode
-                   tvToData.text = "$conversionRate $currencyCode"
-                }
+                binding.tvConversionData.text = String.format(
+                    getString(R.string.currency_conversion_format),
+                    fromCurrency.currencyCode, conversionRate, toCurrency.currencyCode
+                )
                 convertCurrency()
             }
         }.launchIn(lifecycleScope)
@@ -135,11 +158,19 @@ class CurrencyConvertActivity : BaseActivity() {
         }
 
         binding.btnReset.setOnClickListener {
-            currentNumber = ""
+            currentNumber = "0"
             binding.fromValueCurr.text = "0"
             binding.toCurrValue.text = "0"
         }
 
+        binding.swapCountry.setOnClickListener {
+            val temp = fromCurrency
+            fromCurrency = toCurrency
+            toCurrency = temp
+            viewModel.convertCurrency(fromCurrency.currencyCode,toCurrency.currencyCode)
+            setConversionData(fromCurrency,toCurrency)
+            convertCurrency()
+        }
     }
 
     private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -166,6 +197,8 @@ class CurrencyConvertActivity : BaseActivity() {
                     }
                 }
             }
+
+            viewModel.convertCurrency(fromCurrency.currencyCode,toCurrency.currencyCode)
         }
     }
 
@@ -187,10 +220,5 @@ class CurrencyConvertActivity : BaseActivity() {
         val intent = Intent(this,CurrencySelectActivity::class.java)
         intent.putExtra("fromConverter",true)
         resultLauncher.launch(intent)
-    }
-
-    override fun onResume() {
-        viewModel.convertCurrency(fromCurrency.currencyCode,toCurrency.currencyCode)
-        super.onResume()
     }
 }

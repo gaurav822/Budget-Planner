@@ -45,14 +45,14 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_40sdp"
-                android:src="@drawable/img_aus"/>
+                tools:src="@drawable/img_aus"/>
 
             <TextView
                 android:layout_marginTop="@dimen/_2sdp"
                 android:id="@+id/tv_symbol1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="AUD"
+                tools:text="AUD"
                 style="@style/BudgetPlanStyle.VolteMediumWhite14"
                 app:layout_constraintTop_toBottomOf="@id/iv_country1"
                 app:layout_constraintStart_toStartOf="@id/iv_country1"
@@ -106,7 +106,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_40sdp"
-                android:src="@drawable/img_nepal"/>
+                tools:src="@drawable/img_nepal"/>
 
             <TextView
                 style="@style/BudgetPlanStyle.VolteMediumWhite14"
@@ -114,7 +114,7 @@
                 android:id="@+id/tv_symbol2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NPR"
+                tools:text="NPR"
                 app:layout_constraintTop_toBottomOf="@id/iv_country2"
                 app:layout_constraintStart_toStartOf="@id/iv_country2"
                 app:layout_constraintEnd_toEndOf="@id/iv_country2"/>
@@ -202,6 +202,7 @@
                     android:background="@color/black"/>
 
                 <ImageView
+                    android:id="@+id/swapCountry"
                     android:scaleType="centerInside"
                     android:src="@drawable/exchange_country"
                     android:background="@color/grey_blue"
@@ -433,6 +434,7 @@
                     android:background="@color/black"/>
 
                 <TextView
+                    android:id="@+id/addNumber"
                     android:background="@color/orange"
                     android:text="+"
                     android:gravity="center"
@@ -541,42 +543,24 @@
             app:layout_constraintGuide_begin="37dp"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_conversion_data"
+        <TextView
+            android:textColor="@color/black_opacity_60"
+            android:id="@+id/tv_conversion_data"
+            tools:text="1 AUD = 88.76 NPR"
+            style="@style/BudgetPlanStyle.VolteSemiBold14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline">
-
-            <TextView
-                style="@style/BudgetPlanStyle.Semibold14"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:id="@+id/tv_from_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="1 AUD = " />
-
-            <TextView
-                app:layout_constraintTop_toTopOf="parent"
-                style="@style/BudgetPlanStyle.Semibold14"
-                app:layout_constraintLeft_toRightOf="@id/tv_from_data"
-                android:id="@+id/tv_to_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="88.91 NPR" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@id/guideline"/>
 
 
         <TextView
             android:textColor="@color/green"
             style="@style/BudgetPlanStyle.BlackSemiBold16"
             app:layout_constraintBottom_toTopOf="@id/guideline"
-            app:layout_constraintStart_toStartOf="@id/cl_conversion_data"
-            app:layout_constraintEnd_toEndOf="@id/cl_conversion_data"
+            app:layout_constraintStart_toStartOf="@id/tv_conversion_data"
+            app:layout_constraintEnd_toEndOf="@id/tv_conversion_data"
             android:id="@+id/tv_latest_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

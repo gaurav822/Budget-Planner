@@ -45,4 +45,6 @@
     <string name="cancel_keyboard">Cancel</string>
     <string name="forgot_wallet_pin">FORGOT WALLET PIN?</string>
     <string name="touch_the_fingerprint_sensor">Touch the fingerprint sensor</string>
+    <string name="currency_conversion_format">1 %1$s = %2$.2f %3$s</string>
+
 </resources>
