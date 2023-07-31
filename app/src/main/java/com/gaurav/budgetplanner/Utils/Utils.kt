@@ -2,12 +2,24 @@ package com.gaurav.budgetplanner.Utils
 
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Typeface
+import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Log
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.gaurav.budgetplanner.BudgetPlannerApp
+import com.gaurav.budgetplanner.R
+import com.gaurav.budgetplanner.Utils.CustomTextFormat.CustomTextFormat.FontCache
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
+import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -109,6 +121,84 @@ class Utils {
 
         fun dpToPx1(dp: Float): Float {
             return dp * Resources.getSystem().displayMetrics.density
+        }
+
+        fun vibrate(context: Context, duration: Long) {
+            val v = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            // Vibrate for 500 milliseconds
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                v.vibrate(
+                    VibrationEffect.createOneShot(
+                        duration,
+                        VibrationEffect.DEFAULT_AMPLITUDE
+                    )
+                )
+            } else {
+                //deprecated in API 26
+                v.vibrate(duration)
+            }
+        }
+
+        fun showMessageInSnackBar(s: String?, view: View) {
+            try {
+                val snackBar = Snackbar.make(view, s!!, Snackbar.LENGTH_LONG)
+                snackBar.duration = 4000
+                val tv = snackBar.view.findViewById<View>(com.google.android.material.R.id.snackbar_text) as TextView
+                val font = Typeface.createFromAsset(view.context.assets, FontCache.ROBOTO_MEDIUM)
+                tv.typeface = font
+                tv.textSize = 14f
+                snackBar.show()
+            } catch (e: java.lang.NullPointerException) {
+                showToastWithBlackBackground(
+                    view.context,
+                    s
+                )
+            }
+        }
+
+        fun showToast(context: Context, Message: String?) {
+            val inflater =
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val view: View = inflater.inflate(R.layout.custom_toast_layout, null, false)
+            val tvToastMsg = view.findViewById<TextView>(R.id.tv_toast_message)
+            tvToastMsg.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.black_semi_transparent
+                )
+            )
+            tvToastMsg.setTextColor(ContextCompat.getColor(context, android.R.color.white))
+            tvToastMsg.text = Message
+            val customToast = Toast(context)
+            customToast.setView(view)
+            customToast.setGravity(Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM, 0, 0)
+            customToast.duration = Toast.LENGTH_LONG
+            customToast.show()
+        }
+
+
+        fun showToastWithBlackBackground(context: Context, Message: String?) {
+            val inflater =
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val view: View = inflater.inflate(R.layout.custom_toast_layout_black, null, false)
+            val tvToastMsg = view.findViewById<TextView>(R.id.tv_toast_message)
+            tvToastMsg.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                   R.color.black_semi_transparent
+                )
+            )
+            tvToastMsg.setTextColor(ContextCompat.getColor(context, android.R.color.white))
+            tvToastMsg.text = Message
+            val customToast = Toast(context)
+            customToast.setView(view)
+            customToast.setGravity(
+                Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM or Gravity.FILL_HORIZONTAL,
+                0,
+                0
+            )
+            customToast.duration = Toast.LENGTH_LONG
+            customToast.show()
         }
     }
 

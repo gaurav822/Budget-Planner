@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black_opacity_87"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_toast_message"
+        style="@style/BudgetPlanStyle.Body2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/_35sdp"
+        android:padding="@dimen/_12sdp"
+        android:text="Error message here"
+        android:textColor="@color/color_white" />
+
+</LinearLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Background -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/colorPrimary" />
+    <gradient
+        android:endColor="@color/generic_dialog_end_color"
+        android:startColor="@color/generic_dialog_start_color" />
+
+
+
+</shape>
+

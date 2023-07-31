@@ -6,41 +6,23 @@
     android:id="@+id/root_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/transparent"
+    android:background="@color/darkBackground"
     android:focusable="true"
     android:focusableInTouchMode="true"
     tools:ignore="ContentDescription">
 
-    <ImageView
-        android:id="@+id/iv_transparentLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#28000000"
-        android:visibility="visible" />
+    <include
+        android:id="@+id/toolbarPin"
+        layout="@layout/generic_toolbar"/>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pinLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/color_white"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_touchLayout"
-            android:layout_width="@dimen/_64sdp"
-            android:layout_height="@dimen/_64sdp"
-
-            android:layout_marginTop="@dimen/_64sdp"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:src="@drawable/icon_currency"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/desc"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
@@ -50,16 +32,16 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginLeft="4dp"
-            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_72sdp"
             android:layout_marginEnd="4dp"
             android:layout_marginRight="4dp"
             android:gravity="center_horizontal"
             android:text="Good afternoon"
-            android:textColor="@color/black_opacity_87"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.542"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_touchLayout" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_error"
@@ -75,7 +57,7 @@
             android:gravity="center_horizontal"
             android:text="@string/verify_transaction"
             android:visibility="visible"
-            android:textColor="@color/black_opacity_60"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/desc" />
@@ -89,7 +71,6 @@
             android:textSize="@dimen/_12sdp"
             app:circleRadius="@dimen/_7sdp"
             app:distanceInBetween="@dimen/_10sdp"
-            app:fieldBgColor="#fff"
             app:fillerColor="#00CCCC"
             app:fillerRadius="@dimen/_7sdp"
             app:layout_constraintBottom_toTopOf="@+id/keyboard"
@@ -114,7 +95,7 @@
         <TextView
             android:id="@+id/tv_forget_wallet_pin"
             style="@style/BudgetPlanStyle.Button"
-
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_14sdp"
@@ -126,7 +107,7 @@
 
         <TextView
             android:id="@+id/tv_version"
-
+            android:visibility="invisible"
             style="@style/BudgetPlanStyle.Button"
             android:layout_width="wrap_content"
             android:layout_height="0dp"

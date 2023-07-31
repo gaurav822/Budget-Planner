@@ -1,5 +1,6 @@
 package com.gaurav.budgetplanner.Views
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -7,13 +8,13 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityHomeScreenBinding
-import com.gaurav.budgetplanner.features.converter.presentation.ViewModel.ConversionViewModel
 import com.gaurav.budgetplanner.features.converter.presentation.activities.CurrencyConvertActivity
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.CategoryActivity
@@ -198,7 +199,7 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_reminders -> {
-
+                showCustomDialog()
             }
             R.id.nav_settings -> {
                 startActivity(Intent(this,SettingsActivity::class.java))
@@ -213,6 +214,16 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
         }
         binding.drawerLayout.closeDrawers()
         return true
+    }
+
+    private fun showCustomDialog(){
+        val alertDialogBuilder= AlertDialog.Builder (this)
+
+        alertDialogBuilder.setTitle("Feature Coming Soon")
+        alertDialogBuilder.setMessage("This feature will be available in a future update.")
+        alertDialogBuilder.setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+        val alertDialog: AlertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 
     override fun onResume() {

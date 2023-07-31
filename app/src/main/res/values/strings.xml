@@ -46,5 +46,10 @@
     <string name="forgot_wallet_pin">FORGOT WALLET PIN?</string>
     <string name="touch_the_fingerprint_sensor">Touch the fingerprint sensor</string>
     <string name="currency_conversion_format">1 %1$s = %2$.2f %3$s</string>
+    <string name="pin_must_be_of_four_digit">PIN must be of four digit</string>
+    <string name="error_message_here">Error message here</string>
+    <string name="choose_a_pin">Choose a PIN</string>
+    <string name="re_enter_pin">Re-enter your PIN</string>
+    <string name="remove_pin">Remove PIN</string>
 
 </resources>

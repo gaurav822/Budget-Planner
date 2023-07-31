@@ -33,5 +33,17 @@
         android:layout_height="wrap_content"
         android:text="@string/set_pin"/>
 
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_remove_pin"
+        android:layout_marginTop="@dimen/_16sdp"
+        style="@style/BudgetPlanStyle.GreenSemibold16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_set_pin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remove_pin"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

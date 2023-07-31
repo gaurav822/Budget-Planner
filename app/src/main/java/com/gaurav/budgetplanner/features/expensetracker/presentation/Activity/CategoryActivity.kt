@@ -182,7 +182,7 @@ class CategoryActivity : AppCompatActivity() {
         pdfDocument.finishPage(page)
 
         // Step 7: Save the PDF to a file
-        val pdfFile = File(getExternalFilesDir(null), "testfile.pdf")
+        val pdfFile = File(getExternalFilesDir(null), "transaction.pdf")
         try {
             val fileOutputStream = FileOutputStream(pdfFile)
             pdfDocument.writeTo(fileOutputStream)

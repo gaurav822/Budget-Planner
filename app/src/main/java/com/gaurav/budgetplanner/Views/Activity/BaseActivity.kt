@@ -1,8 +1,10 @@
 package com.gaurav.budgetplanner.Views.Activity
 
 import android.content.Intent
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.gaurav.budgetplanner.R
+import com.gaurav.budgetplanner.Utils.Utils
 
 open class BaseActivity: AppCompatActivity() {
 
@@ -14,5 +16,17 @@ open class BaseActivity: AppCompatActivity() {
     override fun finish() {
         super.finish()
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
+    open fun showPopUpMessage(message: String?) {
+        try {
+            Utils.showMessageInSnackBar(message, window.decorView.rootView)
+        } catch (ex: Exception) {
+            try {
+                Utils.showToast(this, message)
+            } catch (exception: Exception) {
+//                IMEPayLogger.Log(exception)
+            }
+        }
     }
 }
