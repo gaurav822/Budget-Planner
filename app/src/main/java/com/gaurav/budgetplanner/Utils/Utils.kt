@@ -1,6 +1,7 @@
 package com.gaurav.budgetplanner.Utils
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Resources
 import android.graphics.Typeface
 import android.os.Build
@@ -15,6 +16,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.gaurav.budgetplanner.BudgetPlannerApp
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.CustomTextFormat.CustomTextFormat.FontCache
@@ -199,6 +202,33 @@ class Utils {
             )
             customToast.duration = Toast.LENGTH_LONG
             customToast.show()
+        }
+
+        fun storePinSecurely(context: Context,pinToStore:String){
+            val editor = getSecuredSharedPref(context).edit()
+            editor.putString("encrypted_pin", pinToStore)
+            editor.apply()
+        }
+
+
+        fun retrievePinSecurely(context: Context): String? {
+
+            return getSecuredSharedPref(context).getString("encrypted_pin", null)
+        }
+
+        private fun getSecuredSharedPref(context: Context): SharedPreferences {
+
+            val masterKey = MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build()
+
+            return EncryptedSharedPreferences.create(
+                context,
+                "secure_prefs_file",
+                masterKey,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            )
         }
     }
 

@@ -10,8 +10,10 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import com.gaurav.budgetplanner.BudgetPlannerApp
 import com.gaurav.budgetplanner.Utils.Constants
+import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.features.Onboarding.presentation.Views.Activities.OnBoardActivity
 import com.gaurav.budgetplanner.databinding.ActivitySplashScreenBinding
+import com.gaurav.budgetplanner.features.settings.activities.PinSetActivity
 
 class SplashScreen : AppCompatActivity() {
     private lateinit var splashAnimation: Animation
@@ -31,6 +33,7 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun init(){
+        var pin:String? = Utils.retrievePinSecurely(this)
         isCurrencySelected = BudgetPlannerApp.getStorage().getBoolean(Constants.PREF_CURRENCY_SELECTION,false)
         val width = splashIcon.width
         val height = splashIcon.height
@@ -63,15 +66,17 @@ class SplashScreen : AppCompatActivity() {
             splashIcon.startAnimation(secondAnimation)
 
             Handler(Looper.getMainLooper()).postDelayed({
-                val intent = Intent(this,if(!isCurrencySelected) OnBoardActivity::class.java else HomeScreenActivity::class.java)
+                pin?.let {
+                    intent = Intent(this,PinSetActivity::class.java)
+                    intent.putExtra("isFromSplash",true)
+                }?:kotlin.run {
+                    intent = Intent(this,if(!isCurrencySelected) OnBoardActivity::class.java else HomeScreenActivity::class.java)
+                }
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
             }, 300)
 
         }, 4000)
-
-
-
 
 
     }

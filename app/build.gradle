@@ -90,4 +90,5 @@ dependencies {
 
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    implementation "androidx.security:security-crypto:1.1.0-alpha03"
 }

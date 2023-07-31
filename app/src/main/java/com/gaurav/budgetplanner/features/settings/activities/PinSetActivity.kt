@@ -12,6 +12,7 @@ import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.CustomPinKeyboard
 import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
+import com.gaurav.budgetplanner.Views.HomeScreenActivity
 import com.gaurav.budgetplanner.databinding.PinSetActivityBinding
 import com.gaurav.budgetplanner.features.converter.presentation.activities.CurrencyConvertActivity
 import com.swifttechnology.imepay.Views.Utils.CirclePinEdittext.PinField.OnTextCompleteListener
@@ -21,6 +22,7 @@ class PinSetActivity : BaseActivity(), View.OnClickListener {
     private val binding get() = _binding!!
     private var isFirstAttempt = true
     private var firstAttemptPin = ""
+    private var isFromSplash:Boolean?=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = PinSetActivityBinding.inflate(layoutInflater)
@@ -30,6 +32,7 @@ class PinSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun init(){
+       isFromSplash = intent.extras?.getBoolean("isFromSplash")
         binding.tvError.text = getString(R.string.choose_a_pin)
         binding.toolbarPin.apply {
             toolbarIconLayout.visibility= View.GONE
@@ -77,7 +80,18 @@ class PinSetActivity : BaseActivity(), View.OnClickListener {
 
     private fun submitPin() {
         val pin: String = binding.walletPinEditText.text.toString()
-        if (pin.length == 4) callPinCheckApi(pin)
+        if (pin.length == 4) {
+            if(isFromSplash!!){
+                val storedPin = Utils.retrievePinSecurely(this)
+                if(storedPin==pin){
+                    startActivity(Intent(this,HomeScreenActivity::class.java))
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+            }
+            else{
+                callPinCheckApi(pin)
+            }
+        }
         else {
             ObjectAnimator
                 .ofFloat(binding.walletPinEditText, "translationX", 0f, 25f, -25f, 25f, -25f, 15f, -15f, 6f, -6f, 0f)
@@ -99,6 +113,7 @@ class PinSetActivity : BaseActivity(), View.OnClickListener {
         else{
            if(firstAttemptPin==pin){
                 Utils.showToast(this,"Pin set up has been completed !!")
+                Utils.storePinSecurely(this,pin)
                 val intent = Intent(this, AppPinActivity::class.java)
                 setResult(Activity.RESULT_OK, intent)
                 finish()
