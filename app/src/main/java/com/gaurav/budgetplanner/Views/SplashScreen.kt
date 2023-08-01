@@ -23,6 +23,7 @@ class SplashScreen : AppCompatActivity() {
     private lateinit var splashIcon: ImageView
     val scaleDownFactor = 0.7f
     private var isCurrencySelected = false
+    var pin:String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,7 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun init(){
-        var pin:String? = Utils.retrievePinSecurely(this)
+        pin = Utils.retrievePinSecurely(this)
         isCurrencySelected = BudgetPlannerApp.getStorage().getBoolean(Constants.PREF_CURRENCY_SELECTION,false)
         val width = splashIcon.width
         val height = splashIcon.height
@@ -68,7 +69,8 @@ class SplashScreen : AppCompatActivity() {
             Handler(Looper.getMainLooper()).postDelayed({
                 pin?.let {
                     intent = Intent(this,PinSetActivity::class.java)
-                    intent.putExtra("isFromSplash",true)
+                    intent.putExtra("pin",it)
+                    intent.putExtra("pinRequestedFrom","splash")
                 }?:kotlin.run {
                     intent = Intent(this,if(!isCurrencySelected) OnBoardActivity::class.java else HomeScreenActivity::class.java)
                 }

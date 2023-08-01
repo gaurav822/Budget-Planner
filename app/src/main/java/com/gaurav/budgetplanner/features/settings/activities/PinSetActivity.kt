@@ -21,8 +21,11 @@ class PinSetActivity : BaseActivity(), View.OnClickListener {
     private var _binding:PinSetActivityBinding?=null
     private val binding get() = _binding!!
     private var isFirstAttempt = true
+    private var pinNotVerified = true
     private var firstAttemptPin = ""
-    private var isFromSplash:Boolean?=false
+    private var pinRequestedFrom:String? = ""
+    private var pin:String? = null
+    private var changePin:Boolean=true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = PinSetActivityBinding.inflate(layoutInflater)
@@ -32,17 +35,40 @@ class PinSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun init(){
-       isFromSplash = intent.extras?.getBoolean("isFromSplash")
-        binding.tvError.text = getString(R.string.choose_a_pin)
+        pinRequestedFrom = intent.extras?.getString("pinRequestedFrom")
+        pin = intent.extras?.getString("pin")
+        setPinLayoutData(pinRequestedFrom)
         binding.toolbarPin.apply {
             toolbarIconLayout.visibility= View.GONE
-            toolbarTitle.text = getString(R.string.set_pin)
             toolbarTitle.textSize = 20f
         }
         binding.pinLayout.setOnClickListener(null)
         val ic: InputConnection? = binding.walletPinEditText.onCreateInputConnection(EditorInfo())
         binding.keyboard.setInputConnection(ic)
         setListeners()
+    }
+
+    private fun setPinLayoutData(pinRequestedFrom:String?){
+        pinRequestedFrom?.let {
+             when(pinRequestedFrom){
+                 "splash" -> {
+                     binding.toolbarPin.mainGenericToolbar.visibility=View.GONE
+                     binding.tvError.text =  getString(R.string.please_enter_pin_continue)
+                 }
+                 "changePin" -> {
+                     binding.toolbarPin.toolbarTitle.text =getString(R.string.change_pin)
+                     binding.tvError.text = getString(R.string.you_must_enter_curr)
+                 }
+                 "setPin" -> {
+                     binding.toolbarPin.toolbarTitle.text =getString(R.string.set_pin)
+                     binding.tvError.text =getString(R.string.choose_a_pin)
+                 }
+                 "deletePin" -> {
+                     binding.toolbarPin.toolbarTitle.text =getString(R.string.remove_pin)
+                     binding.tvError.text = getString(R.string.you_must_enter_curr)
+                 }
+            }
+        }
     }
 
     private fun setListeners(){
@@ -79,51 +105,85 @@ class PinSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun submitPin() {
-        val pin: String = binding.walletPinEditText.text.toString()
-        if (pin.length == 4) {
-            if(isFromSplash!!){
-                val storedPin = Utils.retrievePinSecurely(this)
-                if(storedPin==pin){
+        val currentPin: String = binding.walletPinEditText.text.toString()
+
+        pin?.let {
+            if(!pinRequestedFrom.equals("changePin") && currentPin!=it){
+                binding.walletPinEditText.setText("")
+                Utils.showToast(this,"Invalid PIN, Please try again")
+                return
+            }
+            else{
+                if(pinRequestedFrom.equals("splash")){
                     startActivity(Intent(this,HomeScreenActivity::class.java))
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 }
+                else if(pinRequestedFrom.equals("deletePin")){
+                    deletePinFromSystem()
+                }
+
+                else if(pinRequestedFrom.equals("changePin")){
+                    if(currentPin!=pin && pinNotVerified){
+                        binding.walletPinEditText.setText("")
+                        Utils.showToast(this,"Invalid PIN, Please try again")
+                        return
+                    }
+                    else{
+                        binding.walletPinEditText.setText("")
+                        binding.tvError.text = getString(R.string.choose_a_new_pin)
+                        pinNotVerified=false
+                        callPinCheckApi(currentPin,changePin)
+                    }
+                }
             }
-            else{
-                callPinCheckApi(pin)
-            }
+
+        }?:kotlin.run {
+            callPinCheckApi(currentPin,false)
         }
-        else {
-            ObjectAnimator
-                .ofFloat(binding.walletPinEditText, "translationX", 0f, 25f, -25f, 25f, -25f, 15f, -15f, 6f, -6f, 0f)
-                .setDuration(500)
-                .start()
-            Utils.vibrate(this, 500)
-            showPopUpMessage(getString(R.string.pin_must_be_of_four_digit))
-            // pinEdTxt.setAnimation(shake);
-        }
+//        else {
+//            ObjectAnimator
+//                .ofFloat(binding.walletPinEditText, "translationX", 0f, 25f, -25f, 25f, -25f, 15f, -15f, 6f, -6f, 0f)
+//                .setDuration(500)
+//                .start()
+//            Utils.vibrate(this, 500)
+//            showPopUpMessage(getString(R.string.pin_must_be_of_four_digit))
+//            // pinEdTxt.setAnimation(shake);
+//        }
     }
 
-    private fun callPinCheckApi(pin:String){
-        binding.tvError.text = getString(R.string.re_enter_pin)
-        if(isFirstAttempt){
-           firstAttemptPin = pin
-           binding.walletPinEditText.setText("")
-           isFirstAttempt=false
-       }
-        else{
-           if(firstAttemptPin==pin){
-                Utils.showToast(this,"Pin set up has been completed !!")
-                Utils.storePinSecurely(this,pin)
-                val intent = Intent(this, AppPinActivity::class.java)
-                setResult(Activity.RESULT_OK, intent)
-                finish()
+    private fun deletePinFromSystem(){
+        Utils.storePinSecurely(this,null)
+        val intent = Intent(this, AppPinActivity::class.java)
+        intent.putExtra("intentData","delete")
+        setResult(Activity.RESULT_OK, intent)
+        finish()
+    }
+
+    private fun callPinCheckApi(pin:String,changePin:Boolean){
+            if(changePin) {
+                this.changePin = false
+                return
             }
-           else{
-               binding.walletPinEditText.setText("")
-               Utils.vibrate(this,500)
-               showPopUpMessage("Pin does not match? please re-enter again")
-           }
-        }
+             binding.tvError.text = getString(R.string.re_enter_pin)
+             if(isFirstAttempt){
+                 firstAttemptPin = pin
+                 binding.walletPinEditText.setText("")
+                 isFirstAttempt = false
+             }
+             else {
+                 if (firstAttemptPin == pin) {
+                     Utils.showToast(this, "Pin set up has been completed !!")
+                     Utils.storePinSecurely(this, pin)
+                     val intent = Intent(this, AppPinActivity::class.java)
+                     setResult(Activity.RESULT_OK, intent)
+                     finish()
+                 } else {
+                     binding.walletPinEditText.setText("")
+                     Utils.vibrate(this, 500)
+                     showPopUpMessage("Pin does not match? please re-enter again")
+                 }
+             }
+
     }
 
     override fun onClick(view: View) {

@@ -204,7 +204,7 @@ class Utils {
             customToast.show()
         }
 
-        fun storePinSecurely(context: Context,pinToStore:String){
+        fun storePinSecurely(context: Context,pinToStore:String?){
             val editor = getSecuredSharedPref(context).edit()
             editor.putString("encrypted_pin", pinToStore)
             editor.apply()

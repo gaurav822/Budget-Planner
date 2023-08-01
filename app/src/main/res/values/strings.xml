@@ -51,5 +51,10 @@
     <string name="choose_a_pin">Choose a PIN</string>
     <string name="re_enter_pin">Re-enter your PIN</string>
     <string name="remove_pin">Remove PIN</string>
+    <string name="please_enter_pin_continue">Please enter your PIN to continue</string>
+    <string name="now_you_have_to">Now you have to use PIN to login to app</string>
+    <string name="change_pin">Change PIN</string>
+    <string name="you_must_enter_curr">You must enter your current PIN to change it</string>
+    <string name="choose_a_new_pin">Choose a new PIN</string>
 
 </resources>

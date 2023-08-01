@@ -8,14 +8,17 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.gaurav.budgetplanner.R
+import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.databinding.ActivityAppPinBinding
 import com.gaurav.budgetplanner.features.converter.domain.model.CurrencyModel
+import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.TransactionActivity
 
 class AppPinActivity : AppCompatActivity() {
     private var _binding:ActivityAppPinBinding?=null
     private val binding get() = _binding!!
     private lateinit var intent: Intent
-    private var isPinSetUpComplete:Boolean = false
+    private var isPinActive:Boolean? = false
+    private var pin:String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +30,12 @@ class AppPinActivity : AppCompatActivity() {
     }
 
     private fun init(){
+        intent = Intent(this, PinSetActivity::class.java)
+        pin = Utils.retrievePinSecurely(this)
+        pin?.let {
+            isPinActive=true
+            setHasPinLayout(isPinActive!!)
+        }
         intent = Intent(this,PinSetActivity::class.java)
         setSupportActionBar(binding.toolbar.mainGenericToolbar)
         binding.toolbar.apply {
@@ -36,23 +45,51 @@ class AppPinActivity : AppCompatActivity() {
         }
     }
 
+    private fun setHasPinLayout(isActive:Boolean){
+        if(isActive){
+            binding.apply {
+                tvYouCan.text = getString(R.string.now_you_have_to)
+                tvSetPin.text = getString(R.string.change_pin)
+                tvRemovePin.visibility=View.VISIBLE
+            }
+        }
+        else{
+            binding.apply {
+                tvYouCan.text = getString(R.string.you_can_set_pin)
+                tvSetPin.text = getString(R.string.set_pin)
+                tvRemovePin.visibility=View.GONE
+            }
+        }
+
+    }
+
     private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            val intent: Intent? = result.data
-            intent?.extras.let {
-                isPinSetUpComplete = true
-                binding.apply {
-                    tvYouCan.text = "Now you have to use PIN to login to app"
-                    tvSetPin.text = "Change PIN"
-                    tvRemovePin.visibility=View.VISIBLE
-                }
+            pin = Utils.retrievePinSecurely(this)
+            val intentForData: Intent? = result.data
+            val data = intentForData?.getStringExtra("intentData")
+            if(data=="delete"){
+                isPinActive=false
+                setHasPinLayout(isPinActive!!)
+            }
+            else {
+                intent.putExtra("pin",pin)
+                isPinActive=true
+                setHasPinLayout(isPinActive!!)
             }
         }
     }
 
     private fun clickEvents(){
         binding.tvSetPin.setOnClickListener {
-            intent.putExtra("isPinSetCompleted",isPinSetUpComplete)
+            intent.putExtra("pinRequestedFrom",if(isPinActive!!)"changePin" else "setPin")
+            intent.putExtra("pin",pin)
+            resultLauncher.launch(intent)
+        }
+
+        binding.tvRemovePin.setOnClickListener {
+            intent.putExtra("pinRequestedFrom","deletePin")
+            intent.putExtra("pin",pin)
             resultLauncher.launch(intent)
         }
     }
