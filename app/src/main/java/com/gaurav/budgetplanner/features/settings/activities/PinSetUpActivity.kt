@@ -1,6 +1,5 @@
 package com.gaurav.budgetplanner.features.settings.activities
 
-import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -14,10 +13,9 @@ import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.Views.HomeScreenActivity
 import com.gaurav.budgetplanner.databinding.PinSetActivityBinding
-import com.gaurav.budgetplanner.features.converter.presentation.activities.CurrencyConvertActivity
 import com.swifttechnology.imepay.Views.Utils.CirclePinEdittext.PinField.OnTextCompleteListener
 
-class PinSetActivity : BaseActivity(), View.OnClickListener {
+class PinSetUpActivity : BaseActivity(), View.OnClickListener {
     private var _binding:PinSetActivityBinding?=null
     private val binding get() = _binding!!
     private var isFirstAttempt = true
@@ -38,11 +36,12 @@ class PinSetActivity : BaseActivity(), View.OnClickListener {
         pinRequestedFrom = intent.extras?.getString("pinRequestedFrom")
         pin = intent.extras?.getString("pin")
         setPinLayoutData(pinRequestedFrom)
+        setSupportActionBar(binding.toolbarPin.mainGenericToolbar)
         binding.toolbarPin.apply {
             toolbarIconLayout.visibility= View.GONE
             toolbarTitle.textSize = 20f
         }
-        binding.pinLayout.setOnClickListener(null)
+//        binding.pinLayout.setOnClickListener(null)
         val ic: InputConnection? = binding.walletPinEditText.onCreateInputConnection(EditorInfo())
         binding.keyboard.setInputConnection(ic)
         setListeners()
@@ -65,7 +64,7 @@ class PinSetActivity : BaseActivity(), View.OnClickListener {
                  }
                  "deletePin" -> {
                      binding.toolbarPin.toolbarTitle.text =getString(R.string.remove_pin)
-                     binding.tvError.text = getString(R.string.you_must_enter_curr)
+                     binding.tvError.text = getString(R.string.you_must_enter_curr_delete)
                  }
             }
         }
@@ -184,6 +183,11 @@ class PinSetActivity : BaseActivity(), View.OnClickListener {
                  }
              }
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        super.onBackPressed()
+        return true
     }
 
     override fun onClick(view: View) {

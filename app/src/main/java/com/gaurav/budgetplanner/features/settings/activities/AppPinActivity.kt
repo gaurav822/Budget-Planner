@@ -6,12 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
-import com.bumptech.glide.Glide
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.databinding.ActivityAppPinBinding
-import com.gaurav.budgetplanner.features.converter.domain.model.CurrencyModel
-import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.TransactionActivity
 
 class AppPinActivity : AppCompatActivity() {
     private var _binding:ActivityAppPinBinding?=null
@@ -30,13 +27,13 @@ class AppPinActivity : AppCompatActivity() {
     }
 
     private fun init(){
-        intent = Intent(this, PinSetActivity::class.java)
+        intent = Intent(this, PinSetUpActivity::class.java)
         pin = Utils.retrievePinSecurely(this)
         pin?.let {
             isPinActive=true
             setHasPinLayout(isPinActive!!)
         }
-        intent = Intent(this,PinSetActivity::class.java)
+        intent = Intent(this,PinSetUpActivity::class.java)
         setSupportActionBar(binding.toolbar.mainGenericToolbar)
         binding.toolbar.apply {
             toolbarIconLayout.visibility= View.GONE

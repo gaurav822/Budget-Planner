@@ -13,7 +13,7 @@ import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.features.Onboarding.presentation.Views.Activities.OnBoardActivity
 import com.gaurav.budgetplanner.databinding.ActivitySplashScreenBinding
-import com.gaurav.budgetplanner.features.settings.activities.PinSetActivity
+import com.gaurav.budgetplanner.features.settings.activities.PinSetUpActivity
 
 class SplashScreen : AppCompatActivity() {
     private lateinit var splashAnimation: Animation
@@ -68,7 +68,7 @@ class SplashScreen : AppCompatActivity() {
 
             Handler(Looper.getMainLooper()).postDelayed({
                 pin?.let {
-                    intent = Intent(this,PinSetActivity::class.java)
+                    intent = Intent(this,PinSetUpActivity::class.java)
                     intent.putExtra("pin",it)
                     intent.putExtra("pinRequestedFrom","splash")
                 }?:kotlin.run {

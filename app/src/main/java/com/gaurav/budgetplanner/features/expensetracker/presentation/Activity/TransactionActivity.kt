@@ -6,9 +6,11 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.view.WindowManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -21,6 +23,7 @@ import com.gaurav.budgetplanner.databinding.ActivityTransactionBinding
 import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters.CategoryAdapter
 import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel
+import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -148,6 +151,14 @@ class TransactionActivity : BaseActivity() {
                 else viewModel.addRecord(insertAcc)
                 finish()
             }
+            else{
+                if(!isAmountValid){
+                   Toast.makeText(this,"Invalid Amount!",Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    Toast.makeText(this,"Please select category !",Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         binding.editinputComment.onFocusChangeListener =
@@ -226,7 +237,16 @@ class TransactionActivity : BaseActivity() {
         }
         materialDateBuilder.setSelection(trackDate)
         materialDateBuilder.setTitleText(getText(R.string.trx_day))
+
+// Setting max limit of dates to be picked
+        val constraintsBuilder = CalendarConstraints.Builder()
+        constraintsBuilder.setEnd(System.currentTimeMillis())
+
+// Setting the constraints on the materialDateBuilder
+        materialDateBuilder.setCalendarConstraints(constraintsBuilder.build())
+
         val materialDatePicker: MaterialDatePicker<Long> = materialDateBuilder.build()
+
         materialDatePicker.show(supportFragmentManager, "MATERIAL_DATE_PICKER")
         materialDatePicker.addOnPositiveButtonClickListener {
             val calendar = Calendar.getInstance()
@@ -235,10 +255,19 @@ class TransactionActivity : BaseActivity() {
             selectedDate = Utils.getFormattedDateFromMillis(trackDate, null)
             binding.inputDateOfTrx.editText?.setText(selectedDate)
         }
+
     }
 
     private fun isValidAmount() {
-        isAmountValid = binding.inputAmount.text.toString().isNotEmpty() && binding.inputAmount.text.toString().toInt()>0
+        isAmountValid = binding.inputAmount.text.toString().isNotEmpty()  && binding.inputAmount.text.toString().length<9 && binding.inputAmount.text.toString().toInt()>0
+        if(isAmountValid){
+            binding.errorText.visibility= View.GONE
+            binding.liner.setBackgroundColor(Color.parseColor("#FFFFFF"))
+        }
+        else{
+            binding.errorText.visibility= View.VISIBLE
+            binding.liner.setBackgroundColor(Color.parseColor("#dd8b37"))
+        }
         checkForValidation()
     }
 

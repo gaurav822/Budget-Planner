@@ -102,6 +102,20 @@
                     android:background="@color/white" />
 
                 <TextView
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:id="@+id/error_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/invalid_amount"
+                    android:textColor="@color/orange"
+                    style="@style/BudgetPlanStyle.VolteSemiBold12"
+                    app:layout_constraintStart_toStartOf="@id/liner"
+                    app:layout_constraintEnd_toEndOf="@id/liner"
+                    app:layout_constraintTop_toBottomOf="@id/liner"/>
+
+
+                <TextView
                     android:id="@+id/currency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

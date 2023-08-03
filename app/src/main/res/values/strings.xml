@@ -56,5 +56,7 @@
     <string name="change_pin">Change PIN</string>
     <string name="you_must_enter_curr">You must enter your current PIN to change it</string>
     <string name="choose_a_new_pin">Choose a new PIN</string>
+    <string name="you_must_enter_curr_delete">You must enter your current PIN to delete it</string>
+    <string name="invalid_amount">Invalid Amount</string>
 
 </resources>
