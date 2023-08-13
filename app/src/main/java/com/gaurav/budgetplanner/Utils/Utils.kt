@@ -212,8 +212,11 @@ class Utils {
 
 
         fun retrievePinSecurely(context: Context): String? {
-
-            return getSecuredSharedPref(context).getString("encrypted_pin", null)
+            return try{
+                getSecuredSharedPref(context).getString("encrypted_pin", null)
+            } catch (e:java.lang.Exception){
+                null
+            }
         }
 
         private fun getSecuredSharedPref(context: Context): SharedPreferences {

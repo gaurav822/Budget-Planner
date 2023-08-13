@@ -1,7 +1,9 @@
 package com.gaurav.budgetplanner.Views
 
+import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -192,7 +194,8 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_rate_the_app -> {
-
+                openPlayStoreForRating()
+                return false
             }
             R.id.nav_home -> {
 
@@ -206,7 +209,8 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_share_friends -> {
-
+                shareApp()
+                return false
             }
             R.id.nav_currency -> {
                 startActivity(Intent(this, CurrencyConvertActivity::class.java))
@@ -214,6 +218,36 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
         }
         binding.drawerLayout.closeDrawers()
         return true
+    }
+
+    private fun shareApp() {
+        val playStoreLink = "https://play.google.com/store/apps/details?id=com.gaurav.budgetplanner" // Replace with your actual package name
+
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "text/plain"
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Check out this awesome app!")
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "Hey, I have been using budget planner app that I think you'll love!\n\n$playStoreLink")
+
+        startActivity(Intent.createChooser(shareIntent, "Share via"))
+    }
+
+
+    private fun openPlayStoreForRating() {
+        val packageName = "com.gaurav.budgetplanner" // Replace with your actual package name
+        val playStoreUri = Uri.parse("market://details?id=$packageName")
+
+        val intent = Intent(Intent.ACTION_VIEW, playStoreUri)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        try {
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            // Handle the case where the Play Store app is not installed
+            // You can also consider opening the Play Store link in a browser as an alternative
+            val webPlayStoreUri = Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
+            val webIntent = Intent(Intent.ACTION_VIEW, webPlayStoreUri)
+            startActivity(webIntent)
+        }
     }
 
     private fun showCustomDialog(){
