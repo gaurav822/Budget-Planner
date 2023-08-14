@@ -24,6 +24,8 @@ import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters.CategoryAdapter
 import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel
 import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointBackward
+import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -238,11 +240,14 @@ class TransactionActivity : BaseActivity() {
         materialDateBuilder.setSelection(trackDate)
         materialDateBuilder.setTitleText(getText(R.string.trx_day))
 
-// Setting max limit of dates to be picked
+        // Setting max limit of dates to be picked
         val constraintsBuilder = CalendarConstraints.Builder()
-        constraintsBuilder.setEnd(System.currentTimeMillis())
+//        constraintsBuilder.setEnd(System.currentTimeMillis())
 
-// Setting the constraints on the materialDateBuilder
+        constraintsBuilder.setValidator(DateValidatorPointBackward.now())
+
+
+        // Setting the constraints on the materialDateBuilder
         materialDateBuilder.setCalendarConstraints(constraintsBuilder.build())
 
         val materialDatePicker: MaterialDatePicker<Long> = materialDateBuilder.build()

@@ -7,6 +7,7 @@ import android.os.Handler
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputConnection
+import android.widget.Toast
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.CustomPinKeyboard
 import com.gaurav.budgetplanner.Utils.Utils
@@ -41,6 +42,7 @@ class PinSetUpActivity : BaseActivity(), View.OnClickListener {
             toolbarIconLayout.visibility= View.GONE
             toolbarTitle.textSize = 20f
         }
+        binding.desc.text = Utils.showWelcomeMessageBasedOnTime(this)
 //        binding.pinLayout.setOnClickListener(null)
         val ic: InputConnection? = binding.walletPinEditText.onCreateInputConnection(EditorInfo())
         binding.keyboard.setInputConnection(ic)
@@ -109,11 +111,12 @@ class PinSetUpActivity : BaseActivity(), View.OnClickListener {
         pin?.let {
             if(!pinRequestedFrom.equals("changePin") && currentPin!=it){
                 binding.walletPinEditText.setText("")
-                Utils.showToast(this,"Invalid PIN, Please try again")
+                Toast.makeText(this,"Invalid PIN, Please try again",Toast.LENGTH_SHORT).show()
                 return
             }
             else{
                 if(pinRequestedFrom.equals("splash")){
+                    Toast.makeText(this,"Login Successful!",Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this,HomeScreenActivity::class.java))
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 }
@@ -124,7 +127,7 @@ class PinSetUpActivity : BaseActivity(), View.OnClickListener {
                 else if(pinRequestedFrom.equals("changePin")){
                     if(currentPin!=pin && pinNotVerified){
                         binding.walletPinEditText.setText("")
-                        Utils.showToast(this,"Invalid PIN, Please try again")
+                        Toast.makeText(this,"Invalid PIN, Please try again",Toast.LENGTH_SHORT).show()
                         return
                     }
                     else{
@@ -151,6 +154,7 @@ class PinSetUpActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun deletePinFromSystem(){
+        Toast.makeText(this,"Pin removed Successfully!",Toast.LENGTH_SHORT).show()
         Utils.storePinSecurely(this,null)
         val intent = Intent(this, AppPinActivity::class.java)
         intent.putExtra("intentData","delete")
@@ -171,7 +175,7 @@ class PinSetUpActivity : BaseActivity(), View.OnClickListener {
              }
              else {
                  if (firstAttemptPin == pin) {
-                     Utils.showToast(this, "Pin set up has been completed !!")
+                     Toast.makeText(this,"Pin set up has been completed !!",Toast.LENGTH_SHORT).show()
                      Utils.storePinSecurely(this, pin)
                      val intent = Intent(this, AppPinActivity::class.java)
                      setResult(Activity.RESULT_OK, intent)
@@ -179,7 +183,7 @@ class PinSetUpActivity : BaseActivity(), View.OnClickListener {
                  } else {
                      binding.walletPinEditText.setText("")
                      Utils.vibrate(this, 500)
-                     showPopUpMessage("Pin does not match? please re-enter again")
+                     Toast.makeText(this,"Pin does not match? please re-enter again",Toast.LENGTH_SHORT).show()
                  }
              }
 

@@ -3,6 +3,7 @@ package com.gaurav.budgetplanner.features.converter.presentation.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityCurrencyConvertBinding
@@ -85,13 +86,21 @@ class CurrencyConvertActivity : BaseActivity() {
 
             if (isLoading) {
 
-            } else{
-                conversionRate = DecimalFormat("#.##").format(data?.rate).toDouble()
-                binding.tvConversionData.text = String.format(
-                    getString(R.string.currency_conversion_format),
-                    fromCurrency.currencyCode, conversionRate, toCurrency.currencyCode
-                )
-                convertCurrency()
+            }
+
+            else {
+                if(error.isNotEmpty()){
+                    Toast.makeText(this,error,Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    conversionRate = DecimalFormat("#.##").format(data?.rate).toDouble()
+                    binding.tvConversionData.text = String.format(
+                        getString(R.string.currency_conversion_format),
+                        fromCurrency.currencyCode, conversionRate, toCurrency.currencyCode
+                    )
+                    convertCurrency()
+                }
+
             }
         }.launchIn(lifecycleScope)
     }

@@ -36,6 +36,7 @@ class SplashScreen : AppCompatActivity() {
     private fun init(){
         pin = Utils.retrievePinSecurely(this)
         isCurrencySelected = BudgetPlannerApp.getStorage().getBoolean(Constants.PREF_CURRENCY_SELECTION,false)
+        println("The currency selected state is $isCurrencySelected")
         val width = splashIcon.width
         val height = splashIcon.height
         splashAnimation = AnimationUtils.loadAnimation(

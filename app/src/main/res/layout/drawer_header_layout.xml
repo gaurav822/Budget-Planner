@@ -12,14 +12,32 @@
         android:src="@drawable/gender_male_inactive"
         android:scaleType="centerCrop" />
 
-    <TextView
-        android:layout_gravity="center"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:text="@string/sign_up"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/_16sdp"
-        android:paddingTop="4dp" />
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <TextView
+            style="@style/BudgetPlanStyle.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="Welcome to,"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            style="@style/BudgetPlanStyle.VolteSemiBold12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="@string/budget_planner"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_14sdp" />
+
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

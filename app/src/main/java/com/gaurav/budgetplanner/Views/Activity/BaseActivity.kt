@@ -17,16 +17,4 @@ open class BaseActivity: AppCompatActivity() {
         super.finish()
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
-
-    open fun showPopUpMessage(message: String?) {
-        try {
-            Utils.showMessageInSnackBar(message, window.decorView.rootView)
-        } catch (ex: Exception) {
-            try {
-                Utils.showToast(this, message)
-            } catch (exception: Exception) {
-//                IMEPayLogger.Log(exception)
-            }
-        }
-    }
 }

@@ -142,67 +142,6 @@ class Utils {
             }
         }
 
-        fun showMessageInSnackBar(s: String?, view: View) {
-            try {
-                val snackBar = Snackbar.make(view, s!!, Snackbar.LENGTH_LONG)
-                snackBar.duration = 4000
-                val tv = snackBar.view.findViewById<View>(com.google.android.material.R.id.snackbar_text) as TextView
-                val font = Typeface.createFromAsset(view.context.assets, FontCache.ROBOTO_MEDIUM)
-                tv.typeface = font
-                tv.textSize = 14f
-                snackBar.show()
-            } catch (e: java.lang.NullPointerException) {
-                showToastWithBlackBackground(
-                    view.context,
-                    s
-                )
-            }
-        }
-
-        fun showToast(context: Context, Message: String?) {
-            val inflater =
-                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            val view: View = inflater.inflate(R.layout.custom_toast_layout, null, false)
-            val tvToastMsg = view.findViewById<TextView>(R.id.tv_toast_message)
-            tvToastMsg.setBackgroundColor(
-                ContextCompat.getColor(
-                    context,
-                    R.color.black_semi_transparent
-                )
-            )
-            tvToastMsg.setTextColor(ContextCompat.getColor(context, android.R.color.white))
-            tvToastMsg.text = Message
-            val customToast = Toast(context)
-            customToast.setView(view)
-            customToast.setGravity(Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM, 0, 0)
-            customToast.duration = Toast.LENGTH_LONG
-            customToast.show()
-        }
-
-
-        fun showToastWithBlackBackground(context: Context, Message: String?) {
-            val inflater =
-                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            val view: View = inflater.inflate(R.layout.custom_toast_layout_black, null, false)
-            val tvToastMsg = view.findViewById<TextView>(R.id.tv_toast_message)
-            tvToastMsg.setBackgroundColor(
-                ContextCompat.getColor(
-                    context,
-                   R.color.black_semi_transparent
-                )
-            )
-            tvToastMsg.setTextColor(ContextCompat.getColor(context, android.R.color.white))
-            tvToastMsg.text = Message
-            val customToast = Toast(context)
-            customToast.setView(view)
-            customToast.setGravity(
-                Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM or Gravity.FILL_HORIZONTAL,
-                0,
-                0
-            )
-            customToast.duration = Toast.LENGTH_LONG
-            customToast.show()
-        }
 
         fun storePinSecurely(context: Context,pinToStore:String?){
             val editor = getSecuredSharedPref(context).edit()
@@ -233,6 +172,17 @@ class Utils {
                 EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
             )
         }
-    }
 
+        fun showWelcomeMessageBasedOnTime(context: Context): String? {
+            val c = Calendar.getInstance()
+            val timeOfDay = c[Calendar.HOUR_OF_DAY]
+            return if (timeOfDay in 0..11) {
+                context.getString(R.string.good_morning)
+            } else if (timeOfDay in 12..15) {
+                context.getString(R.string.good_afternoon)
+            } else if (timeOfDay in 16..23) {
+                context.getString(R.string.good_evening)
+            } else ""
+        }
+    }
 }
