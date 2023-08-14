@@ -233,7 +233,7 @@ class TransactionActivity : BaseActivity() {
 
 
     private fun pickDate() {
-        val materialDateBuilder = MaterialDatePicker.Builder.datePicker()
+        val materialDateBuilder = MaterialDatePicker.Builder.datePicker().setTheme(R.style.MyDatePickerTheme)
         if (trackDate == 0L) {
             trackDate = System.currentTimeMillis()
         }

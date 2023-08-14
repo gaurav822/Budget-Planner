@@ -2,7 +2,7 @@ package com.gaurav.budgetplanner.di
 
 import android.app.Application
 import androidx.room.Room
-import com.gaurav.budgetplanner.features.converter.common.Constants
+import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.features.converter.data.data_source.CurrencyConvertApi
 import com.gaurav.budgetplanner.features.converter.data.repository.ConversionRepoImpl
 import com.gaurav.budgetplanner.features.converter.domain.repository.ConversionRepository
@@ -15,11 +15,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module

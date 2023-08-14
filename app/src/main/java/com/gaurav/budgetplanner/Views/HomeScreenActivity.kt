@@ -265,5 +265,9 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
         binding.navigationView.setCheckedItem(R.id.nav_home)
     }
 
+    override fun onBackPressed() {
+        finishAffinity()
+    }
+
 
 }
