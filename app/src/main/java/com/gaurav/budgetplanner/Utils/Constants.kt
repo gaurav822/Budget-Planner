@@ -39,10 +39,5 @@ object Constants {
 
           const val BASE_URL = "https://v6.exchangerate-api.com/v6/${BuildConfig.API_KEY}/"
 
-     enum class BaseUrl {
-          CURRENCY_BASE_URL, DASHBOARD
-     }
-
-
 }
 
