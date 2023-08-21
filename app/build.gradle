@@ -6,6 +6,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('/Users/gauravdahal/AndroidStudioProjects/BudgetPlanner/build/jks/budgetplanner.jks')
+            keyAlias 'key0'
+            keyPassword 'asdfghjk'
+            storePassword 'wertyuio'
+        }
+    }
     namespace 'com.gaurav.budgetplanner'
     compileSdk 33
 
@@ -13,8 +21,8 @@ android {
         applicationId "com.gaurav.budgetplanner"
         minSdk 29
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
 
@@ -24,6 +32,7 @@ android {
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
 
         buildConfigField "String","API_KEY","\"${properties.getProperty("API_KEY")}\""
+        signingConfig signingConfigs.debug
     }
 
     buildFeatures {
@@ -32,7 +41,6 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
