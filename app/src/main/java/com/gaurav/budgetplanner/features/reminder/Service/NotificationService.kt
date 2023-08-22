@@ -1,5 +1,6 @@
 package com.gaurav.budgetplanner.features.reminder.Service
 
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
@@ -8,6 +9,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Views.HomeScreenActivity
+import com.gaurav.budgetplanner.features.reminder.activites.ReminderLanding
 
 class NotificationService(private val context:Context) {
 
@@ -23,9 +25,9 @@ class NotificationService(private val context:Context) {
         )
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.icon_currency)
-            .setContentTitle("Test Title")
-            .setContentText("Content Test")
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentTitle("title")
+            .setContentText("description")
+            .setPriority(NotificationCompat.PRIORITY_MAX)
             .setContentIntent(activityPendingIntent)
             .build()
 
@@ -34,5 +36,7 @@ class NotificationService(private val context:Context) {
 
     companion object {
         const val CHANNEL_ID = "reminder_channel"
+        const val EXTRA_TITLE = "extra_title"
+        const val EXTRA_DESCRIPTION = "extra_description"
     }
 }

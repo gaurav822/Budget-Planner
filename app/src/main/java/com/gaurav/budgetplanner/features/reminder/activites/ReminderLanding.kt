@@ -1,8 +1,8 @@
-package com.gaurav.budgetplanner.features.reminder.Activites
+package com.gaurav.budgetplanner.features.reminder.activites
 
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -36,25 +36,19 @@ class ReminderLanding :BaseActivity(){
 
     private fun viewClickEvents(){
         binding.clCreateReminder.setOnClickListener {
-//            val service = NotificationService(applicationContext)
-//            service.showNotification()
-            var intent= Intent(this,NotificationBroadCastReceiver::class.java)
 
-            val activityPendingIntent = PendingIntent.getActivity(
-                this,
-                1,
-                intent,
-                if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
-            )
-
-            val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
-
-            val time = System.currentTimeMillis()
-
-            val tenSecInMillis = 10*1000;
-
-            alarmManager.set(AlarmManager.RTC_WAKEUP,time+tenSecInMillis,activityPendingIntent)
+            val delayMillis: Long = 10000
+            setNotificationAlarm(this, delayMillis,"Gaurav","Dahal")
         }
+    }
+
+    private fun setNotificationAlarm(context: Context, delayMillis: Long,title:String,description:String) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, NotificationBroadCastReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
+        val triggerTime = System.currentTimeMillis() + delayMillis
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent)
     }
 
     override fun onSupportNavigateUp(): Boolean {

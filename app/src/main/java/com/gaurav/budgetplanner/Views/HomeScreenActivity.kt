@@ -1,7 +1,6 @@
 package com.gaurav.budgetplanner.Views
 
 import android.content.ActivityNotFoundException
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -23,7 +22,7 @@ import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.Ca
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.TransactionActivity
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters.RecordAdapter
 import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel
-import com.gaurav.budgetplanner.features.reminder.Activites.ReminderLanding
+import com.gaurav.budgetplanner.features.reminder.activites.ReminderLanding
 import com.gaurav.budgetplanner.features.settings.activities.SettingsActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout

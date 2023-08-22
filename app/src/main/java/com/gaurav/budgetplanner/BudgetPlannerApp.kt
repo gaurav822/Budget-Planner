@@ -10,6 +10,7 @@ import android.support.multidex.MultiDexApplication
 import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.features.reminder.Service.NotificationService
 import dagger.hilt.android.HiltAndroidApp
+import java.security.Provider.Service
 
 @HiltAndroidApp
 class BudgetPlannerApp:MultiDexApplication(){
@@ -25,13 +26,14 @@ class BudgetPlannerApp:MultiDexApplication(){
         instance= this
 
         createNotificationChannel()
+
     }
 
     private fun createNotificationChannel(){
         val channel = NotificationChannel(
             NotificationService.CHANNEL_ID,
             "Reminder",
-            NotificationManager.IMPORTANCE_DEFAULT
+            NotificationManager.IMPORTANCE_HIGH
         )
         channel.description = "Used for reminders"
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
