@@ -16,6 +16,7 @@ class AppPinActivity : AppCompatActivity() {
     private lateinit var intent: Intent
     private var isPinActive:Boolean? = false
     private var pin:String? = null
+    private var isEmailVerified = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,9 +80,15 @@ class AppPinActivity : AppCompatActivity() {
 
     private fun clickEvents(){
         binding.tvSetPin.setOnClickListener {
-            intent.putExtra("pinRequestedFrom",if(isPinActive!!)"changePin" else "setPin")
-            intent.putExtra("pin",pin)
-            resultLauncher.launch(intent)
+
+            if(isEmailVerified) {
+                intent.putExtra("pinRequestedFrom", if (isPinActive!!) "changePin" else "setPin")
+                intent.putExtra("pin", pin)
+                resultLauncher.launch(intent)
+            }
+            else{
+
+            }
         }
 
         binding.tvRemovePin.setOnClickListener {
