@@ -15,7 +15,7 @@ class NotificationService(private val context:Context) {
 
     private val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-    fun showNotification(){
+    fun showNotification(title:String,description:String){
         val activityIntent = Intent(context,HomeScreenActivity::class.java)
         val activityPendingIntent = PendingIntent.getActivity(
             context,
@@ -25,8 +25,8 @@ class NotificationService(private val context:Context) {
         )
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.icon_currency)
-            .setContentTitle("title")
-            .setContentText("description")
+            .setContentTitle(title)
+            .setContentText(description)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setContentIntent(activityPendingIntent)
             .build()

@@ -36,15 +36,20 @@ class ReminderLanding :BaseActivity(){
 
     private fun viewClickEvents(){
         binding.clCreateReminder.setOnClickListener {
+//            val delayMillis: Long = 10000
+//            setNotificationAlarm(this, delayMillis,"This is title","This is Description")
 
-            val delayMillis: Long = 10000
-            setNotificationAlarm(this, delayMillis,"Gaurav","Dahal")
+
+            val intent = Intent(this,CreateReminderPage::class.java)
+            startActivity(intent)
         }
     }
 
     private fun setNotificationAlarm(context: Context, delayMillis: Long,title:String,description:String) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, NotificationBroadCastReceiver::class.java)
+        intent.putExtra(NotificationService.EXTRA_TITLE,title)
+        intent.putExtra(NotificationService.EXTRA_DESCRIPTION,description)
         val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
         val triggerTime = System.currentTimeMillis() + delayMillis
