@@ -9,7 +9,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Views.HomeScreenActivity
-import com.gaurav.budgetplanner.features.reminder.activites.ReminderLanding
+import com.gaurav.budgetplanner.features.reminder.presentation.activites.ReminderLanding
 
 class NotificationService(private val context:Context) {
 

@@ -1,24 +1,42 @@
-package com.gaurav.budgetplanner.features.reminder.activites
+package com.gaurav.budgetplanner.features.reminder.presentation.activites
 
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.view.WindowManager
+import android.widget.EditText
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityCreateReminderBinding
+import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel
+import com.gaurav.budgetplanner.features.reminder.domain.model.Reminder
+import com.gaurav.budgetplanner.features.reminder.presentation.ViewModel.ReminderViewModel
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 
+
+@AndroidEntryPoint
 class CreateReminderPage:BaseActivity() {
 
     private var _binding: ActivityCreateReminderBinding?= null
     private val binding get() = _binding!!
+    private var reminderName:String = ""
+    private var comment:String = ""
+    private var isValidName = false
+
+    private lateinit var reminderViewModel: ReminderViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,17 +46,53 @@ class CreateReminderPage:BaseActivity() {
     }
 
     private fun init(){
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
         setSupportActionBar(binding.toolbar.mainGenericToolbar)
         binding.toolbar.apply {
             toolbarIconLayout.visibility= View.GONE
             toolbarTitle.text = getString(R.string.create_reminder)
             toolbarTitle.textSize = 20f
         }
-
+        setMaterialTextWatcher(binding.inputReminder.editText!!,R.id.input_reminder)
         setDateTime()
-
         viewClickEvents()
+        reminderViewModel = ViewModelProvider(this)[ReminderViewModel::class.java]
 
+    }
+
+
+    private fun setMaterialTextWatcher(editText: EditText, id:Int) {
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                //
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                when (id) {
+                    R.id.input_reminder -> {
+                        isValidReminderName()
+                    }
+                }
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                //
+            }
+        })
+    }
+
+
+    private fun isValidReminderName(){
+       isValidName =  binding.inputReminder.editText?.text.toString().isNotEmpty()
+        if(isValidName) {
+            binding.proceedStart.setBackgroundResource(R.drawable.boundry_proceed_button)
+            binding.addText.setTextColor(Color.parseColor("#c6000000"))
+        }
+        else{
+            binding.proceedStart.setBackgroundResource(R.drawable.boundry_proceed_disabled)
+            binding.addText.setTextColor(Color.parseColor("#796727"))
+        }
     }
 
     private fun viewClickEvents(){
@@ -49,6 +103,20 @@ class CreateReminderPage:BaseActivity() {
 
         binding.time.setOnClickListener {
             pickTimeForReminder()
+        }
+
+        binding.proceedStart.setOnClickListener {
+            if(isValidName){
+                val reminder = Reminder(
+                    name = binding.inputReminder.editText?.text.toString(),
+                    date = "",
+                    time = 1000,
+                    comment = "test",
+                    isActive = true
+                )
+                reminderViewModel.addRecord(reminder)
+                finish()
+            }
         }
     }
 
@@ -84,34 +152,44 @@ class CreateReminderPage:BaseActivity() {
         }
     }
 
+    private var hour:Int = 0
+    private var minute:Int = 0
 
     private fun pickTimeForReminder(){
         val timePicker = MaterialTimePicker.Builder()
             .setTimeFormat(TimeFormat.CLOCK_24H)
             .setTheme(R.style.CustomTimePickerTheme)
+            .setHour(hour)
+            .setMinute(minute)
             .build()
 
         timePicker.addOnPositiveButtonClickListener {
-            val selectedHour = timePicker.hour
-            val selectedMinute = timePicker.minute
-
-            val selectedTime = "$selectedHour:$selectedMinute"
+            hour = timePicker.hour
+            minute = timePicker.minute
+            val selectedTime = "$hour:$minute"
             binding.time.text = selectedTime
         }
 
         timePicker.show(supportFragmentManager, "timePicker")
     }
 
-    private fun setDateTime(){
+    private fun setDateTime() {
 
-        binding.day.text = Utils.getFormattedDateFromMillis(System.currentTimeMillis(),"MMMM dd, YYYY")
+        binding.day.text =
+            Utils.getFormattedDateFromMillis(System.currentTimeMillis(), "MMMM dd, YYYY")
 
         val currentTime = Calendar.getInstance()
         currentTime.add(Calendar.HOUR_OF_DAY, 1)
         val updatedTime = currentTime.time
-        val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-        val formattedTime = timeFormat.format(updatedTime)
-        binding.time.text = formattedTime
+        val updatedCalendar = Calendar.getInstance()
+        updatedCalendar.time = updatedTime
+
+        val updatedHour = updatedCalendar.get(Calendar.HOUR_OF_DAY)
+        val updatedMinute = updatedCalendar.get(Calendar.MINUTE)
+        hour = updatedHour
+        minute = updatedMinute
+
+        binding.time.text = "${updatedHour}:${updatedMinute}"
 
     }
 

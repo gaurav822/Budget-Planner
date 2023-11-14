@@ -36,7 +36,7 @@
             tools:ignore="PrivateResource">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editinputComment"
+                android:id="@+id/editinputReminder"
                 android:textColor="@color/white"
                 android:paddingStart="0dp"
                 android:focusableInTouchMode="true"

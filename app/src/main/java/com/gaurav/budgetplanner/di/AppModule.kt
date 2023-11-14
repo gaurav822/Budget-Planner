@@ -11,6 +11,9 @@ import com.gaurav.budgetplanner.features.expensetracker.data.data_source.Transac
 import com.gaurav.budgetplanner.features.expensetracker.data.repository.TransactionRepositoryImpl
 import com.gaurav.budgetplanner.features.expensetracker.domain.repository.TransactionRepository
 import com.gaurav.budgetplanner.features.expensetracker.domain.use_case.*
+import com.gaurav.budgetplanner.features.reminder.data.repository.ReminderRepositoryImpl
+import com.gaurav.budgetplanner.features.reminder.domain.repository.ReminderRepository
+import com.gaurav.budgetplanner.features.reminder.domain.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -50,6 +53,27 @@ object AppModule {
             addTransaction = AddTransaction((repository)),
             getTransaction = GetTransaction(repository),
             updateTransaction = UpdateTransaction(repository)
+        )
+    }
+
+
+    @Provides
+    @Singleton
+    fun providesReminderRepo(db:TransactionDatabase):ReminderRepository{
+        return ReminderRepositoryImpl(db.reminderDao)
+    }
+
+
+
+    @Provides
+    @Singleton
+    fun provideReminderUseCases(repository: ReminderRepository) : ReminderUseCases {
+        return ReminderUseCases(
+            getReminders = GetReminders(repository),
+            deleteReminder = DeleteReminder(repository),
+            addReminder = AddReminder((repository)),
+            getReminder = GetReminder(repository),
+            updateReminder = UpdateReminder(repository)
         )
     }
 

@@ -22,7 +22,7 @@ import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.Ca
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.TransactionActivity
 import com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters.RecordAdapter
 import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel
-import com.gaurav.budgetplanner.features.reminder.activites.ReminderLanding
+import com.gaurav.budgetplanner.features.reminder.presentation.activites.ReminderLanding
 import com.gaurav.budgetplanner.features.settings.activities.SettingsActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
@@ -203,7 +203,7 @@ class HomeScreenActivity : BaseActivity(),NavigationView.OnNavigationItemSelecte
 
             R.id.nav_reminders -> {
 //                showCustomDialog()
-                startActivity(Intent(this,ReminderLanding::class.java))
+                startActivity(Intent(this, ReminderLanding::class.java))
             }
             R.id.nav_settings -> {
                 startActivity(Intent(this,SettingsActivity::class.java))
