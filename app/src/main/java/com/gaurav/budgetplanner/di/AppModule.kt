@@ -73,7 +73,8 @@ object AppModule {
             deleteReminder = DeleteReminder(repository),
             addReminder = AddReminder((repository)),
             getReminder = GetReminder(repository),
-            updateReminder = UpdateReminder(repository)
+            updateReminder = UpdateReminder(repository),
+            updateIsActive = GetUpdateIsActive(repository)
         )
     }
 

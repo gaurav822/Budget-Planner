@@ -9,8 +9,9 @@ import java.util.Date
 @Entity(tableName = "reminderTable")
 data class Reminder(
     @ColumnInfo("name")val name:String,
-    @ColumnInfo("date")val date:String,
-    @ColumnInfo("time") val time:Long,
+    @ColumnInfo("date")val date:Long,
+    @ColumnInfo("hour") val hour:Int,
+    @ColumnInfo("minute") val minute:Int,
     @ColumnInfo("comment") val comment:String,
     @ColumnInfo("isActive") val isActive:Boolean,
     @PrimaryKey(autoGenerate = true)

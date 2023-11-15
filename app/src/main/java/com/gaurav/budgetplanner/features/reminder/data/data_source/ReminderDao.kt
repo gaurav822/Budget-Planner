@@ -20,6 +20,9 @@ interface ReminderDao {
     @Update
     suspend fun updateReminder(reminder: Reminder)
 
+    @Query("UPDATE reminderTable SET isActive = :isActive WHERE id = :reminderId")
+    suspend fun updateIsActive(reminderId: Int, isActive: Boolean)
+
     @Delete
     suspend fun delete(reminder: Reminder)
 

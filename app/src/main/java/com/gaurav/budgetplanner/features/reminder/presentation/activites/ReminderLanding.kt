@@ -54,6 +54,11 @@ class ReminderLanding :BaseActivity(){
         binding.reminderRv.layoutManager = LinearLayoutManager(this)
         binding.reminderRv.adapter = adapter
 
+        adapter.onSwitchChange = {
+                id,isChecked ->
+                viewModel.updateChecked(id,isChecked)
+        }
+
         viewModel.getAllRecords().observe(this) { list ->
             list?.let {
                 adapter.updateList(it)

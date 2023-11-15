@@ -31,4 +31,8 @@ class ReminderViewModel @Inject constructor(private val useCases: ReminderUseCas
     fun addRecord(record: Reminder) = viewModelScope.launch(Dispatchers.IO) {
         useCases.addReminder(record)
     }
+
+    fun updateChecked(id: Int,isChecked:Boolean) = viewModelScope.launch(Dispatchers.IO) {
+        useCases.updateIsActive(id,isChecked)
+    }
 }

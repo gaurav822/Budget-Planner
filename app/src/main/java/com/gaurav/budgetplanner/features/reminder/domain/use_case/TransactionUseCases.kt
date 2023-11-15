@@ -5,5 +5,6 @@ data class ReminderUseCases(
     val deleteReminder: DeleteReminder,
     val addReminder: AddReminder,
     val getReminder : GetReminder,
-    val updateReminder: UpdateReminder
+    val updateReminder: UpdateReminder,
+    val updateIsActive: GetUpdateIsActive
 )

@@ -34,7 +34,9 @@ class CreateReminderPage:BaseActivity() {
     private val binding get() = _binding!!
     private var reminderName:String = ""
     private var comment:String = ""
+    private var reminderDate:Long = 0L
     private var isValidName = false
+
 
     private lateinit var reminderViewModel: ReminderViewModel
 
@@ -47,7 +49,7 @@ class CreateReminderPage:BaseActivity() {
 
     private fun init(){
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-
+        reminderDate = System.currentTimeMillis()
         setSupportActionBar(binding.toolbar.mainGenericToolbar)
         binding.toolbar.apply {
             toolbarIconLayout.visibility= View.GONE
@@ -109,9 +111,10 @@ class CreateReminderPage:BaseActivity() {
             if(isValidName){
                 val reminder = Reminder(
                     name = binding.inputReminder.editText?.text.toString(),
-                    date = "",
-                    time = 1000,
-                    comment = "test",
+                    date = reminderDate,
+                    hour = hour,
+                    minute = minute,
+                    comment = binding.inputComment.editText?.text.toString(),
                     isActive = true
                 )
                 reminderViewModel.addRecord(reminder)
@@ -149,6 +152,7 @@ class CreateReminderPage:BaseActivity() {
             calendar.timeInMillis = it
             trackDate = calendar.timeInMillis
             binding.day.text = Utils.getFormattedDateFromMillis(trackDate,"MMMM dd, YYYY")
+            reminderDate = trackDate
         }
     }
 
@@ -176,7 +180,7 @@ class CreateReminderPage:BaseActivity() {
     private fun setDateTime() {
 
         binding.day.text =
-            Utils.getFormattedDateFromMillis(System.currentTimeMillis(), "MMMM dd, YYYY")
+            Utils.getFormattedDateFromMillis(reminderDate, "MMMM dd, YYYY")
 
         val currentTime = Calendar.getInstance()
         currentTime.add(Calendar.HOUR_OF_DAY, 1)

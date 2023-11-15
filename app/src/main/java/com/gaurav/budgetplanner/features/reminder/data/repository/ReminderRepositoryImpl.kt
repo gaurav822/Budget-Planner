@@ -32,5 +32,9 @@ class ReminderRepositoryImpl
         dao.delete(reminder)
     }
 
+    override suspend fun updateIsActive(reminderId: Int, isActive: Boolean) {
+        dao.updateIsActive(reminderId,isActive)
+    }
+
 
 }

@@ -11,6 +11,7 @@ class ReminderAdapter(): RecyclerView.Adapter<ReminderAdapter.MyViewHolder>() {
 
     private var allRecords = emptyList<Reminder>()
     var onItemClick : ((Reminder) -> Unit)? = null
+    var onSwitchChange :((Int,Boolean) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view =
@@ -29,6 +30,10 @@ class ReminderAdapter(): RecyclerView.Adapter<ReminderAdapter.MyViewHolder>() {
         holder.binding.btnRemind.isChecked = eachItem.isActive
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(eachItem)
+        }
+
+        holder.binding.btnRemind.setOnCheckedChangeListener { _, isChecked ->
+            onSwitchChange?.invoke(eachItem.id,isChecked)
         }
     }
 

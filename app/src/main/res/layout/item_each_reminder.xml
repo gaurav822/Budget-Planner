@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
+        android:textSize="@dimen/_14sdp"
         android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -12,7 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        style="@style/BudgetPlanStyle.VolteSemiBold12"
+        style="@style/BudgetPlanStyle.Body1"
         android:text="Reminder!"/>
 
     <androidx.appcompat.widget.SwitchCompat
