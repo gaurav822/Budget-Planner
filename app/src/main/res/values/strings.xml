@@ -69,5 +69,6 @@
     <string name="reminder">Reminder</string>
     <string name="time">Time</string>
     <string name="select_day">Select Day</string>
+    <string name="edit_reminder">Edit Reminder</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.gaurav.budgetplanner.features.reminder.presentation.activites
 
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -7,12 +8,14 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityCreateReminderBinding
+import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
 import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel
 import com.gaurav.budgetplanner.features.reminder.domain.model.Reminder
 import com.gaurav.budgetplanner.features.reminder.presentation.ViewModel.ReminderViewModel
@@ -20,6 +23,7 @@ import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +40,9 @@ class CreateReminderPage:BaseActivity() {
     private var comment:String = ""
     private var reminderDate:Long = 0L
     private var isValidName = false
+    private var reminder:Reminder?= null
+    private var bundle:Bundle? = null
+    private var editModeOn = false
 
 
     private lateinit var reminderViewModel: ReminderViewModel
@@ -60,7 +67,36 @@ class CreateReminderPage:BaseActivity() {
         setDateTime()
         viewClickEvents()
         reminderViewModel = ViewModelProvider(this)[ReminderViewModel::class.java]
+        getIntentData()
 
+    }
+
+    private fun getIntentData(){
+        bundle = intent?.extras
+        bundle?.let {
+            reminder = bundle?.getSerializable("reminder") as Reminder
+        }
+        reminder?.let {
+            triggerEditMode()
+        }
+    }
+
+
+    private fun triggerEditMode(){
+        editModeOn = true
+        hour = reminder?.hour!!
+        minute = reminder?.minute!!
+        trackDate = reminder?.date!!
+        binding.apply {
+            deleteButton.visibility=View.VISIBLE
+            toolbar.toolbarTitle.text = getString(R.string.edit_reminder)
+            addText.text = "Save"
+            inputReminder.editText?.setText(reminder?.name)
+            inputComment.editText?.setText(reminder?.comment)
+            day.text = Utils.getFormattedDateFromMillis(reminder?.date!!,"MMMM dd, YYYY")
+            time.text = "${hour}:${String.format("%02d", minute)}"
+
+        }
     }
 
 
@@ -109,19 +145,48 @@ class CreateReminderPage:BaseActivity() {
 
         binding.proceedStart.setOnClickListener {
             if(isValidName){
-                val reminder = Reminder(
+                val insertReminder = Reminder(
                     name = binding.inputReminder.editText?.text.toString(),
                     date = reminderDate,
                     hour = hour,
                     minute = minute,
                     comment = binding.inputComment.editText?.text.toString(),
-                    isActive = true
                 )
-                reminderViewModel.addRecord(reminder)
+                if(editModeOn){
+                    insertReminder.id = reminder?.id!!
+                    insertReminder.isActive = reminder?.isActive!!
+                    reminderViewModel.updateRecord(insertReminder)
+
+                }
+               else reminderViewModel.addRecord(insertReminder)
                 finish()
             }
         }
+
+
+        binding.deleteButton.setOnClickListener {
+            showDeleteDialog()
+        }
     }
+
+
+
+
+    private fun showDeleteDialog(){
+        val builder = MaterialAlertDialogBuilder(this, R.style.CustomAlertDialogStyle)
+        builder.setTitle("Are you sure you want to delete the reminder?")
+        builder.setPositiveButton("YES") { dialog: DialogInterface, _: Int ->
+            dialog.dismiss()
+            reminderViewModel.deleteRecord(reminder!!)
+            finish()
+        }
+        builder.setNegativeButton("NO") { dialog: DialogInterface, _: Int ->
+            Toast.makeText(this, "Delete Cancelled", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+
 
     private var trackDate: Long = 0L
 
@@ -170,7 +235,7 @@ class CreateReminderPage:BaseActivity() {
         timePicker.addOnPositiveButtonClickListener {
             hour = timePicker.hour
             minute = timePicker.minute
-            val selectedTime = "$hour:$minute"
+            val selectedTime = "$hour:${String.format("%02d", minute)}"
             binding.time.text = selectedTime
         }
 
@@ -185,6 +250,7 @@ class CreateReminderPage:BaseActivity() {
         val currentTime = Calendar.getInstance()
         currentTime.add(Calendar.HOUR_OF_DAY, 1)
         val updatedTime = currentTime.time
+
         val updatedCalendar = Calendar.getInstance()
         updatedCalendar.time = updatedTime
 
@@ -193,7 +259,7 @@ class CreateReminderPage:BaseActivity() {
         hour = updatedHour
         minute = updatedMinute
 
-        binding.time.text = "${updatedHour}:${updatedMinute}"
+        binding.time.text = "${updatedHour}:${String.format("%02d", updatedMinute)}"
 
     }
 

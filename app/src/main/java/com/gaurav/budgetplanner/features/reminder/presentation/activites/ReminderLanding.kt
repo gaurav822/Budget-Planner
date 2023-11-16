@@ -64,6 +64,14 @@ class ReminderLanding :BaseActivity(){
                 adapter.updateList(it)
             }
         }
+
+        adapter.onItemClick = {
+            val bundle = Bundle()
+            bundle.putSerializable("reminder",it)
+            val intent = Intent(this,CreateReminderPage::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent)
+        }
     }
 
     private fun viewClickEvents(){

@@ -133,6 +133,20 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+
+        <TextView
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:id="@+id/deleteButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_comment"
+            android:textColor="@color/orange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/BudgetPlanStyle.Button16Red"
+            android:text="@string/delete" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -9,7 +9,7 @@ import com.gaurav.budgetplanner.features.reminder.domain.model.Reminder
 
 @Database(
     entities = [Account::class,Reminder::class],
-    version = 6,
+    version = 7,
     exportSchema = false
 )
 abstract class TransactionDatabase:RoomDatabase() {

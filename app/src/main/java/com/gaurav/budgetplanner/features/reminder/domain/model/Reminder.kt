@@ -13,7 +13,7 @@ data class Reminder(
     @ColumnInfo("hour") val hour:Int,
     @ColumnInfo("minute") val minute:Int,
     @ColumnInfo("comment") val comment:String,
-    @ColumnInfo("isActive") val isActive:Boolean,
+    @ColumnInfo("isActive") var isActive:Boolean=true,
     @PrimaryKey(autoGenerate = true)
     var id:Int =0
 ):java.io.Serializable
