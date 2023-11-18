@@ -184,5 +184,11 @@ class Utils {
                 context.getString(R.string.good_evening)
             } else ""
         }
+
+        fun generateUniqueRequestCode(reminderId: Int): Int {
+            // Use a constant or a prime number to create unique request codes
+            val primeMultiplier = 31
+            return reminderId * primeMultiplier
+        }
     }
 }

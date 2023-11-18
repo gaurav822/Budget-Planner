@@ -55,8 +55,9 @@ class ReminderLanding :BaseActivity(){
         binding.reminderRv.adapter = adapter
 
         adapter.onSwitchChange = {
-                id,isChecked ->
+                id,isChecked,reminder ->
                 viewModel.updateChecked(id,isChecked)
+                updateAlaram(isChecked,reminder)
         }
 
         viewModel.getAllRecords().observe(this) { list ->
@@ -74,12 +75,15 @@ class ReminderLanding :BaseActivity(){
         }
     }
 
+    private fun updateAlaram(isChecked:Boolean,reminder:Reminder){
+        if(isChecked) viewModel.scheduleAlarm(this,reminder)
+        else viewModel.cancelAlarm(this,reminder)
+    }
+
     private fun viewClickEvents(){
         binding.clCreateReminder.setOnClickListener {
 //            val delayMillis: Long = 10000
 //            setNotificationAlarm(this, delayMillis,"This is title","This is Description")
-
-
             val intent = Intent(this, CreateReminderPage::class.java)
             startActivity(intent)
         }
