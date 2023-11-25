@@ -43,6 +43,7 @@ class CreateReminderPage:BaseActivity() {
     private var reminder:Reminder?= null
     private var bundle:Bundle? = null
     private var editModeOn = false
+    private var isValidTime = true
 
 
     private lateinit var reminderViewModel: ReminderViewModel
@@ -109,7 +110,7 @@ class CreateReminderPage:BaseActivity() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 when (id) {
                     R.id.input_reminder -> {
-                        isValidReminderName()
+                        isValidData()
                     }
                 }
             }
@@ -121,9 +122,9 @@ class CreateReminderPage:BaseActivity() {
     }
 
 
-    private fun isValidReminderName(){
+    private fun isValidData(){
        isValidName =  binding.inputReminder.editText?.text.toString().isNotEmpty()
-        if(isValidName) {
+        if(isValidName && isValidTime) {
             binding.proceedStart.setBackgroundResource(R.drawable.boundry_proceed_button)
             binding.addText.setTextColor(Color.parseColor("#c6000000"))
         }
@@ -144,7 +145,13 @@ class CreateReminderPage:BaseActivity() {
         }
 
         binding.proceedStart.setOnClickListener {
-            if(isValidName){
+            if(!isValidName){
+                Toast.makeText(this,"Please enter valid reminder name",Toast.LENGTH_SHORT).show()
+            }
+            else if(!isValidTime){
+                Toast.makeText(this,"Past time cannot be set",Toast.LENGTH_SHORT).show()
+            }
+            else{
                 val insertReminder = Reminder(
                     name = binding.inputReminder.editText?.text.toString(),
                     date = reminderDate,
@@ -158,7 +165,7 @@ class CreateReminderPage:BaseActivity() {
                     reminderViewModel.updateRecord(insertReminder)
 
                 }
-               else reminderViewModel.addRecord(insertReminder)
+                else reminderViewModel.addRecord(insertReminder)
                 finish()
             }
         }
@@ -237,9 +244,16 @@ class CreateReminderPage:BaseActivity() {
             minute = timePicker.minute
             val selectedTime = "$hour:${String.format("%02d", minute)}"
             binding.time.text = selectedTime
+            isValidTime = getTimeInSeconds(timePicker.hour,timePicker.minute)>getTimeInSeconds(Calendar.getInstance().get(Calendar.HOUR_OF_DAY),Calendar.getInstance().get(Calendar.MINUTE))
+            isValidData()
         }
 
         timePicker.show(supportFragmentManager, "timePicker")
+    }
+
+
+    fun getTimeInSeconds(hours: Int, minutes: Int): Int {
+        return (hours * 3600) + (minutes * 60)
     }
 
     private fun setDateTime() {
@@ -248,6 +262,8 @@ class CreateReminderPage:BaseActivity() {
             Utils.getFormattedDateFromMillis(reminderDate, "MMMM dd, YYYY")
 
         val currentTime = Calendar.getInstance()
+
+        //for increasing hour by 1
         currentTime.add(Calendar.HOUR_OF_DAY, 1)
         val updatedTime = currentTime.time
 

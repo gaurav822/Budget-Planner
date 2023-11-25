@@ -26,7 +26,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReminderViewModel @Inject constructor(private val useCases: ReminderUseCases): ViewModel() {
-
     fun deleteRecord(record: Reminder) = viewModelScope.launch(Dispatchers.IO) {
         useCases.deleteReminder(record)
     }
@@ -54,15 +53,15 @@ class ReminderViewModel @Inject constructor(private val useCases: ReminderUseCas
 
         // Create an intent that will be triggered when the alarm fires
         val intent = Intent(context, NotificationBroadCastReceiver::class.java)
-        intent.putExtra("REMINDER_ID", reminder.id) // You can pass the reminder ID to identify which reminder triggered the alarm
+        intent.putExtra(NotificationService.EXTRA_ID, reminder.id) // You can pass the reminder ID to identify which reminder triggered the alarm
         intent.putExtra(NotificationService.EXTRA_TITLE,reminder.name)
         intent.putExtra(NotificationService.EXTRA_DESCRIPTION,reminder.comment)
 
         val pendingIntent = PendingIntent.getBroadcast(
             context,
-            Utils.generateUniqueRequestCode(reminder.id), // Use a unique ID for each alarm
+            reminder.id, // Use a unique ID for each alarm
             intent,
-            PendingIntent.FLAG_IMMUTABLE
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
         // Set the alarm time
@@ -92,9 +91,9 @@ class ReminderViewModel @Inject constructor(private val useCases: ReminderUseCas
         val intent = Intent(context, NotificationBroadCastReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(
             context,
-            Utils.generateUniqueRequestCode(reminder.id),
+            reminder.id,
             intent,
-            PendingIntent.FLAG_IMMUTABLE
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
         // Cancel the alarm

@@ -15,11 +15,11 @@ class NotificationService(private val context:Context) {
 
     private val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-    fun showNotification(title:String,description:String){
+    fun showNotification(title:String,description:String,id:Int){
         val activityIntent = Intent(context,HomeScreenActivity::class.java)
         val activityPendingIntent = PendingIntent.getActivity(
             context,
-            1,
+            id,
             activityIntent,
             if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
         )
@@ -31,12 +31,13 @@ class NotificationService(private val context:Context) {
             .setContentIntent(activityPendingIntent)
             .build()
 
-        notificationManager.notify(1,notification)
+        notificationManager.notify(id,notification)
     }
 
     companion object {
         const val CHANNEL_ID = "reminder_channel"
         const val EXTRA_TITLE = "extra_title"
         const val EXTRA_DESCRIPTION = "extra_description"
+        const val EXTRA_ID = "extra_id"
     }
 }
