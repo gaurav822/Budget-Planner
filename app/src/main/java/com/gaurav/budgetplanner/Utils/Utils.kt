@@ -190,5 +190,34 @@ class Utils {
             val primeMultiplier = 31
             return reminderId * primeMultiplier
         }
+
+
+        fun checkIfPastDate(date:Long,hour:Int,minute:Int):Boolean{
+
+            val dateString = getFormattedDateFromMillis(date,"MMMM dd, yyyy")
+
+            val dateTimeFormat = DateTimeFormatter.ofPattern("MMMM dd, yyyy HH:mm")
+
+            //converting in case of single digit
+
+            val paddedHour = String.format("%02d", hour)
+            val paddedMinute = String.format("%02d",minute)
+
+            // Parse date and time strings into LocalDateTime object
+            val givenDateTime = LocalDateTime.parse("$dateString $paddedHour:$paddedMinute", dateTimeFormat)
+
+            // Adjust the parsed LocalDateTime object with the given hour and minute values
+            val adjustedDateTime = givenDateTime.withHour(hour).withMinute(minute)
+
+            // Get current date and time
+            val currentDateTime = LocalDateTime.now()
+
+            val comparisonResult = currentDateTime.compareTo(adjustedDateTime)
+
+            if(comparisonResult > 0)
+                return false
+
+            return true
+        }
     }
 }

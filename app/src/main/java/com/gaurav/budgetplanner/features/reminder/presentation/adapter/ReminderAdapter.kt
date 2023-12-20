@@ -1,4 +1,4 @@
-package com.gaurav.budgetplanner.features.reminder.presentation.Adapter
+package com.gaurav.budgetplanner.features.reminder.presentation.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

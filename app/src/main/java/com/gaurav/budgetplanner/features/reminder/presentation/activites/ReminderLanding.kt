@@ -1,24 +1,16 @@
 package com.gaurav.budgetplanner.features.reminder.presentation.activites
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gaurav.budgetplanner.R
-import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityReminderLandingBinding
-import com.gaurav.budgetplanner.features.expensetracker.presentation.Adapters.RecordAdapter
-import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel
-import com.gaurav.budgetplanner.features.reminder.Service.NotificationBroadCastReceiver
-import com.gaurav.budgetplanner.features.reminder.Service.NotificationService
 import com.gaurav.budgetplanner.features.reminder.domain.model.Reminder
-import com.gaurav.budgetplanner.features.reminder.presentation.Adapter.ReminderAdapter
-import com.gaurav.budgetplanner.features.reminder.presentation.ViewModel.ReminderViewModel
+import com.gaurav.budgetplanner.features.reminder.presentation.adapter.ReminderAdapter
+import com.gaurav.budgetplanner.features.reminder.presentation.viewmodel.ReminderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -65,6 +57,7 @@ class ReminderLanding :BaseActivity(){
                 adapter.updateList(it)
             }
         }
+
 
         adapter.onItemClick = {
             val bundle = Bundle()

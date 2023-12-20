@@ -1,6 +1,8 @@
 package com.gaurav.budgetplanner.features.reminder.presentation.activites
 
+import android.app.Activity
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -10,24 +12,20 @@ import android.view.WindowManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityCreateReminderBinding
-import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
-import com.gaurav.budgetplanner.features.expensetracker.presentation.ViewModel.RecordViewModel
+import com.gaurav.budgetplanner.features.expensetracker.presentation.Activity.TransactionDetailActivity
 import com.gaurav.budgetplanner.features.reminder.domain.model.Reminder
-import com.gaurav.budgetplanner.features.reminder.presentation.ViewModel.ReminderViewModel
+import com.gaurav.budgetplanner.features.reminder.presentation.viewmodel.ReminderViewModel
 import com.google.android.material.datepicker.CalendarConstraints
-import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -98,6 +96,9 @@ class CreateReminderPage:BaseActivity() {
             time.text = "${hour}:${String.format("%02d", minute)}"
 
         }
+        isValidTime = Utils.checkIfPastDate(trackDate,reminder?.hour!!,reminder?.minute!!)
+        isValidData()
+
     }
 
 
@@ -149,7 +150,7 @@ class CreateReminderPage:BaseActivity() {
                 Toast.makeText(this,"Please enter valid reminder name",Toast.LENGTH_SHORT).show()
             }
             else if(!isValidTime){
-                Toast.makeText(this,"Past time cannot be set",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Past is in past. Please check date or time !!",Toast.LENGTH_SHORT).show()
             }
             else{
                 val insertReminder = Reminder(
@@ -163,9 +164,17 @@ class CreateReminderPage:BaseActivity() {
                     insertReminder.id = reminder?.id!!
                     insertReminder.isActive = reminder?.isActive!!
                     reminderViewModel.updateRecord(insertReminder)
-
+                    Toast.makeText(this,"Reminder updated Successfully !",Toast.LENGTH_SHORT).show()
                 }
-                else reminderViewModel.addRecord(insertReminder)
+                else {
+                    reminderViewModel.addRecord(insertReminder)
+                    Toast.makeText(this,"Reminder Added Successfully !",Toast.LENGTH_SHORT).show()
+                }
+
+                if(insertReminder.isActive){
+                    reminderViewModel.scheduleAlarm(this,insertReminder)
+                }
+
                 finish()
             }
         }
@@ -225,6 +234,8 @@ class CreateReminderPage:BaseActivity() {
             trackDate = calendar.timeInMillis
             binding.day.text = Utils.getFormattedDateFromMillis(trackDate,"MMMM dd, YYYY")
             reminderDate = trackDate
+            isValidTime = Utils.checkIfPastDate(reminderDate,reminder?.hour!!,reminder?.minute!!)
+            isValidData()
         }
     }
 
@@ -242,18 +253,13 @@ class CreateReminderPage:BaseActivity() {
         timePicker.addOnPositiveButtonClickListener {
             hour = timePicker.hour
             minute = timePicker.minute
-            val selectedTime = "$hour:${String.format("%02d", minute)}"
+            val selectedTime = "${String.format("%02d",hour)}:${String.format("%02d", minute)}"
             binding.time.text = selectedTime
-            isValidTime = getTimeInSeconds(timePicker.hour,timePicker.minute)>getTimeInSeconds(Calendar.getInstance().get(Calendar.HOUR_OF_DAY),Calendar.getInstance().get(Calendar.MINUTE))
+            isValidTime = Utils.checkIfPastDate(reminderDate,timePicker.hour,timePicker.minute)
             isValidData()
         }
 
         timePicker.show(supportFragmentManager, "timePicker")
-    }
-
-
-    fun getTimeInSeconds(hours: Int, minutes: Int): Int {
-        return (hours * 3600) + (minutes * 60)
     }
 
     private fun setDateTime() {

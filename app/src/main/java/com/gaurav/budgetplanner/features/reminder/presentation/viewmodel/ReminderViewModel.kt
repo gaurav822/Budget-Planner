@@ -1,19 +1,14 @@
-package com.gaurav.budgetplanner.features.reminder.presentation.ViewModel
+package com.gaurav.budgetplanner.features.reminder.presentation.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gaurav.budgetplanner.Utils.Utils
-import com.gaurav.budgetplanner.features.expensetracker.domain.model.Account
-import com.gaurav.budgetplanner.features.expensetracker.domain.use_case.TransactionUseCases
 import com.gaurav.budgetplanner.features.reminder.Service.NotificationBroadCastReceiver
 import com.gaurav.budgetplanner.features.reminder.Service.NotificationService
 import com.gaurav.budgetplanner.features.reminder.domain.model.Reminder
@@ -99,6 +94,4 @@ class ReminderViewModel @Inject constructor(private val useCases: ReminderUseCas
         // Cancel the alarm
         alarmManager.cancel(pendingIntent)
     }
-
-
 }
