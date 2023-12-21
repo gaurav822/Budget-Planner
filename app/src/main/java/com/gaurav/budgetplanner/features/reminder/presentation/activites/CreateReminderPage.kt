@@ -150,7 +150,7 @@ class CreateReminderPage:BaseActivity() {
                 Toast.makeText(this,"Please enter valid reminder name",Toast.LENGTH_SHORT).show()
             }
             else if(!isValidTime){
-                Toast.makeText(this,"Past is in past. Please check date or time !!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Reminder is in past. Please check date or time !!",Toast.LENGTH_SHORT).show()
             }
             else{
                 val insertReminder = Reminder(

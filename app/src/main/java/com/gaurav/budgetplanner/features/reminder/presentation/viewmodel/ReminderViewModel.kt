@@ -11,11 +11,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gaurav.budgetplanner.features.reminder.Service.NotificationBroadCastReceiver
 import com.gaurav.budgetplanner.features.reminder.Service.NotificationService
+import com.gaurav.budgetplanner.features.reminder.Service.NotificationTriggeredEvent
 import com.gaurav.budgetplanner.features.reminder.domain.model.Reminder
 import com.gaurav.budgetplanner.features.reminder.domain.use_case.ReminderUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.util.*
 import javax.inject.Inject
 
@@ -41,6 +45,19 @@ class ReminderViewModel @Inject constructor(private val useCases: ReminderUseCas
         useCases.updateIsActive(id,isChecked)
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onNotificationTriggered(event: NotificationTriggeredEvent) {
+        updateChecked(event.id, false)
+    }
+
+    init {
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onCleared() {
+        EventBus.getDefault().unregister(this)
+        super.onCleared()
+    }
 
     @SuppressLint("UnspecifiedImmutableFlag")
     fun scheduleAlarm(context: Context, reminder: Reminder) {

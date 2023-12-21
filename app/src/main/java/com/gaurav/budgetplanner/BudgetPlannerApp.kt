@@ -5,12 +5,11 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.SharedPreferences
-import android.os.Build
 import android.support.multidex.MultiDexApplication
 import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.features.reminder.Service.NotificationService
 import dagger.hilt.android.HiltAndroidApp
-import java.security.Provider.Service
+
 
 @HiltAndroidApp
 class BudgetPlannerApp:MultiDexApplication(){
@@ -26,7 +25,6 @@ class BudgetPlannerApp:MultiDexApplication(){
         instance= this
 
         createNotificationChannel()
-
     }
 
     private fun createNotificationChannel(){

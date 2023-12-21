@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.gaurav.budgetplanner.Utils.Utils
 import com.gaurav.budgetplanner.databinding.ItemEachReminderBinding
 import com.gaurav.budgetplanner.features.reminder.domain.model.Reminder
 
@@ -28,6 +29,7 @@ class ReminderAdapter(): RecyclerView.Adapter<ReminderAdapter.MyViewHolder>() {
         val eachItem = allRecords[position]
         holder.binding.tvReminderName.text = eachItem.name
         holder.binding.btnRemind.isChecked = eachItem.isActive
+
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(eachItem)
         }
