@@ -2,6 +2,7 @@ package com.gaurav.budgetplanner.features.reminder.presentation.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.AlarmManager
+import android.app.Notification
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -16,6 +17,7 @@ import com.gaurav.budgetplanner.features.reminder.domain.model.Reminder
 import com.gaurav.budgetplanner.features.reminder.domain.use_case.ReminderUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -45,26 +47,13 @@ class ReminderViewModel @Inject constructor(private val useCases: ReminderUseCas
         useCases.updateIsActive(id,isChecked)
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onNotificationTriggered(event: NotificationTriggeredEvent) {
-        updateChecked(event.id, false)
-    }
-
-    init {
-        EventBus.getDefault().register(this)
-    }
-
-    override fun onCleared() {
-        EventBus.getDefault().unregister(this)
-        super.onCleared()
-    }
-
     @SuppressLint("UnspecifiedImmutableFlag")
     fun scheduleAlarm(context: Context, reminder: Reminder) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         // Create an intent that will be triggered when the alarm fires
         val intent = Intent(context, NotificationBroadCastReceiver::class.java)
+
         intent.putExtra(NotificationService.EXTRA_ID, reminder.id) // You can pass the reminder ID to identify which reminder triggered the alarm
         intent.putExtra(NotificationService.EXTRA_TITLE,reminder.name)
         intent.putExtra(NotificationService.EXTRA_DESCRIPTION,reminder.comment)

@@ -1,11 +1,11 @@
 package com.gaurav.budgetplanner.features.reminder.Service
 
-import android.app.Application
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
-import com.gaurav.budgetplanner.features.reminder.presentation.viewmodel.ReminderViewModel
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.gaurav.budgetplanner.BudgetPlannerApp
 import org.greenrobot.eventbus.EventBus
 
 class NotificationBroadCastReceiver():BroadcastReceiver() {
@@ -16,12 +16,9 @@ class NotificationBroadCastReceiver():BroadcastReceiver() {
         val service = NotificationService(p0)
         service.showNotification(title!!,description!!,id!!)
 
-
-//        val viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(Application()).create(
-//            ReminderViewModel::class.java)
-//        viewModel.updateChecked(id, false)
-
         EventBus.getDefault().post(NotificationTriggeredEvent(id))
+
+
     }
 }
 
