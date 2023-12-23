@@ -3,10 +3,6 @@ package com.gaurav.budgetplanner.features.reminder.Service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.gaurav.budgetplanner.BudgetPlannerApp
-import org.greenrobot.eventbus.EventBus
 
 class NotificationBroadCastReceiver():BroadcastReceiver() {
     override fun onReceive(p0: Context, intent: Intent) {
@@ -15,9 +11,6 @@ class NotificationBroadCastReceiver():BroadcastReceiver() {
         val id = intent.getIntExtra(NotificationService.EXTRA_ID,0)
         val service = NotificationService(p0)
         service.showNotification(title!!,description!!,id!!)
-
-        EventBus.getDefault().post(NotificationTriggeredEvent(id))
-
 
     }
 }

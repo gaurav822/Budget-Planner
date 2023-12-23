@@ -2,11 +2,15 @@ package com.gaurav.budgetplanner.features.reminder.presentation.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.AlarmManager
+import android.app.Application
 import android.app.Notification
 import android.app.PendingIntent
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.util.Log
+import androidx.core.content.ContextCompat.registerReceiver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,6 +19,7 @@ import com.gaurav.budgetplanner.features.reminder.Service.NotificationService
 import com.gaurav.budgetplanner.features.reminder.Service.NotificationTriggeredEvent
 import com.gaurav.budgetplanner.features.reminder.domain.model.Reminder
 import com.gaurav.budgetplanner.features.reminder.domain.use_case.ReminderUseCases
+import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.isActive

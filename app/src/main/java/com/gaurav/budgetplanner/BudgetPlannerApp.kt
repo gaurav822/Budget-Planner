@@ -14,7 +14,7 @@ import dagger.hilt.android.HiltAndroidApp
 
 
 @HiltAndroidApp
-class BudgetPlannerApp:MultiDexApplication(){
+class BudgetPlannerApp:Application(){
 
      private var sharedPreferences: SharedPreferences?=null
 

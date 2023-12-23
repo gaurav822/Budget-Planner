@@ -1,25 +1,19 @@
 package com.gaurav.budgetplanner.features.reminder.presentation.activites
 
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityReminderLandingBinding
-import com.gaurav.budgetplanner.features.reminder.Service.NotificationService
 import com.gaurav.budgetplanner.features.reminder.Service.NotificationTriggeredEvent
 import com.gaurav.budgetplanner.features.reminder.domain.model.Reminder
 import com.gaurav.budgetplanner.features.reminder.presentation.adapter.ReminderAdapter
 import com.gaurav.budgetplanner.features.reminder.presentation.viewmodel.ReminderViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
@@ -37,12 +31,6 @@ class ReminderLanding :BaseActivity(){
         setContentView(binding.root)
         init()
         viewClickEvents()
-        EventBus.getDefault().register(this)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-//        EventBus.getDefault().unregister(this)
     }
 
     private fun init(){
@@ -56,12 +44,6 @@ class ReminderLanding :BaseActivity(){
 
         setUpRecyclerView()
 
-    }
-
-    @Subscribe(threadMode = ThreadMode.BACKGROUND)
-    fun onNotificationTriggered(event: NotificationTriggeredEvent) {
-        Log.d("EVENTBUS","DATA IS AVAILABLE ON BACK AS WELL")
-        viewModel.updateChecked(event.id,false)
     }
 
     private fun setUpRecyclerView(){

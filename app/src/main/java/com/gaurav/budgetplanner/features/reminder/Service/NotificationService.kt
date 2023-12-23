@@ -39,5 +39,7 @@ class NotificationService(private val context:Context) {
         const val EXTRA_TITLE = "extra_title"
         const val EXTRA_DESCRIPTION = "extra_description"
         const val EXTRA_ID = "extra_id"
+        const val ACTION_NOTIFICATION_SHOWN = "action_notification_shown"
+
     }
 }
