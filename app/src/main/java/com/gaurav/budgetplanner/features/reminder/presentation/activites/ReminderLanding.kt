@@ -14,8 +14,6 @@ import com.gaurav.budgetplanner.features.reminder.domain.model.Reminder
 import com.gaurav.budgetplanner.features.reminder.presentation.adapter.ReminderAdapter
 import com.gaurav.budgetplanner.features.reminder.presentation.viewmodel.ReminderViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 
 @AndroidEntryPoint
 class ReminderLanding :BaseActivity(){
