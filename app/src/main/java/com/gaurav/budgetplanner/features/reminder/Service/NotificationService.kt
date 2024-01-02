@@ -8,6 +8,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Views.HomeScreenActivity
+import com.gaurav.budgetplanner.features.reminder.presentation.activites.ReminderLanding
 
 
 class NotificationService(private val context:Context) {
@@ -15,7 +16,7 @@ class NotificationService(private val context:Context) {
     private val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     fun showNotification(title:String,description:String,id:Int){
-        val activityIntent = Intent(context,HomeScreenActivity::class.java)
+        val activityIntent = Intent(context,ReminderLanding::class.java)
         val activityPendingIntent = PendingIntent.getActivity(
             context,
             id,
@@ -28,6 +29,7 @@ class NotificationService(private val context:Context) {
             .setContentText(description)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setContentIntent(activityPendingIntent)
+            .setAutoCancel(true)
             .build()
 
         notificationManager.notify(id,notification)

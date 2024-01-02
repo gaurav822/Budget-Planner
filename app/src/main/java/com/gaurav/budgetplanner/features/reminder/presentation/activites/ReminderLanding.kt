@@ -15,6 +15,7 @@ import com.gaurav.budgetplanner.features.reminder.presentation.adapter.ReminderA
 import com.gaurav.budgetplanner.features.reminder.presentation.viewmodel.ReminderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
+import com.gaurav.budgetplanner.Views.HomeScreenActivity
 
 @AndroidEntryPoint
 class ReminderLanding :BaseActivity(){
@@ -85,8 +86,22 @@ class ReminderLanding :BaseActivity(){
         }
     }
 
+    private fun goToHomeScreen(){
+        val homeScreenIntent = Intent(this, HomeScreenActivity::class.java)
+        homeScreenIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+
+        startActivity(homeScreenIntent)
+        // Finish the ReminderLandingActivity
+        finish()
+    }
+
     override fun onSupportNavigateUp(): Boolean {
-        super.onBackPressed()
+        goToHomeScreen()
         return true
+    }
+
+    override fun onBackPressed() {
+        goToHomeScreen()
+        super.onBackPressed()
     }
 }
