@@ -3,32 +3,30 @@ package com.gaurav.budgetplanner.features.reminder.presentation.viewmodel
 import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.Application
-import android.app.Notification
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.util.Log
-import androidx.core.content.ContextCompat.registerReceiver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gaurav.budgetplanner.features.reminder.Service.NotificationBroadCastReceiver
 import com.gaurav.budgetplanner.features.reminder.Service.NotificationService
-import com.gaurav.budgetplanner.features.reminder.Service.NotificationTriggeredEvent
 import com.gaurav.budgetplanner.features.reminder.domain.model.Reminder
 import com.gaurav.budgetplanner.features.reminder.domain.use_case.ReminderUseCases
-import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.isActive
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class ReminderViewModel @Inject constructor(private val useCases: ReminderUseCases): ViewModel() {
+
     fun deleteRecord(record: Reminder) = viewModelScope.launch(Dispatchers.IO) {
         useCases.deleteReminder(record)
     }
@@ -46,8 +44,11 @@ class ReminderViewModel @Inject constructor(private val useCases: ReminderUseCas
     }
 
     fun updateChecked(id: Int,isChecked:Boolean) = viewModelScope.launch(Dispatchers.IO) {
-        useCases.updateIsActive(id,isChecked)
+             useCases.updateIsActive(id, isChecked)
     }
+
+    // Define a function to handle the broadcast
+
 
     @SuppressLint("UnspecifiedImmutableFlag")
     fun scheduleAlarm(context: Context, reminder: Reminder) {
@@ -59,6 +60,8 @@ class ReminderViewModel @Inject constructor(private val useCases: ReminderUseCas
         intent.putExtra(NotificationService.EXTRA_ID, reminder.id) // You can pass the reminder ID to identify which reminder triggered the alarm
         intent.putExtra(NotificationService.EXTRA_TITLE,reminder.name)
         intent.putExtra(NotificationService.EXTRA_DESCRIPTION,reminder.comment)
+
+        intent.action = NotificationService.ACTION_NOTIFICATION_SHOWN
 
         val pendingIntent = PendingIntent.getBroadcast(
             context,
@@ -92,6 +95,13 @@ class ReminderViewModel @Inject constructor(private val useCases: ReminderUseCas
 
         // Create the same intent that was used to schedule the alarm
         val intent = Intent(context, NotificationBroadCastReceiver::class.java)
+
+        intent.putExtra(NotificationService.EXTRA_ID, reminder.id) // You can pass the reminder ID to identify which reminder triggered the alarm
+        intent.putExtra(NotificationService.EXTRA_TITLE,reminder.name)
+        intent.putExtra(NotificationService.EXTRA_DESCRIPTION,reminder.comment)
+
+        intent.action = NotificationService.ACTION_NOTIFICATION_SHOWN
+
         val pendingIntent = PendingIntent.getBroadcast(
             context,
             reminder.id,

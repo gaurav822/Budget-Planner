@@ -6,20 +6,21 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.gaurav.budgetplanner.BudgetPlannerApp
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Views.Activity.BaseActivity
 import com.gaurav.budgetplanner.databinding.ActivityReminderLandingBinding
-import com.gaurav.budgetplanner.features.reminder.Service.NotificationTriggeredEvent
 import com.gaurav.budgetplanner.features.reminder.domain.model.Reminder
 import com.gaurav.budgetplanner.features.reminder.presentation.adapter.ReminderAdapter
 import com.gaurav.budgetplanner.features.reminder.presentation.viewmodel.ReminderViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.activity.viewModels
 
 @AndroidEntryPoint
 class ReminderLanding :BaseActivity(){
     private var _binding: ActivityReminderLandingBinding?= null
     private val binding get() = _binding!!
-    private lateinit var viewModel: ReminderViewModel
+    private val viewModel: ReminderViewModel by viewModels()
     private lateinit var adapter: ReminderAdapter
 
 
@@ -33,7 +34,7 @@ class ReminderLanding :BaseActivity(){
 
     private fun init(){
         setSupportActionBar(binding.toolbar.mainGenericToolbar)
-        viewModel = ViewModelProvider(this)[ReminderViewModel::class.java]
+//        viewModel = ViewModelProvider(this)[ReminderViewModel::class.java]
         binding.toolbar.apply {
             toolbarIconLayout.visibility= View.GONE
             toolbarTitle.text = getString(R.string.reminders)

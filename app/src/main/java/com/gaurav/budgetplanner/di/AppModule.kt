@@ -1,6 +1,7 @@
 package com.gaurav.budgetplanner.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.features.converter.data.data_source.CurrencyConvertApi
@@ -17,6 +18,7 @@ import com.gaurav.budgetplanner.features.reminder.domain.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

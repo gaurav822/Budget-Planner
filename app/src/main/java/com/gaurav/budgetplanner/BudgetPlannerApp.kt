@@ -5,12 +5,8 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.SharedPreferences
-import android.support.multidex.MultiDexApplication
-import androidx.lifecycle.ViewModelProvider
-import androidx.work.Configuration
 import com.gaurav.budgetplanner.Utils.Constants
 import com.gaurav.budgetplanner.features.reminder.Service.NotificationService
-import com.gaurav.budgetplanner.features.reminder.presentation.viewmodel.ReminderViewModel
 import dagger.hilt.android.HiltAndroidApp
 
 
@@ -18,8 +14,6 @@ import dagger.hilt.android.HiltAndroidApp
 class BudgetPlannerApp:Application(){
 
      private var sharedPreferences: SharedPreferences?=null
-
-
 
     override fun onCreate() {
         super.onCreate()
@@ -50,5 +44,7 @@ class BudgetPlannerApp:Application(){
             return instance.sharedPreferences!!
         }
     }
+
+
 
 }

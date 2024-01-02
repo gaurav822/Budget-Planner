@@ -6,10 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import androidx.work.Data
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
-import com.gaurav.budgetplanner.MyWorker
 import com.gaurav.budgetplanner.R
 import com.gaurav.budgetplanner.Views.HomeScreenActivity
 
@@ -35,16 +31,6 @@ class NotificationService(private val context:Context) {
             .build()
 
         notificationManager.notify(id,notification)
-
-        // Create a OneTimeWorkRequest for your worker class
-        val data = Data.Builder()
-        data.putInt("notification_id",id)
-        val workRequest = OneTimeWorkRequest.Builder(MyWorker::class.java)
-            .setInputData(data.build())
-            .build()
-
-        // Enqueue the work request with WorkManager
-        WorkManager.getInstance(context).enqueue(workRequest)
     }
 
     companion object {

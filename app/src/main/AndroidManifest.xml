@@ -87,7 +87,10 @@
             android:exported="false"/>
         <activity android:name=".features.reminder.presentation.activites.CreateReminderPage"
             android:exported="false"/>
-        <receiver android:name=".features.reminder.Service.NotificationBroadCastReceiver"/>
+
+        <receiver
+            android:name=".features.reminder.Service.NotificationBroadCastReceiver"/>
+
     </application>
 
 </manifest>
