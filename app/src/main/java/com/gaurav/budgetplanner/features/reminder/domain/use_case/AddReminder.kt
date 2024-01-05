@@ -11,11 +11,16 @@ class AddReminder(
     private val repository: ReminderRepository
 ) {
     @Throws(InValidReminderException::class)
-    suspend operator fun invoke(reminder: Reminder){
+    suspend operator fun invoke(reminder: Reminder):Long{
         if(reminder.name.isBlank()){
             throw InValidTransactionException("Reminder Name cannot be empty.")
         }
 
-        repository.insertReminder(reminder)
+        return try {
+            repository.insertReminder(reminder)
+        } catch (e: Exception) {
+            // Log or handle the exception
+            -1L // or any default value to indicate an error
+        }
     }
 }

@@ -15,7 +15,7 @@ data class Reminder(
     @ColumnInfo("comment") val comment:String,
     @ColumnInfo("isActive") var isActive:Boolean=true,
     @PrimaryKey(autoGenerate = true)
-    var id:Int =0
+    var id:Long = 0
 ):java.io.Serializable
 
 class InValidReminderException(message:String) :Exception (message){

@@ -52,7 +52,7 @@ class ReminderAdapter(): RecyclerView.Adapter<ReminderAdapter.MyViewHolder>() {
 
 
         holder.binding.btnRemind.setOnCheckedChangeListener { _, isChecked ->
-            onSwitchChange?.invoke(eachItem.id,isChecked,eachItem)
+            onSwitchChange?.invoke(eachItem.id.toInt(),isChecked,eachItem)
         }
     }
 

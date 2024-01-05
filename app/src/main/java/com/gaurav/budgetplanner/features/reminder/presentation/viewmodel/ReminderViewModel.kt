@@ -17,10 +17,7 @@ import com.gaurav.budgetplanner.features.reminder.Service.NotificationService
 import com.gaurav.budgetplanner.features.reminder.domain.model.Reminder
 import com.gaurav.budgetplanner.features.reminder.domain.use_case.ReminderUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.util.*
 import javax.inject.Inject
 
@@ -39,8 +36,16 @@ class ReminderViewModel @Inject constructor(private val useCases: ReminderUseCas
         useCases.updateReminder(record)
     }
 
-    fun addRecord(record: Reminder) = viewModelScope.launch(Dispatchers.IO) {
-        useCases.addReminder(record)
+    suspend fun addRecord(record: Reminder): Long {
+        return try {
+            val deferredId = viewModelScope.async(Dispatchers.IO) {
+                useCases.addReminder(record)
+            }
+            deferredId.await()
+        } catch (e: Exception) {
+            Log.d("EXCEPT", e.toString())
+            -1 // or any default value to indicate an error
+        }
     }
 
     fun updateChecked(id: Int,isChecked:Boolean) = viewModelScope.launch(Dispatchers.IO) {
@@ -57,7 +62,7 @@ class ReminderViewModel @Inject constructor(private val useCases: ReminderUseCas
         // Create an intent that will be triggered when the alarm fires
         val intent = Intent(context, NotificationBroadCastReceiver::class.java)
 
-        intent.putExtra(NotificationService.EXTRA_ID, reminder.id) // You can pass the reminder ID to identify which reminder triggered the alarm
+        intent.putExtra(NotificationService.EXTRA_ID, reminder.id.toInt()) // You can pass the reminder ID to identify which reminder triggered the alarm
         intent.putExtra(NotificationService.EXTRA_TITLE,reminder.name)
         intent.putExtra(NotificationService.EXTRA_DESCRIPTION,reminder.comment)
 
@@ -65,7 +70,7 @@ class ReminderViewModel @Inject constructor(private val useCases: ReminderUseCas
 
         val pendingIntent = PendingIntent.getBroadcast(
             context,
-            reminder.id, // Use a unique ID for each alarm
+            reminder.id.toInt(), // Use a unique ID for each alarm
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
@@ -104,7 +109,7 @@ class ReminderViewModel @Inject constructor(private val useCases: ReminderUseCas
 
         val pendingIntent = PendingIntent.getBroadcast(
             context,
-            reminder.id,
+            reminder.id.toInt(),
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )

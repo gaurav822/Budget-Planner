@@ -15,7 +15,7 @@ interface ReminderDao {
     suspend fun getReminderById(id:Int): Reminder?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertReminder(reminder: Reminder)
+    suspend fun insertReminder(reminder: Reminder):Long
 
     @Update
     suspend fun updateReminder(reminder: Reminder)

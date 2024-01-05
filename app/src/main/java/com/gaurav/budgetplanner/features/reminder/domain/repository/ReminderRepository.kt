@@ -11,7 +11,7 @@ interface ReminderRepository {
 
     suspend fun getReminderById(id:Int): Reminder?
 
-    suspend fun insertReminder(reminder: Reminder)
+    suspend fun insertReminder(reminder: Reminder):Long
 
     suspend fun updateReminder(reminder: Reminder)
 

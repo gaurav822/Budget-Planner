@@ -26,6 +26,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.*
 import java.util.*
 
 
@@ -42,9 +43,11 @@ class CreateReminderPage:BaseActivity() {
     private var bundle:Bundle? = null
     private var editModeOn = false
     private var isValidTime = true
+    private val jobScope = CoroutineScope(Dispatchers.IO)
 
 
     private lateinit var reminderViewModel: ReminderViewModel
+    private  var newlyGeneratedId:Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -167,11 +170,17 @@ class CreateReminderPage:BaseActivity() {
                     Toast.makeText(this,"Reminder updated Successfully !",Toast.LENGTH_SHORT).show()
                 }
                 else {
-                    reminderViewModel.addRecord(insertReminder)
+                    runBlocking {
+                        newlyGeneratedId = jobScope.async( Dispatchers.IO) {
+                            reminderViewModel.addRecord(insertReminder)
+                        }.await()
+                    }
+
                     Toast.makeText(this,"Reminder Added Successfully !",Toast.LENGTH_SHORT).show()
                 }
 
                 if(insertReminder.isActive){
+                    insertReminder.id = newlyGeneratedId
                     reminderViewModel.scheduleAlarm(this,insertReminder)
                 }
 
